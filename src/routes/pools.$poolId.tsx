@@ -34,10 +34,14 @@ function PoolDetail() {
     const { data: p } = await supabase.from("pools").select("*").eq("id", poolId).maybeSingle();
     setPool(p as Pool | null);
     if (p) setAmount(String(p.default_contribution));
-    const { data: m } = await supabase.from("pool_members").select("user_id, profiles:profiles!inner(full_name, user_id)").eq("pool_id", poolId);
-    setMembers(((m ?? []) as Array<{ user_id: string; profiles: { full_name: string | null } | null }>).map((row) => ({
-      user_id: row.user_id, full_name: row.profiles?.full_name ?? null,
-    })));
+    const { data: m } = await supabase.from("pool_members").select("user_id").eq("pool_id", poolId);
+    const memberIds = (m ?? []).map((r) => r.user_id);
+    let profMap = new Map<string, string | null>();
+    if (memberIds.length > 0) {
+      const { data: profs } = await supabase.from("profiles").select("user_id, full_name").in("user_id", memberIds);
+      profMap = new Map((profs ?? []).map((p) => [p.user_id, p.full_name]));
+    }
+    setMembers(memberIds.map((uid) => ({ user_id: uid, full_name: profMap.get(uid) ?? null })));
     const { data: c } = await supabase.from("contributions").select("*").eq("pool_id", poolId).order("contributed_at", { ascending: false }).limit(20);
     setContribs((c ?? []) as never);
   };

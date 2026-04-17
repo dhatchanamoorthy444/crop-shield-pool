@@ -9,10 +9,30 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SimulatorRouteImport } from './routes/simulator'
+import { Route as PricesRouteImport } from './routes/prices'
+import { Route as KycRouteImport } from './routes/kyc'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PoolsIndexRouteImport } from './routes/pools.index'
+import { Route as PoolsPoolIdRouteImport } from './routes/pools.$poolId'
 
+const SimulatorRoute = SimulatorRouteImport.update({
+  id: '/simulator',
+  path: '/simulator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricesRoute = PricesRouteImport.update({
+  id: '/prices',
+  path: '/prices',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KycRoute = KycRouteImport.update({
+  id: '/kyc',
+  path: '/kyc',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -28,39 +48,115 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PoolsIndexRoute = PoolsIndexRouteImport.update({
+  id: '/pools/',
+  path: '/pools/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoolsPoolIdRoute = PoolsPoolIdRouteImport.update({
+  id: '/pools/$poolId',
+  path: '/pools/$poolId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
+  '/kyc': typeof KycRoute
+  '/prices': typeof PricesRoute
+  '/simulator': typeof SimulatorRoute
+  '/pools/$poolId': typeof PoolsPoolIdRoute
+  '/pools/': typeof PoolsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
+  '/kyc': typeof KycRoute
+  '/prices': typeof PricesRoute
+  '/simulator': typeof SimulatorRoute
+  '/pools/$poolId': typeof PoolsPoolIdRoute
+  '/pools': typeof PoolsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
+  '/kyc': typeof KycRoute
+  '/prices': typeof PricesRoute
+  '/simulator': typeof SimulatorRoute
+  '/pools/$poolId': typeof PoolsPoolIdRoute
+  '/pools/': typeof PoolsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/kyc'
+    | '/prices'
+    | '/simulator'
+    | '/pools/$poolId'
+    | '/pools/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard'
-  id: '__root__' | '/' | '/auth' | '/dashboard'
+  to:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/kyc'
+    | '/prices'
+    | '/simulator'
+    | '/pools/$poolId'
+    | '/pools'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/kyc'
+    | '/prices'
+    | '/simulator'
+    | '/pools/$poolId'
+    | '/pools/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
   DashboardRoute: typeof DashboardRoute
+  KycRoute: typeof KycRoute
+  PricesRoute: typeof PricesRoute
+  SimulatorRoute: typeof SimulatorRoute
+  PoolsPoolIdRoute: typeof PoolsPoolIdRoute
+  PoolsIndexRoute: typeof PoolsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/simulator': {
+      id: '/simulator'
+      path: '/simulator'
+      fullPath: '/simulator'
+      preLoaderRoute: typeof SimulatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prices': {
+      id: '/prices'
+      path: '/prices'
+      fullPath: '/prices'
+      preLoaderRoute: typeof PricesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kyc': {
+      id: '/kyc'
+      path: '/kyc'
+      fullPath: '/kyc'
+      preLoaderRoute: typeof KycRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -82,6 +178,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pools/': {
+      id: '/pools/'
+      path: '/pools'
+      fullPath: '/pools/'
+      preLoaderRoute: typeof PoolsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pools/$poolId': {
+      id: '/pools/$poolId'
+      path: '/pools/$poolId'
+      fullPath: '/pools/$poolId'
+      preLoaderRoute: typeof PoolsPoolIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +199,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
   DashboardRoute: DashboardRoute,
+  KycRoute: KycRoute,
+  PricesRoute: PricesRoute,
+  SimulatorRoute: SimulatorRoute,
+  PoolsPoolIdRoute: PoolsPoolIdRoute,
+  PoolsIndexRoute: PoolsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
