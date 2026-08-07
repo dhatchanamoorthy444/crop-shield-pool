@@ -11,7 +11,7 @@ export function Farm3DScene() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none relative mx-auto h-[320px] w-full max-w-xl select-none sm:h-[400px]"
+      className="pointer-events-none relative mx-auto h-[320px] w-full max-w-xl select-none overflow-hidden rounded-3xl sm:h-[400px]"
       style={{ perspective: "900px" }}
     >
       {/* sun */}
@@ -24,7 +24,7 @@ export function Farm3DScene() {
 
       {/* ground plane */}
       <div
-        className="absolute bottom-0 left-1/2 h-[220px] w-[160%] -translate-x-1/2 overflow-hidden rounded-t-[40%] farm-ground"
+        className="absolute bottom-0 left-1/2 h-[200px] w-[120%] -translate-x-1/2 overflow-hidden rounded-t-[40%] farm-ground"
         style={{ transform: "translateX(-50%) rotateX(62deg)", transformStyle: "preserve-3d" }}
       >
         <div className="absolute inset-0 bg-gradient-hero opacity-90" />
@@ -39,7 +39,7 @@ export function Farm3DScene() {
       </div>
 
       {/* growing crops */}
-      <div className="absolute bottom-[60px] left-1/2 flex -translate-x-1/2 items-end gap-3 sm:gap-4">
+      <div className="absolute bottom-[70px] left-1/2 flex -translate-x-1/2 items-end gap-3 sm:gap-4">
         {Array.from({ length: 9 }).map((_, i) => (
           <div
             key={i}
@@ -56,7 +56,7 @@ export function Farm3DScene() {
       </div>
 
       {/* shield dome */}
-      <div className="absolute bottom-[52px] left-1/2 h-[190px] w-[300px] -translate-x-1/2 rounded-t-full border-2 border-primary/40 bg-primary/5 farm-dome sm:w-[360px]" />
+      <div className="absolute bottom-[64px] left-1/2 h-[170px] w-[260px] -translate-x-1/2 rounded-t-full border-2 border-primary/40 bg-primary/5 farm-dome sm:w-[360px]" />
     </div>
   );
 }
