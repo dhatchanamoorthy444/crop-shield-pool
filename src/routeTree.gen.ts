@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SimulatorRouteImport } from './routes/simulator'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PricesRouteImport } from './routes/prices'
 import { Route as KycRouteImport } from './routes/kyc'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -21,6 +22,11 @@ import { Route as PoolsPoolIdRouteImport } from './routes/pools.$poolId'
 const SimulatorRoute = SimulatorRouteImport.update({
   id: '/simulator',
   path: '/simulator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PricesRoute = PricesRouteImport.update({
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/kyc': typeof KycRoute
   '/prices': typeof PricesRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/simulator': typeof SimulatorRoute
   '/pools/$poolId': typeof PoolsPoolIdRoute
   '/pools/': typeof PoolsIndexRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/kyc': typeof KycRoute
   '/prices': typeof PricesRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/simulator': typeof SimulatorRoute
   '/pools/$poolId': typeof PoolsPoolIdRoute
   '/pools': typeof PoolsIndexRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/kyc': typeof KycRoute
   '/prices': typeof PricesRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/simulator': typeof SimulatorRoute
   '/pools/$poolId': typeof PoolsPoolIdRoute
   '/pools/': typeof PoolsIndexRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/kyc'
     | '/prices'
+    | '/reset-password'
     | '/simulator'
     | '/pools/$poolId'
     | '/pools/'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/kyc'
     | '/prices'
+    | '/reset-password'
     | '/simulator'
     | '/pools/$poolId'
     | '/pools'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/kyc'
     | '/prices'
+    | '/reset-password'
     | '/simulator'
     | '/pools/$poolId'
     | '/pools/'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   KycRoute: typeof KycRoute
   PricesRoute: typeof PricesRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SimulatorRoute: typeof SimulatorRoute
   PoolsPoolIdRoute: typeof PoolsPoolIdRoute
   PoolsIndexRoute: typeof PoolsIndexRoute
@@ -141,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/simulator'
       fullPath: '/simulator'
       preLoaderRoute: typeof SimulatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/prices': {
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   KycRoute: KycRoute,
   PricesRoute: PricesRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SimulatorRoute: SimulatorRoute,
   PoolsPoolIdRoute: PoolsPoolIdRoute,
   PoolsIndexRoute: PoolsIndexRoute,
@@ -208,12 +229,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

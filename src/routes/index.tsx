@@ -7,6 +7,8 @@ import {
   Sprout, ShieldCheck, TrendingUp, Lock, Languages, FileText, ArrowRight,
 } from "lucide-react";
 import heroImg from "@/assets/hero-field.jpg";
+import { Farm3DScene } from "@/components/Farm3DScene";
+
 
 export const Route = createFileRoute("/")({
   component: Landing,
@@ -52,12 +54,12 @@ function Landing() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40" />
         </div>
-        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:py-36">
+        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-20 sm:px-6 sm:py-24 lg:grid-cols-2 lg:py-28">
           <div className="max-w-2xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
               <Sprout className="h-3.5 w-3.5" /> {t("tagline")}
             </span>
-            <h1 className="mt-6 font-display text-4xl font-extrabold leading-[1.05] text-foreground text-balance sm:text-6xl lg:text-7xl">
+            <h1 className="mt-6 font-display text-4xl font-extrabold leading-[1.05] text-foreground text-balance sm:text-6xl">
               {t("landing.hero_title")}
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
@@ -74,8 +76,10 @@ function Landing() {
               </Button>
             </div>
           </div>
+          <Farm3DScene />
         </div>
       </section>
+
 
       {/* FEATURES */}
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
