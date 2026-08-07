@@ -7,6 +7,8 @@ import {
   Sprout, ShieldCheck, TrendingUp, Lock, Languages, FileText, ArrowRight,
 } from "lucide-react";
 import heroImg from "@/assets/hero-field.jpg";
+import { Farm3DScene } from "@/components/Farm3DScene";
+
 
 export const Route = createFileRoute("/")({
   component: Landing,
