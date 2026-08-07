@@ -165,3 +165,24 @@
   .shadow-glow { box-shadow: var(--shadow-glow); }
   .text-balance { text-wrap: balance; }
 }
+
+@layer utilities {
+  @keyframes farm-sun-float { 0%,100% { transform: translateX(-50%) translateY(0) scale(1); } 50% { transform: translateX(-50%) translateY(-10px) scale(1.05); } }
+  @keyframes farm-pulse-ring { 0% { transform: translateX(-50%) scale(1); opacity: 0.6; } 100% { transform: translateX(-50%) scale(2.2); opacity: 0; } }
+  @keyframes farm-drift { 0% { left: -20%; } 100% { left: 110%; } }
+  @keyframes farm-sway { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+  @keyframes farm-grow { 0% { transform: scaleY(0); opacity: 0; } 60% { opacity: 1; } 100% { transform: scaleY(1); opacity: 1; } }
+  @keyframes farm-spin-plane { 0%,100% { transform: translateX(-50%) rotateX(62deg) rotateZ(-2deg); } 50% { transform: translateX(-50%) rotateX(60deg) rotateZ(2deg); } }
+  @keyframes farm-dome-glow { 0%,100% { opacity: 0.5; transform: translateX(-50%) scale(1); } 50% { opacity: 0.9; transform: translateX(-50%) scale(1.03); } }
+
+  .farm-sun { animation: farm-sun-float 6s ease-in-out infinite; }
+  .farm-pulse { animation: farm-pulse-ring 4s ease-out infinite; }
+  .farm-cloud { animation: farm-drift 26s linear infinite; }
+  .farm-cloud-slow { animation-duration: 40s; }
+  .farm-ground { animation: farm-spin-plane 12s ease-in-out infinite; }
+  .farm-sprout { transform-origin: bottom center; animation: farm-grow 1s ease-out both, farm-sway 4s ease-in-out infinite 1s; }
+  .farm-dome { animation: farm-dome-glow 5s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .farm-sun, .farm-pulse, .farm-cloud, .farm-ground, .farm-sprout, .farm-dome { animation: none !important; }
+  }
+}
