@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { useRequireAuth } from "@/hooks/useRequireAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { useServerFn } from "@tanstack/react-start";
-import { processKycDocument } from "@/server/kyc.functions";
+import { processKycDocument } from "@/lib/kyc.functions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
