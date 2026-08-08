@@ -7,7 +7,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ShieldCheck, ShieldAlert, Wallet, TrendingUp, Users, Sprout, ArrowRight } from "lucide-react";
+import { ShieldCheck, ShieldAlert, Wallet, TrendingUp, Users, Sprout, ArrowRight, Share2, Layout } from "lucide-react";
+import { PostComposer } from "@/components/posts/PostComposer";
+import { Feed } from "@/components/posts/Feed";
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
@@ -109,25 +111,45 @@ function Dashboard() {
           {kycBadge()}
         </div>
 
-        {/* KPI cards */}
-        <div className="mt-8 grid gap-4 sm:grid-cols-3">
-          <KpiCard icon={Wallet} label={t("dashboard.pool_balance")} value={`₹${totalBalance.toLocaleString("en-IN")}`} />
-          <KpiCard icon={TrendingUp} label={t("dashboard.your_contributions")} value={`₹${totalContrib.toLocaleString("en-IN")}`} />
-          <KpiCard icon={ShieldCheck} label={t("dashboard.est_coverage")} value={`₹${estCoverage.toLocaleString("en-IN")}`} />
-        </div>
+        <div className="mt-8 grid gap-6 lg:grid-cols-3">
+          {/* Main content area */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* KPI cards */}
+            <div className="grid gap-4 sm:grid-cols-3">
+              <KpiCard icon={Wallet} label={t("dashboard.pool_balance")} value={`₹${totalBalance.toLocaleString("en-IN")}`} />
+              <KpiCard icon={TrendingUp} label={t("dashboard.your_contributions")} value={`₹${totalContrib.toLocaleString("en-IN")}`} />
+              <KpiCard icon={ShieldCheck} label={t("dashboard.est_coverage")} value={`₹${estCoverage.toLocaleString("en-IN")}`} />
+            </div>
 
-        {/* Quick actions */}
-        <Card className="mt-8 border-border/60 bg-gradient-card">
-          <CardHeader>
-            <CardTitle className="font-display">{t("dashboard.quick_actions")}</CardTitle>
-          </CardHeader>
-          <CardContent className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <ActionTile to="/pools" icon={Users} label={t("dashboard.join_pool")} />
-            <ActionTile to="/simulator" icon={TrendingUp} label={t("dashboard.open_simulator")} />
-            <ActionTile to="/prices" icon={Sprout} label={t("nav.prices")} />
-            <ActionTile to="/kyc" icon={ShieldCheck} label={t("dashboard.verify_kyc")} />
-          </CardContent>
-        </Card>
+            {/* Post/Feed section */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <Share2 className="h-5 w-5 text-primary" />
+                <h2 className="font-display text-xl font-bold">Community Feed</h2>
+              </div>
+              <PostComposer />
+              <Feed />
+            </div>
+          </div>
+
+          {/* Sidebar */}
+          <div className="space-y-6">
+            <Card className="border-border/60 bg-gradient-card">
+              <CardHeader className="pb-3">
+                <CardTitle className="font-display text-lg flex items-center gap-2">
+                  <Layout className="h-4 w-4 text-primary" />
+                  {t("dashboard.quick_actions")}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="grid gap-3">
+                <ActionTile to="/pools" icon={Users} label={t("dashboard.join_pool")} />
+                <ActionTile to="/simulator" icon={TrendingUp} label={t("dashboard.open_simulator")} />
+                <ActionTile to="/prices" icon={Sprout} label={t("nav.prices")} />
+                <ActionTile to="/kyc" icon={ShieldCheck} label={t("dashboard.verify_kyc")} />
+              </CardContent>
+            </Card>
+          </div>
+        </div>
 
         {/* Pools */}
         <h2 className="mt-10 font-display text-2xl font-bold text-foreground">{t("nav.pools")}</h2>
