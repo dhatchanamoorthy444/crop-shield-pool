@@ -6,7 +6,7 @@ import { z } from "zod";
  * extracts name + ID number, masks the ID number, then updates the kyc_documents row.
  */
 export const processKycDocument = createServerFn({ method: "POST" })
-  .validator((input: { documentId: string }) => {
+  .inputValidator((input: { documentId: string }) => {
     if (!input?.documentId || typeof input.documentId !== "string") {
       throw new Error("documentId required");
     }
