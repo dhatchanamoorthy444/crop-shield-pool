@@ -23,9 +23,11 @@ export function useChat(otherUserId: string | null) {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
-      const { data, error } = await supabase
-        .from("messages")
-        .select("*")
+      // Use a raw RPC or a carefully constructed query if types are missing
+      // For now we cast to any to bypass strict generated type checks until migration finishes
+      const { data, error } = await (supabase
+        .from("messages" as any)
+        .select("*") as any)
         .or(`and(sender_id.eq.${user.id},receiver_id.eq.${otherUserId}),and(sender_id.eq.${otherUserId},receiver_id.eq.${user.id})`)
         .order("created_at", { ascending: true });
 
@@ -41,17 +43,16 @@ export function useChat(otherUserId: string | null) {
     const channel = supabase
       .channel(`chat:${otherUserId}`)
       .on(
-        "postgres_changes",
+        "postgres_changes" as any,
         {
           event: "INSERT",
           schema: "public",
           table: "messages",
         },
-        (payload) => {
+        (payload: any) => {
           const newMessage = payload.new as Message;
           if (
-            (newMessage.sender_id === otherUserId) ||
-            (newMessage.receiver_id === otherUserId)
+            (newMessage.sender_id === otherUserId || newMessage.receiver_id === otherUserId)
           ) {
             setMessages((prev) => [...prev, newMessage]);
           }
@@ -70,11 +71,11 @@ export function useChat(otherUserId: string | null) {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
 
-    const { error } = await supabase.from("messages").insert({
+    const { error } = await (supabase.from("messages" as any).insert({
       sender_id: user.id,
       receiver_id: otherUserId,
       content: content.trim(),
-    });
+    } as any));
 
     if (error) {
       console.error("Error sending message:", error);

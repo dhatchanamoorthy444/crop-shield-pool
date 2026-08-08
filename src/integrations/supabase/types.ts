@@ -124,6 +124,33 @@ export type Database = {
         }
         Relationships: []
       }
+      messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          is_read: boolean
+          receiver_id: string
+          sender_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          receiver_id: string
+          sender_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          receiver_id?: string
+          sender_id?: string
+        }
+        Relationships: []
+      }
       pool_members: {
         Row: {
           id: string
@@ -223,6 +250,7 @@ export type Database = {
           state: string | null
           updated_at: string
           user_id: string
+          username: string | null
           village: string | null
         }
         Insert: {
@@ -237,6 +265,7 @@ export type Database = {
           state?: string | null
           updated_at?: string
           user_id: string
+          username?: string | null
           village?: string | null
         }
         Update: {
@@ -251,6 +280,7 @@ export type Database = {
           state?: string | null
           updated_at?: string
           user_id?: string
+          username?: string | null
           village?: string | null
         }
         Relationships: []
