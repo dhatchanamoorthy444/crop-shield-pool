@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "@/contexts/AuthContext";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Button } from "@/components/ui/button";
-import { Sprout } from "lucide-react";
+import { Sprout, LayoutDashboard, Wallet, TrendingUp, Sprout as SproutIcon } from "lucide-react";
+import { UserSearch } from "./messaging/UserSearch";
 
 export function SiteHeader() {
   const { t } = useTranslation();
@@ -23,16 +24,23 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-1 md:flex">
           {user && (
             <>
-              <Link to="/dashboard" className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground">
+              <div className="mr-4">
+                <UserSearch />
+              </div>
+              <Link to="/dashboard" className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground flex items-center gap-1.5">
+                <LayoutDashboard className="h-4 w-4" />
                 {t("nav.dashboard")}
               </Link>
-              <Link to="/pools" className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground">
+              <Link to="/pools" className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground flex items-center gap-1.5">
+                <Wallet className="h-4 w-4" />
                 {t("nav.pools")}
               </Link>
-              <Link to="/simulator" className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground">
+              <Link to="/simulator" className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground flex items-center gap-1.5">
+                <TrendingUp className="h-4 w-4" />
                 {t("nav.simulator")}
               </Link>
-              <Link to="/prices" className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground">
+              <Link to="/prices" className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground flex items-center gap-1.5">
+                <SproutIcon className="h-4 w-4" />
                 {t("nav.prices")}
               </Link>
             </>

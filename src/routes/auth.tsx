@@ -60,8 +60,12 @@ function AuthPage() {
   }, [user, loading, nav]);
 
   return (
-    <div className="min-h-screen bg-gradient-field">
-      <div className="mx-auto flex min-h-screen max-w-md flex-col px-4 py-8">
+    <div className="min-h-screen bg-gradient-field overflow-hidden relative">
+      {/* Background Decorations */}
+      <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/10 rounded-full blur-[120px] animate-pulse pointer-events-none" />
+      <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-harvest/10 rounded-full blur-[120px] animate-pulse delay-700 pointer-events-none" />
+      
+      <div className="mx-auto flex min-h-screen max-w-md flex-col px-4 py-8 relative z-10 transition-all duration-700 animate-in fade-in slide-in-from-bottom-10">
         <div className="mb-6 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 font-display text-lg font-bold">
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-hero shadow-soft">
