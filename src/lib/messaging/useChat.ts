@@ -23,8 +23,6 @@ export function useChat(otherUserId: string | null) {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
-      // Use a raw RPC or a carefully constructed query if types are missing
-      // For now we cast to any to bypass strict generated type checks until migration finishes
       const { data, error } = await (supabase
         .from("messages" as any)
         .select("*") as any)
@@ -52,7 +50,7 @@ export function useChat(otherUserId: string | null) {
         (payload: any) => {
           const newMessage = payload.new as Message;
           if (
-            (newMessage.sender_id === otherUserId || newMessage.receiver_id === otherUserId)
+            newMessage.sender_id === otherUserId || newMessage.receiver_id === otherUserId
           ) {
             setMessages((prev) => [...prev, newMessage]);
           }

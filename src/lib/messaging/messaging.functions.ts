@@ -6,7 +6,6 @@ import { supabaseAdmin } from "@/integrations/supabase/client.server";
 export const searchUsers = createServerFn({ method: "GET" })
   .inputValidator((data) => z.object({ query: z.string().min(2) }).parse(data))
   .handler(async ({ data }) => {
-    // Search by username or full name
     const { data: users, error } = await supabaseAdmin
       .from("profiles")
       .select("user_id, full_name, username, avatar_url")
