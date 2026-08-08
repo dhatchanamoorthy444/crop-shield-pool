@@ -16,9 +16,9 @@ export function usePosts() {
   const fetchPosts = async () => {
     const { data, error } = await supabase
       .from("posts")
-      .select("*, profiles(username, full_name, avatar_url)")
+      .select("*, profiles!posts_user_id_profiles_fkey(username, full_name, avatar_url)")
       .order("created_at", { ascending: false });
-    if (!error && data) setPosts(data as Post[]);
+    if (!error && data) setPosts(data as unknown as Post[]);
   };
 
   useEffect(() => {

@@ -6,7 +6,7 @@ export const getPosts = createServerFn({ method: "GET" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data, error } = await supabaseAdmin
       .from("posts")
-      .select("*, profiles(username, full_name, avatar_url)")
+      .select("*, profiles!posts_user_id_profiles_fkey(username, full_name, avatar_url)")
       .order("created_at", { ascending: false });
     if (error) throw error;
     return data || [];
