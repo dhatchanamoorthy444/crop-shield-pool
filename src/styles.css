@@ -116,11 +116,10 @@
     letter-spacing: -0.02em;
   }
   
-  /* Custom Multi-Tone Selection: Ocean Tech inspired */
+  /* Custom Selection: Zodiac & Storm Green */
   ::selection {
-    background-color: #007979; /* Deep Teal */
-    color: #FFE2AF;            /* Soft Peach */
-    text-decoration-color: #24B1B1; /* Bright Teal accent */
+    background-color: #1a2a6c; /* Deep Zodiac Blue */
+    color: #39FF14;            /* Neon Storm Green */
   }
 }
 
