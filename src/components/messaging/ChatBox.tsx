@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { MessageSquare, Phone, Video, Send, X, User, PhoneCall, VideoIcon, MoreVertical, Search } from "lucide-react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
