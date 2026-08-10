@@ -56,11 +56,11 @@ function Landing() {
             transition={{ duration: 1.2, ease: "easeOut" }}
             className="lg:col-span-3"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary mb-8 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-primary mb-8 backdrop-blur-md font-mobile">
               <Leaf className="h-4 w-4" />
               <span>Next-Gen Agricultural Intelligence</span>
             </div>
-            <h1 className="font-classic text-6xl md:text-[5.5rem] font-extrabold tracking-tighter mb-8 leading-[0.9] text-glow neon-text-green uppercase">
+            <h1 className="font-business text-6xl md:text-[5.5rem] font-extrabold tracking-tighter mb-8 leading-[0.9] text-glow neon-text-green uppercase">
               See Risk.<br />
               <span className="text-primary italic font-signature lowercase normal-case text-7xl md:text-[6.5rem]">Think Smarter.</span><br />
               Grow Stronger.
@@ -69,7 +69,7 @@ function Landing() {
               AgriShield brings agricultural risk intelligence, AI assistance, and data-driven insights together in one powerful platform.
             </p>
             <div className="flex flex-wrap gap-6">
-              <Button asChild size="lg" className="rounded-full px-10 h-16 bg-primary text-black font-bold hover:bg-primary/90 shadow-[0_0_30px_rgba(0,255,102,0.3)] transition-all duration-300 active:scale-95 group border-none">
+              <Button asChild size="lg" className="rounded-full px-10 h-16 bg-primary text-black font-business font-extrabold hover:bg-primary/90 shadow-[0_0_30px_rgba(0,255,102,0.3)] transition-all duration-300 active:scale-95 group border-none">
                 <Link to="/auth" className="flex items-center gap-2">
                   Explore Risk Intelligence
                   <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -95,13 +95,13 @@ function Landing() {
               className="absolute top-0 right-0 glass-dark p-8 rounded-[2rem] w-full max-w-[320px] border-white/10 shadow-2xl z-20 animate-float"
             >
               <div className="flex justify-between items-center mb-6">
-                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Risk Score</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground font-mobile">Risk Score</p>
                 <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
                   <Activity className="h-5 w-5 text-primary" />
                 </div>
               </div>
-              <p className="text-6xl font-classic font-extrabold text-white mb-2 italic">72</p>
-              <p className="text-xs text-primary font-bold uppercase tracking-widest">Moderate Status</p>
+              <p className="text-6xl font-quota font-bold text-white mb-2 italic">72</p>
+              <p className="text-[10px] text-primary font-bold uppercase tracking-widest font-mobile">Moderate Status</p>
               <div className="mt-6 h-2 w-full bg-white/5 rounded-full overflow-hidden">
                 <motion.div 
                   initial={{ width: 0 }}
@@ -122,7 +122,7 @@ function Landing() {
                 <div className="h-8 w-8 rounded-lg bg-accent/20 flex items-center justify-center">
                   <Brain className="h-4 w-4 text-accent" />
                 </div>
-                <p className="text-xs font-bold uppercase tracking-widest text-accent">AI Analysis</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent font-mobile">AI Analysis</p>
               </div>
               <p className="text-sm font-friendly leading-relaxed text-muted-foreground italic">
                 "Suboptimal moisture in Sector B-4. Priority irrigation recommended."
@@ -136,12 +136,12 @@ function Landing() {
               className="absolute bottom-0 right-10 glass p-5 rounded-2xl w-full max-w-[240px] border-white/5 shadow-2xl z-30 neon-glow-green"
             >
               <div className="flex justify-between items-center mb-3">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Market Trend</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground font-mobile">Market Trend</p>
                 <TrendingUp className="h-4 w-4 text-primary" />
               </div>
               <div className="flex items-end gap-2">
                 <p className="text-2xl font-classic font-bold text-white">+12.4%</p>
-                <p className="text-[10px] text-primary font-bold mb-1 uppercase tracking-wider">Incr</p>
+                <p className="text-[10px] text-primary font-bold mb-1 uppercase tracking-widest font-mobile">Incr</p>
               </div>
             </motion.div>
           </div>
@@ -169,7 +169,7 @@ function Landing() {
             viewport={{ once: true }}
             className="mb-24"
           >
-            <h2 className="font-luxury text-4xl md:text-7xl font-extrabold mb-8 max-w-3xl italic">Intelligence Built Around the Farm.</h2>
+            <h2 className="font-business text-4xl md:text-7xl font-extrabold mb-8 max-w-3xl uppercase tracking-tighter">Intelligence Built Around the Farm.</h2>
             <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
               AgriShield provides the financial and intelligence infrastructure for resilient agricultural operations.
             </p>
@@ -336,7 +336,7 @@ function SolutionCard({ title, icon: Icon, desc, delay }: { title: string; icon:
       <div className="h-16 w-16 rounded-2xl bg-white/5 flex items-center justify-center text-primary mb-8 border border-white/10 group-hover:bg-primary group-hover:text-white transition-all duration-500">
         <Icon className="h-8 w-8" />
       </div>
-      <h3 className="font-classic text-2xl font-bold mb-4 uppercase tracking-wider">{title}</h3>
+      <h3 className="font-margin text-2xl font-bold mb-4 uppercase tracking-wider">{title}</h3>
       <p className="text-muted-foreground leading-relaxed">{desc}</p>
     </motion.div>
   );

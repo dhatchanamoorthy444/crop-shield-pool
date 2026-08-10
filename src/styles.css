@@ -154,6 +154,14 @@
   .font-impact { font-family: var(--font-bold-impact); }
   .font-signature { font-family: var(--font-signature); }
   .font-friendly { font-family: var(--font-friendly); }
+  .font-quota { font-family: var(--font-quota); font-weight: 700; }
+  .font-encrypt { font-family: var(--font-encrypt); }
+  .font-logistics { font-family: var(--font-logistics); }
+  .font-mobile { font-family: var(--font-mobile); font-weight: 700; }
+  .font-demand { font-family: var(--font-demand); }
+  .font-margin { font-family: var(--font-margin); font-weight: 700; }
+  .font-business { font-family: var(--font-business); font-weight: 800; }
+  .font-consumer { font-family: var(--font-consumer); font-weight: 300; }
 
   .perspective-1000 {
     perspective: 1000px;
