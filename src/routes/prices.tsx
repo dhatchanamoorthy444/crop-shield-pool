@@ -11,7 +11,7 @@ import { TrendingUp, TrendingDown } from "lucide-react";
 
 export const Route = createFileRoute("/prices")({
   component: Prices,
-  head: () => ({ meta: [{ title: "Mandi prices — CropShield" }] }),
+  head: () => ({ meta: [{ title: "Market Prices — AgriShield" }] }),
 });
 
 const CROPS = ["Paddy", "Wheat", "Tomato", "Cotton"] as const;

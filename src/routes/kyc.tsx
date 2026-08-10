@@ -17,7 +17,7 @@ import { Lock, ShieldCheck } from "lucide-react";
 
 export const Route = createFileRoute("/kyc")({
   component: KycPage,
-  head: () => ({ meta: [{ title: "Verify ID — CropShield" }] }),
+  head: () => ({ meta: [{ title: "Verify ID — AgriShield" }] }),
 });
 
 type DocType = "aadhaar" | "voter_id" | "pan" | "driving_license";

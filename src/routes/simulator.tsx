@@ -10,7 +10,7 @@ import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Toolti
 
 export const Route = createFileRoute("/simulator")({
   component: Simulator,
-  head: () => ({ meta: [{ title: "Simulator — CropShield" }] }),
+  head: () => ({ meta: [{ title: "Risk Simulator — AgriShield" }] }),
 });
 
 type Scenario = "normal" | "drought" | "flood" | "pest";
