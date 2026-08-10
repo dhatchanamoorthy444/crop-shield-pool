@@ -51,7 +51,11 @@ function Landing() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-5 gap-10 items-center">
           <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
             className="lg:col-span-3"
+          >
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary mb-8 backdrop-blur-md">
               <Leaf className="h-4 w-4" />
               <span>Next-Gen Agricultural Intelligence</span>
