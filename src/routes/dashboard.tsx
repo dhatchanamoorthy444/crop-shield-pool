@@ -13,7 +13,15 @@ import { Feed } from "@/components/posts/Feed";
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
-  head: () => ({ meta: [{ title: "Dashboard — AgriShield" }] }),
+  head: () => ({ 
+    title: "Dashboard — AgriShield",
+    meta: [
+      { name: "description", content: "Manage your farm risks, community pools, and contributions." },
+      { property: "og:title", content: "AgriShield Dashboard" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ]
+  }),
 });
 
 interface PoolSummary {
