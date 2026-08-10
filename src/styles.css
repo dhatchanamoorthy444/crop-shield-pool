@@ -36,32 +36,32 @@
   --radius-3xl: 2.5rem;
 
   /* Neon & Oil Palette from Design Spec */
-  --color-background: #020504; /* Darker Oil Green Black */
-  --color-foreground: #e0f2e8;
+  --color-background: #007979; /* Deep Teal */
+  --color-foreground: #FFE2AF; /* Soft Peach */
 
   --color-card: rgba(4, 12, 8, 0.9);
   --color-card-foreground: #e0f2e8;
 
   /* Primary Neon Greens */
-  --color-primary: #3C205E; /* Deep Royal Purple */
-  --color-primary-dark: #2a1642;
-  --color-primary-foreground: #ffffff;
+  --color-primary: #FFE2AF; /* Soft Peach */
+  --color-primary-dark: #e6cc9e;
+  --color-primary-foreground: #3C205E; /* Deep Royal Purple */
 
   /* Accent Neon Blues/Cyans */
-  --color-accent: #00e5ff; /* Cyan (#10) */
-  --color-accent-royal: #0074ff; /* Royal Blue (#13) */
-  --color-accent-foreground: #000000;
+  --color-accent: #3C205E; /* Deep Royal Purple */
+  --color-accent-royal: #5A318E;
+  --color-accent-foreground: #FFE2AF;
 
   /* Status Colors */
   --color-danger-neon: #ff3131; /* Bright Red (#11) */
   --color-warning-neon: #ffbd44; /* Bright Orange (#14) */
-  --color-success-neon: #3C205E;
+  --color-success-neon: #FFE2AF;
 
   --color-muted: #0d1a12;
   --color-muted-foreground: #a0bca8;
 
-  --color-border: rgba(60, 32, 94, 0.15);
-  --color-ring: rgba(60, 32, 94, 0.5);
+  --color-border: rgba(60, 32, 94, 0.3);
+  --color-ring: rgba(60, 32, 94, 0.6);
 
   --shadow-premium: 
     0 20px 25px -5px rgb(0 0 0 / 0.5), 
@@ -128,20 +128,20 @@
     background: rgba(10, 15, 12, 0.6);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
-    border: 1px solid rgba(60, 32, 94, 0.1);
-    box-shadow: 0 0 20px rgba(60, 32, 94, 0.05);
+    border: 1px solid rgba(60, 32, 94, 0.3);
+    box-shadow: 0 0 20px rgba(60, 32, 94, 0.1);
   }
 
   .glass-dark {
     background: rgba(2, 4, 3, 0.7);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
-    border: 1px solid rgba(60, 32, 94, 0.08);
+    border: 1px solid rgba(60, 32, 94, 0.2);
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
   }
 
   .neon-glow-green {
-    box-shadow: 0 0 15px rgba(60, 32, 94, 0.4), inset 0 0 10px rgba(60, 32, 94, 0.2);
+    box-shadow: 0 0 15px rgba(60, 32, 94, 0.6), inset 0 0 10px rgba(60, 32, 94, 0.3);
   }
 
   .neon-glow-blue {

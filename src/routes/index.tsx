@@ -29,7 +29,7 @@ function Landing() {
   const heroImageY = useTransform(scrollYProgress, [0, 0.5], [0, 200]);
 
   return (
-    <div className="min-h-screen bg-[#020504] text-white selection:bg-primary selection:text-white" ref={containerRef}>
+    <div className="min-h-screen bg-[#007979] text-[#FFE2AF] selection:bg-[#3C205E] selection:text-[#FFE2AF]" ref={containerRef}>
       <SiteHeader />
 
       {/* HERO SECTION — CINEMATIC EXPERIENCE */}
@@ -60,12 +60,12 @@ function Landing() {
               <Leaf className="h-4 w-4" />
               <span>Next-Gen Agricultural Intelligence</span>
             </div>
-            <h1 className="font-business text-6xl md:text-[5.5rem] font-extrabold tracking-tighter mb-8 leading-[0.9] text-glow uppercase" style={{ color: '#3C205E' }}>
+            <h1 className="font-business text-6xl md:text-[5.5rem] font-extrabold tracking-tighter mb-8 leading-[0.9] text-glow uppercase" style={{ color: '#FFE2AF' }}>
               <span className="text-white">SEE </span>
               <span>RISK.</span>
               <br />
               <span className="text-white">THINK </span>
-              <span style={{ color: '#5A318E' }}>SMATER</span>
+              <span style={{ color: '#3C205E' }}>SMATER</span>
               <br />
               <span className="text-white">GROW </span>
               <span>STRONGER.</span>
