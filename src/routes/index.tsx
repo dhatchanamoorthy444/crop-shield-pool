@@ -81,7 +81,7 @@ function Landing() {
           </motion.div>
 
           {/* Floating Glass Cards System */}
-          <div className="relative h-[600px] hidden lg:block perspective-1000">
+          <div className="relative h-[600px] hidden lg:block">
             <motion.div 
               initial={{ opacity: 0, x: 50, rotateY: 10 }}
               animate={{ opacity: 1, x: 0, rotateY: -10 }}
