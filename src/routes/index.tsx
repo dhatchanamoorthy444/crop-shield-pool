@@ -222,7 +222,7 @@ function Landing() {
       </section>
 
       {/* HOW IT WORKS — EDITORIAL GRID */}
-      <section className="py-32 bg-[#020504] border-t border-white/5">
+      <section className="py-32 bg-[#1B3B2B] border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <motion.div 
@@ -295,7 +295,7 @@ function Landing() {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-20 bg-[#020504] border-t border-white/5">
+      <footer className="py-20 bg-[#1B3B2B] border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
             <div>
