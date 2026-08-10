@@ -14,7 +14,15 @@ import { z } from "zod";
 
 export const Route = createFileRoute("/pools/")({
   component: PoolsPage,
-  head: () => ({ meta: [{ title: "AgriShield — Manage Risk Pools" }] }),
+  head: () => ({ 
+    title: "Village Pools — AgriShield",
+    meta: [
+      { name: "description", content: "Join or create village risk-pools for collective protection." },
+      { property: "og:title", content: "Village Pools — AgriShield" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ]
+  }),
 });
 
 function genCode() {

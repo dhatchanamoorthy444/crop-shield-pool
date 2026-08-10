@@ -17,7 +17,15 @@ import { Lock, ShieldCheck } from "lucide-react";
 
 export const Route = createFileRoute("/kyc")({
   component: KycPage,
-  head: () => ({ meta: [{ title: "Verify ID — AgriShield" }] }),
+  head: () => ({ 
+    title: "Verify ID — AgriShield",
+    meta: [
+      { name: "description", content: "Securely verify your identity to join village cooperatives." },
+      { property: "og:title", content: "Verify ID — AgriShield" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ]
+  }),
 });
 
 type DocType = "aadhaar" | "voter_id" | "pan" | "driving_license";
