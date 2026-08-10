@@ -3,137 +3,102 @@ import { useTranslation } from "react-i18next";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  Sprout, ShieldCheck, TrendingUp, Lock, Languages, FileText, ArrowRight,
-} from "lucide-react";
-import heroImg from "@/assets/hero-field.jpg";
-import { Farm3DScene } from "@/components/Farm3DScene";
-
+import { ArrowRight, Brain, ShieldCheck, TrendingUp, Droplets, Leaf, Activity } from "lucide-react";
+import { AgriShieldAI } from "@/components/ai/AgriShieldAI";
 
 export const Route = createFileRoute("/")({
   component: Landing,
-  head: () => ({
-    meta: [
-      { title: "CropShield Pool — Village risk-pools for Indian farmers" },
-      {
-        name: "description",
-        content:
-          "Verified, encrypted, multi-language risk-sharing for smallholder farmers. Pool savings, automatic payouts, real-time mandi prices.",
-      },
-      { property: "og:title", content: "CropShield Pool" },
-      { property: "og:description", content: "Village risk-pools that protect every farmer." },
-    ],
-  }),
 });
 
 function Landing() {
   const { t } = useTranslation();
-  const features = [
-    { icon: Sprout, title: t("landing.feature1_title"), body: t("landing.feature1_body") },
-    { icon: TrendingUp, title: t("landing.feature2_title"), body: t("landing.feature2_body") },
-    { icon: ShieldCheck, title: t("landing.feature3_title"), body: t("landing.feature3_body") },
-    { icon: Lock, title: t("landing.feature4_title"), body: t("landing.feature4_body") },
-    { icon: Languages, title: t("landing.feature5_title"), body: t("landing.feature5_body") },
-    { icon: FileText, title: t("landing.feature6_title"), body: t("landing.feature6_body") },
-  ];
-  const steps = [t("landing.step1"), t("landing.step2"), t("landing.step3"), t("landing.step4")];
 
   return (
-    <div className="min-h-screen bg-gradient-field">
+    <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
 
       {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src={heroImg}
-            alt="Indian paddy fields at golden hour with farmers working together"
-            width={1920}
-            height={1080}
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40" />
-        </div>
-        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-20 sm:px-6 sm:py-24 lg:grid-cols-2 lg:py-28">
-          <div className="max-w-2xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
-              <Sprout className="h-3.5 w-3.5" /> {t("tagline")}
-            </span>
-            <h1 className="mt-6 font-display text-4xl font-extrabold leading-[1.05] text-foreground text-balance sm:text-6xl">
-              {t("landing.hero_title")}
+      <section className="relative overflow-hidden py-24 sm:py-32">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-sm font-medium text-primary">
+              <Leaf className="h-4 w-4" />
+              <span>Next-Gen AgriTech</span>
+            </div>
+            <h1 className="mt-6 font-display text-5xl font-extrabold leading-[1.1] text-foreground tracking-tight sm:text-7xl">
+              Smarter Risk Decisions for a More Resilient Farm.
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
-              {t("landing.hero_sub")}
+            <p className="mt-6 text-xl text-muted-foreground leading-relaxed">
+              Understand agricultural risks, monitor changing conditions, and make better decisions with intelligent tools built for modern agriculture.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button asChild size="lg" className="bg-primary text-primary-foreground shadow-elevated hover:bg-primary/90">
-                <Link to="/auth">
-                  {t("landing.cta_primary")} <ArrowRight className="ml-1 h-4 w-4" />
-                </Link>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Button asChild size="lg" className="h-12 px-8 text-base">
+                <Link to="/auth">Explore Risk Intelligence</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-foreground/20 bg-background/80 backdrop-blur">
-                <Link to="/simulator">{t("landing.cta_secondary")}</Link>
+              <Button asChild size="lg" variant="outline" className="h-12 px-8 text-base">
+                <Link to="/simulator">Ask AgriShield AI</Link>
               </Button>
             </div>
           </div>
-          <Farm3DScene />
+          <div className="relative">
+            <div className="absolute -inset-4 bg-gradient-to-tr from-primary/20 to-accent/20 blur-3xl rounded-full" />
+            <Card className="relative p-6 bg-white/60 backdrop-blur-xl border border-white/50 shadow-premium">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="p-4 rounded-xl bg-primary/5 border border-primary/10">
+                  <Activity className="h-6 w-6 text-primary" />
+                  <p className="mt-2 text-sm font-medium text-muted-foreground">Overall Risk</p>
+                  <p className="text-2xl font-bold">Moderate</p>
+                </div>
+                <div className="p-4 rounded-xl bg-primary/5 border border-primary/10">
+                  <Droplets className="h-6 w-6 text-primary" />
+                  <p className="mt-2 text-sm font-medium text-muted-foreground">Water Risk</p>
+                  <p className="text-2xl font-bold">Low</p>
+                </div>
+              </div>
+            </Card>
+          </div>
         </div>
       </section>
 
-
-      {/* FEATURES */}
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((f) => (
-            <Card key={f.title} className="border-border/60 bg-gradient-card shadow-soft transition hover:shadow-elevated">
-              <CardContent className="p-6">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <f.icon className="h-6 w-6" />
-                </div>
-                <h3 className="mt-4 font-display text-xl font-bold text-foreground">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
-              </CardContent>
-            </Card>
+      {/* VALUE STRIP */}
+      <section className="border-y border-border bg-muted/30 py-10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 grid grid-cols-2 md:grid-cols-5 gap-8">
+          {[
+            { icon: ShieldCheck, label: "Risk Intelligence" },
+            { icon: Brain, label: "AI Assistance" },
+            { icon: Activity, label: "Weather Awareness" },
+            { icon: Leaf, label: "Crop Insights" },
+            { icon: TrendingUp, label: "Decision Support" },
+          ].map((item, i) => (
+            <div key={i} className="flex flex-col items-center gap-2 text-center text-sm font-medium text-muted-foreground">
+              <item.icon className="h-6 w-6 text-primary" />
+              {item.label}
+            </div>
           ))}
         </div>
       </section>
 
-      {/* HOW */}
-      <section className="bg-gradient-hero py-20 text-primary-foreground">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <h2 className="text-center font-display text-3xl font-extrabold sm:text-5xl">
-            {t("landing.how_title")}
-          </h2>
-          <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {steps.map((s, i) => (
-              <li key={i} className="rounded-2xl bg-primary-foreground/10 p-6 backdrop-blur">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-harvest font-display text-lg font-bold text-harvest-foreground">
-                  {i + 1}
-                </span>
-                <p className="mt-4 text-base leading-relaxed">{s}</p>
-              </li>
+      {/* PROBLEM */}
+      <section className="py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 text-center">
+          <h2 className="font-display text-4xl font-bold">Agricultural Risk Is Changing Faster Than Ever.</h2>
+          <div className="mt-16 grid md:grid-cols-3 gap-8">
+            {[
+              { icon: Activity, title: "Unpredictable Weather" },
+              { icon: Droplets, title: "Water Scarcity" },
+              { icon: ShieldCheck, title: "Market Volatility" },
+            ].map((p, i) => (
+              <Card key={i} className="p-8 shadow-premium border-none">
+                <p.icon className="h-10 w-10 text-primary mx-auto" />
+                <h3 className="mt-6 font-bold text-xl">{p.title}</h3>
+              </Card>
             ))}
-          </ol>
+          </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6">
-        <h2 className="font-display text-3xl font-extrabold text-foreground sm:text-5xl text-balance">
-          {t("landing.cta_band")}
-        </h2>
-        <Button asChild size="lg" className="mt-8 bg-primary text-primary-foreground shadow-elevated hover:bg-primary/90">
-          <Link to="/auth">
-            {t("landing.cta_primary")} <ArrowRight className="ml-1 h-4 w-4" />
-          </Link>
-        </Button>
-      </section>
-
-      <footer className="border-t border-border/60 bg-background/80 py-8">
-        <div className="mx-auto max-w-7xl px-4 text-center text-sm text-muted-foreground sm:px-6">
-          © {new Date().getFullYear()} {t("brand")}. End-to-end encrypted. Built for farmers.
-        </div>
-      </footer>
+      <AgriShieldAI />
     </div>
   );
 }
