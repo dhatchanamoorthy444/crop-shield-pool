@@ -62,7 +62,7 @@ function Landing() {
             </div>
             <h1 className="font-business text-6xl md:text-[5.5rem] font-extrabold tracking-tighter mb-8 leading-[0.9] text-glow neon-text-green uppercase">
               See Risk.<br />
-              <span className="text-primary italic font-signature lowercase normal-case text-7xl md:text-[6.5rem]"></span><br />
+              
               Grow Stronger.
             </h1>
             <p className="font-friendly text-xl text-muted-foreground mb-12 max-w-xl leading-relaxed">
