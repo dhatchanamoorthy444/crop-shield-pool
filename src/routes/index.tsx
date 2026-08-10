@@ -274,7 +274,7 @@ function Landing() {
             <h2 className="font-business text-4xl md:text-6xl font-extrabold mb-8 leading-tight uppercase">
               Ready to grow a more<br />resilient future?
             </h2>
-            <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-2xl mx-auto font-medium">
+            <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-2xl mx-auto font-cooket tracking-tight">
               Join the thousand of farmers already using AgriShield to manage risk intelligently.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
