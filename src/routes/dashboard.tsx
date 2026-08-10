@@ -103,8 +103,8 @@ function Dashboard() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="font-display text-5xl md:text-6xl font-extrabold tracking-tight mb-4 neon-text-green">
-              Intelligence <span className="text-primary italic">Hub</span>
+            <h1 className="font-classic text-5xl md:text-7xl font-extrabold tracking-widest mb-4 neon-text-green uppercase italic">
+              Intelligence <span className="text-primary font-signature lowercase text-7xl md:text-8xl tracking-normal">Hub</span>
             </h1>
             <div className="flex items-center gap-4 text-muted-foreground font-bold text-xs uppercase tracking-[0.2em]">
               <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/5">
@@ -192,8 +192,8 @@ function Dashboard() {
             {/* Community Feed Section */}
             <section className="space-y-8">
               <div className="flex items-center justify-between">
-                <h2 className="font-display text-3xl font-bold flex items-center gap-4">
-                  <Share2 className="h-8 w-8 text-primary" /> Network Intelligence Feed
+                <h2 className="font-classic text-3xl font-bold flex items-center gap-4 uppercase tracking-widest">
+                  <Share2 className="h-8 w-8 text-primary" /> Network Feed
                 </h2>
               </div>
               <div className="glass-dark p-2 rounded-[2.5rem] border-white/5">
@@ -214,11 +214,11 @@ function Dashboard() {
               className="glass-dark p-2 rounded-[2.5rem] border-white/10"
             >
               <div className="p-8 pb-4">
-                <h3 className="font-display text-xl font-extrabold flex items-center gap-3 mb-2">
+                <h3 className="font-classic text-xl font-extrabold flex items-center gap-3 mb-2 uppercase tracking-widest">
                   <Layout className="h-6 w-6 text-primary" />
-                  Protocol Entry
+                  Gateway
                 </h3>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Quick Action Gateway</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">Action Protocol</p>
               </div>
               <div className="p-4 pt-0 space-y-2">
                 <ActionTile to="/pools" icon={Users} label="Risk Pools" desc="Cooperative Capital" />
@@ -267,7 +267,7 @@ function KpiCard({ icon: Icon, label, value, trend }: { icon: any; label: string
       </div>
       <div>
         <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground mb-2">{label}</p>
-        <p className="font-display text-4xl font-extrabold tracking-tight">{value}</p>
+        <p className="font-classic text-4xl font-extrabold tracking-tighter italic">{value}</p>
       </div>
     </motion.div>
   );

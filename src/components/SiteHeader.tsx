@@ -39,7 +39,7 @@ export function SiteHeader() {
           <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary shadow-soft group-hover:scale-110 transition-all duration-500 border border-white/20">
             <Leaf className="h-6 w-6 text-primary-foreground" />
           </span>
-          <span className="font-display text-2xl font-bold tracking-tighter text-foreground hidden sm:inline text-glow">
+          <span className="font-classic text-2xl font-bold tracking-widest text-foreground hidden sm:inline text-glow uppercase">
             AgriShield
           </span>
         </Link>
@@ -103,7 +103,7 @@ function NavLink({ to, icon: Icon, label }: { to: string; icon?: any; label: str
   return (
     <Link 
       to={to} 
-      className="px-5 py-2 rounded-full text-sm font-bold text-foreground/70 hover:text-white transition-all flex items-center gap-2 [&.active]:bg-primary/20 [&.active]:text-primary-foreground [&.active]:border border-transparent [&.active]:border-white/10"
+      className="px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-foreground/70 hover:text-white transition-all flex items-center gap-2 [&.active]:bg-primary/20 [&.active]:text-primary-foreground [&.active]:border border-transparent [&.active]:border-white/10"
     >
       {Icon && <Icon className="h-4 w-4" />}
       {label}
