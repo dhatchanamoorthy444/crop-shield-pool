@@ -36,32 +36,32 @@
   --radius-3xl: 2.5rem;
 
   /* Neon & Oil Palette from Design Spec */
-  --color-background: #007979; /* Deep Teal */
-  --color-foreground: #FFE2AF; /* Soft Peach */
+  --color-background: #1B3B2B; /* Deep Forest Green */
+  --color-foreground: #F4F1DE; /* Warm Cream */
 
-  --color-card: rgba(4, 12, 8, 0.9);
-  --color-card-foreground: #e0f2e8;
+  --color-card: rgba(27, 59, 43, 0.95);
+  --color-card-foreground: #F4F1DE;
 
-  /* Primary Neon Greens */
-  --color-primary: #FFE2AF; /* Soft Peach */
-  --color-primary-dark: #e6cc9e;
-  --color-primary-foreground: #3C205E; /* Deep Royal Purple */
+  /* Harvest Gold & Forest Palette */
+  --color-primary: #D4A373; /* Harvest Gold */
+  --color-primary-dark: #bc8a5f;
+  --color-primary-foreground: #1B3B2B;
 
-  /* Accent Neon Blues/Cyans */
-  --color-accent: #3C205E; /* Deep Royal Purple */
-  --color-accent-royal: #5A318E;
-  --color-accent-foreground: #FFE2AF;
+  /* Accent Earth Tones */
+  --color-accent: #588157; /* Sage Green */
+  --color-accent-royal: #3a5a40;
+  --color-accent-foreground: #F4F1DE;
 
-  /* Status Colors */
-  --color-danger-neon: #ff3131; /* Bright Red (#11) */
-  --color-warning-neon: #ffbd44; /* Bright Orange (#14) */
-  --color-success-neon: #FFE2AF;
+  /* Status Colors (Earth Tones) */
+  --color-danger-neon: #bc4749; 
+  --color-warning-neon: #D4A373;
+  --color-success-neon: #588157;
 
-  --color-muted: #0d1a12;
-  --color-muted-foreground: #a0bca8;
+  --color-muted: #2B2D42; /* Charcoal Grey */
+  --color-muted-foreground: #8d99ae;
 
-  --color-border: rgba(60, 32, 94, 0.3);
-  --color-ring: rgba(60, 32, 94, 0.6);
+  --color-border: rgba(212, 163, 115, 0.2);
+  --color-ring: rgba(212, 163, 115, 0.5);
 
   --shadow-premium: 
     0 20px 25px -5px rgb(0 0 0 / 0.5), 
@@ -118,8 +118,8 @@
   
   /* Custom Selection: Zodiac & Storm Green */
   ::selection {
-    background-color: #FFE2AF; /* Soft Peach */
-    color: #3C205E;            /* Deep Royal Purple (Dark) */
+    background-color: #D4A373; /* Harvest Gold */
+    color: #1B3B2B;            /* Deep Forest Green */
   }
 }
 
@@ -128,20 +128,20 @@
     background: rgba(10, 15, 12, 0.6);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
-    border: 1px solid rgba(60, 32, 94, 0.3);
-    box-shadow: 0 0 20px rgba(60, 32, 94, 0.1);
+    border: 1px solid rgba(212, 163, 115, 0.15);
+    box-shadow: 0 0 20px rgba(212, 163, 115, 0.05);
   }
 
   .glass-dark {
     background: rgba(2, 4, 3, 0.7);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
-    border: 1px solid rgba(60, 32, 94, 0.2);
+    border: 1px solid rgba(212, 163, 115, 0.1);
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
   }
 
   .neon-glow-green {
-    box-shadow: 0 0 15px rgba(60, 32, 94, 0.6), inset 0 0 10px rgba(60, 32, 94, 0.3);
+    box-shadow: 0 0 15px rgba(212, 163, 115, 0.3), inset 0 0 10px rgba(212, 163, 115, 0.1);
   }
 
   .neon-glow-blue {

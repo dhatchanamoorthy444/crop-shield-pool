@@ -29,7 +29,7 @@ function Landing() {
   const heroImageY = useTransform(scrollYProgress, [0, 0.5], [0, 200]);
 
   return (
-    <div className="min-h-screen bg-[#007979] text-[#FFE2AF] selection:bg-[#3C205E] selection:text-[#FFE2AF]" ref={containerRef}>
+    <div className="min-h-screen bg-[#1B3B2B] text-[#F4F1DE] selection:bg-[#D4A373] selection:text-[#1B3B2B]" ref={containerRef}>
       <SiteHeader />
 
       {/* HERO SECTION — CINEMATIC EXPERIENCE */}
@@ -45,8 +45,8 @@ function Landing() {
             className="w-full h-full object-cover scale-110 blur-[2px]"
           />
           {/* Green Cinematic Tint Overlay */}
-          <div className="absolute inset-0 bg-[#020504]/80 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#020504] via-transparent to-[#020504]/30" />
+          <div className="absolute inset-0 bg-[#1B3B2B]/80 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1B3B2B] via-transparent to-[#1B3B2B]/30" />
         </motion.div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-5 gap-10 items-center">
@@ -60,12 +60,12 @@ function Landing() {
               <Leaf className="h-4 w-4" />
               <span>Next-Gen Agricultural Intelligence</span>
             </div>
-            <h1 className="font-business text-6xl md:text-[5.5rem] font-extrabold tracking-tighter mb-8 leading-[0.9] text-glow uppercase" style={{ color: '#FFE2AF' }}>
+            <h1 className="font-business text-6xl md:text-[5.5rem] font-extrabold tracking-tighter mb-8 leading-[0.9] text-glow uppercase" style={{ color: '#D4A373' }}>
               <span className="text-white">SEE </span>
               <span>RISK.</span>
               <br />
               <span className="text-white">THINK </span>
-              <span style={{ color: '#3C205E' }}>SMATER</span>
+              <span style={{ color: '#F4F1DE' }}>SMATER</span>
               <br />
               <span className="text-white">GROW </span>
               <span>STRONGER.</span>
@@ -74,7 +74,7 @@ function Landing() {
               AgriShield brings agricultural risk intelligence, AI assistance, and data-driven insights together in one powerful platform.
             </p>
             <div className="flex flex-wrap gap-6">
-              <Button asChild size="lg" className="rounded-full px-10 h-16 bg-primary text-[#3C205E] font-business font-extrabold hover:bg-primary/90 shadow-[0_0_30px_rgba(60,32,94,0.4)] transition-all duration-300 active:scale-95 group border-none">
+              <Button asChild size="lg" className="rounded-full px-10 h-16 bg-primary text-[#1B3B2B] font-business font-extrabold hover:bg-primary/90 shadow-[0_0_30px_rgba(212,163,115,0.3)] transition-all duration-300 active:scale-95 group border-none">
                 <Link to="/auth" className="flex items-center gap-2">
                   Explore Risk Intelligence
                   <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -166,7 +166,7 @@ function Landing() {
       </section>
 
       {/* INTELLIGENCE SECTION — SOLUTIONS SHOWCASE */}
-      <section className="py-32 bg-[#040806]">
+      <section className="py-32 bg-[#132a1e]">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
@@ -222,7 +222,7 @@ function Landing() {
       </section>
 
       {/* HOW IT WORKS — EDITORIAL GRID */}
-      <section className="py-32 bg-[#020504] border-t border-white/5">
+      <section className="py-32 bg-[#1B3B2B] border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <motion.div 
@@ -295,7 +295,7 @@ function Landing() {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-20 bg-[#020504] border-t border-white/5">
+      <footer className="py-20 bg-[#1B3B2B] border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
             <div>
