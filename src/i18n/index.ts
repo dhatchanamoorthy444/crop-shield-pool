@@ -15,6 +15,9 @@ if (!i18n.isInitialized) {
       hi: { translation: hi },
       ta: { translation: ta },
       kn: { translation: kn },
+      te: { translation: te },
+      ml: { translation: ml },
+
     },
     lng: typeof window !== "undefined" ? localStorage.getItem("cs_lang") || "en" : "en",
     fallbackLng: "en",
@@ -27,6 +30,9 @@ export const LANGS = [
   { code: "hi", label: "हिन्दी" },
   { code: "ta", label: "தமிழ்" },
   { code: "kn", label: "ಕನ್ನಡ" },
+  { code: "te", label: "తెలుగు" },
+  { code: "ml", label: "മലയാളം" },
+
 ] as const;
 
 export type LangCode = (typeof LANGS)[number]["code"];
