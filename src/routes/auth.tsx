@@ -68,7 +68,7 @@ function AuthPage() {
         className="w-full max-w-[480px] relative z-10"
       >
         <div className="mb-12 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 font-display text-3xl font-extrabold text-white group">
+          <Link to="/" className="flex items-center gap-3 font-classic text-3xl font-extrabold text-white group uppercase tracking-widest">
             <span className="flex h-12 w-12 items-center justify-center rounded-[1rem] bg-primary shadow-[0_0_20px_rgba(27,77,46,0.4)] group-hover:scale-105 transition-transform">
               <Leaf className="h-7 w-7 text-white" />
             </span>
@@ -84,13 +84,13 @@ function AuthPage() {
             <TabsList className="grid w-full grid-cols-2 bg-white/5 p-2 h-auto rounded-none border-b border-white/5">
               <TabsTrigger 
                 value="signin" 
-                className="rounded-2xl py-3.5 font-display font-extrabold text-sm uppercase tracking-widest data-[state=active]:bg-primary data-[state=active]:text-white transition-all"
+                className="rounded-2xl py-3.5 font-classic font-extrabold text-xs uppercase tracking-[0.2em] data-[state=active]:bg-primary data-[state=active]:text-white transition-all"
               >
                 Sign In
               </TabsTrigger>
               <TabsTrigger 
                 value="signup" 
-                className="rounded-2xl py-3.5 font-display font-extrabold text-sm uppercase tracking-widest data-[state=active]:bg-primary data-[state=active]:text-white transition-all"
+                className="rounded-2xl py-3.5 font-classic font-extrabold text-xs uppercase tracking-[0.2em] data-[state=active]:bg-primary data-[state=active]:text-white transition-all"
               >
                 Join Now
               </TabsTrigger>
@@ -151,8 +151,8 @@ function SignInForm() {
   return (
     <form onSubmit={submit} className="p-10 space-y-8">
       <div>
-        <h2 className="text-3xl font-display font-extrabold mb-3">Welcome Back</h2>
-        <p className="text-muted-foreground text-sm font-medium">Re-establish your connection to the risk network.</p>
+        <h2 className="text-4xl font-classic font-extrabold mb-3 uppercase tracking-wider italic">Welcome Back</h2>
+        <p className="text-muted-foreground text-sm font-medium font-friendly">Re-establish your connection to the risk network.</p>
       </div>
 
       <div className="space-y-6">
@@ -184,7 +184,7 @@ function SignInForm() {
         <Button 
           type="submit" 
           disabled={busy} 
-          className="w-full h-16 rounded-2xl bg-primary text-white font-display font-extrabold text-sm uppercase tracking-widest shadow-[0_10px_30px_rgba(27,77,46,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all group"
+          className="w-full h-16 rounded-2xl bg-primary text-white font-classic font-extrabold text-xs uppercase tracking-[0.2em] shadow-[0_10px_30px_rgba(27,77,46,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all group"
         >
           {busy ? "Verifying..." : (
             <span className="flex items-center gap-2">
