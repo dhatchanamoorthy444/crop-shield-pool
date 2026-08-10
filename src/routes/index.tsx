@@ -61,9 +61,9 @@ function Landing() {
               <span>Next-Gen Agricultural Intelligence</span>
             </div>
             <h1 className="font-business text-6xl md:text-[5.5rem] font-extrabold tracking-tighter mb-8 leading-[0.9] text-glow neon-text-green uppercase">
-              See Risk.<br />
-              
-              Grow Stronger.
+              SEE RISK.<br />
+              THINK SMATER<br />
+              GROW STRONGER.
             </h1>
             <p className="font-friendly text-xl text-muted-foreground mb-12 max-w-xl leading-relaxed">
               AgriShield brings agricultural risk intelligence, AI assistance, and data-driven insights together in one powerful platform.
