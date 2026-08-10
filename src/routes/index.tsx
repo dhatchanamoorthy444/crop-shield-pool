@@ -83,11 +83,10 @@ function Landing() {
           {/* Floating Glass Cards System */}
           <div className="relative h-[600px] hidden lg:block">
             <motion.div 
-              initial={{ opacity: 0, x: 50, rotateY: 10 }}
-              animate={{ opacity: 1, x: 0, rotateY: -10 }}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 1.5 }}
-              className="absolute top-0 right-10 glass-dark p-8 rounded-[2rem] w-80 border-white/10 shadow-2xl z-20"
-              style={{ transformStyle: "preserve-3d" }}
+              className="absolute top-0 right-0 glass-dark p-8 rounded-[2rem] w-80 border-white/10 shadow-2xl z-20"
             >
               <div className="flex justify-between items-center mb-6">
                 <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Agricultural Risk Score</p>
@@ -106,12 +105,12 @@ function Landing() {
                 />
               </div>
             </motion.div>
-
+            
             <motion.div 
               initial={{ opacity: 0, scale: 0.9, y: 50 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 1.2 }}
-              className="absolute bottom-20 left-0 glass-dark p-6 rounded-2xl w-64 border-white/5 shadow-2xl z-10"
+              className="absolute top-[45%] right-[60%] glass-dark p-6 rounded-2xl w-64 border-white/5 shadow-2xl z-10"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="h-8 w-8 rounded-lg bg-accent/20 flex items-center justify-center">
@@ -125,10 +124,10 @@ function Landing() {
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 1 }}
-              className="absolute top-[60%] -left-32 glass p-5 rounded-2xl w-56 border-white/5 shadow-2xl z-40"
+              initial={{ opacity: 0, scale: 0.8, x: 20 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ delay: 1, duration: 1 }}
+              className="absolute top-[65%] right-[20%] glass p-5 rounded-2xl w-56 border-white/5 shadow-2xl z-30"
             >
               <div className="flex justify-between items-center mb-3">
                 <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Market Trend</p>
@@ -139,6 +138,7 @@ function Landing() {
                 <p className="text-[10px] text-emerald-400 font-bold mb-1 uppercase tracking-wider">Increase</p>
               </div>
             </motion.div>
+
 
 
 
