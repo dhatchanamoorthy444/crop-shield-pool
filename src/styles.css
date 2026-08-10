@@ -116,10 +116,10 @@
     letter-spacing: -0.02em;
   }
   
-  /* Custom Selection: Zodiac & Storm Green */
+  /* Custom Selection: Dark, Oil, Light Sophisticated palette */
   ::selection {
-    background-color: #D4A373; /* Harvest Gold */
-    color: #1B3B2B;            /* Deep Forest Green */
+    background-color: #0A0F0C; /* Oil Black */
+    color: #F4F1DE;            /* Warm Cream */
   }
 }
 
