@@ -168,6 +168,7 @@
   .font-encrypt { font-family: var(--font-encrypt); }
   .font-logistics { font-family: var(--font-logistics); }
   .font-mobile { font-family: var(--font-mobile); font-weight: 700; }
+  .font-cooket { font-family: var(--font-cooket); font-weight: 800; }
   .font-demand { font-family: var(--font-demand); }
   .font-margin { font-family: var(--font-margin); font-weight: 700; }
   .font-business { font-family: var(--font-business); font-weight: 800; }
