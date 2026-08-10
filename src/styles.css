@@ -116,10 +116,11 @@
     letter-spacing: -0.02em;
   }
   
-  /* Dark Oil Light Selection */
+  /* Custom Multi-Tone Selection: Ocean Tech inspired */
   ::selection {
-    background-color: #003d4d; /* Dark Oil Blue */
-    color: var(--color-accent); /* Light Cyber Blue */
+    background-color: #007979; /* Deep Teal */
+    color: #FFE2AF;            /* Soft Peach */
+    text-decoration-color: #24B1B1; /* Bright Teal accent */
   }
 }
 
