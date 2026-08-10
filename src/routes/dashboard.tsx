@@ -214,11 +214,11 @@ function Dashboard() {
               className="glass-dark p-2 rounded-[2.5rem] border-white/10"
             >
               <div className="p-8 pb-4">
-                <h3 className="font-display text-xl font-extrabold flex items-center gap-3 mb-2">
+                <h3 className="font-classic text-xl font-extrabold flex items-center gap-3 mb-2 uppercase tracking-widest">
                   <Layout className="h-6 w-6 text-primary" />
-                  Protocol Entry
+                  Gateway
                 </h3>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Quick Action Gateway</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">Action Protocol</p>
               </div>
               <div className="p-4 pt-0 space-y-2">
                 <ActionTile to="/pools" icon={Users} label="Risk Pools" desc="Cooperative Capital" />
