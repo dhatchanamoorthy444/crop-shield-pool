@@ -103,7 +103,7 @@ function Dashboard() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="font-display text-5xl md:text-6xl font-extrabold tracking-tight mb-4">
+            <h1 className="font-display text-5xl md:text-6xl font-extrabold tracking-tight mb-4 neon-text-green">
               Intelligence <span className="text-primary italic">Hub</span>
             </h1>
             <div className="flex items-center gap-4 text-muted-foreground font-bold text-xs uppercase tracking-[0.2em]">
