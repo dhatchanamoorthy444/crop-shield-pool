@@ -4,6 +4,9 @@ import en from "./locales/en";
 import hi from "./locales/hi";
 import ta from "./locales/ta";
 import kn from "./locales/kn";
+import te from "./locales/te";
+import ml from "./locales/ml";
+
 
 if (!i18n.isInitialized) {
   i18n.use(initReactI18next).init({
