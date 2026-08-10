@@ -17,6 +17,16 @@
   --font-signature: "Sacramento", cursive;
   --font-friendly: "Quicksand", sans-serif;
 
+  /* Strictly Business Commercial Fonts */
+  --font-quota: "PT Sans", sans-serif;
+  --font-encrypt: "Sifonn", sans-serif;
+  --font-logistics: "Zen Dots", cursive;
+  --font-mobile: "Syncopate", sans-serif;
+  --font-demand: "Jost", sans-serif;
+  --font-margin: "Syne", sans-serif;
+  --font-business: "Gilroy", sans-serif;
+  --font-consumer: "Raleway", sans-serif;
+
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
