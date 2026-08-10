@@ -75,12 +75,12 @@ function Dashboard() {
     if (profile.kyc_status === "approved")
       return (
         <Badge className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20">
-          <ShieldCheck className="mr-1 h-3 w-3" /> {t("dashboard.kyc_approved")}
+          <ShieldCheck className="mr-1 h-3 w-3" /> Verified Member
         </Badge>
       );
     return (
       <Badge variant="outline" className="border-muted text-muted-foreground">
-        <ShieldAlert className="mr-1 h-3 w-3" /> {t("dashboard.kyc_required")}
+        <ShieldAlert className="mr-1 h-3 w-3" /> Verification Required
       </Badge>
     );
   };
