@@ -59,12 +59,12 @@ function Landing() {
               <Leaf className="h-4 w-4" />
               <span>Next-Gen Agricultural Intelligence</span>
             </div>
-            <h1 className="font-display text-6xl md:text-[5.5rem] font-extrabold tracking-tighter mb-8 leading-[0.9] text-glow neon-text-green">
+            <h1 className="font-classic text-6xl md:text-[5.5rem] font-extrabold tracking-tighter mb-8 leading-[0.9] text-glow neon-text-green uppercase">
               See Risk.<br />
-              <span className="text-primary italic">Think Smarter.</span><br />
+              <span className="text-primary italic font-signature lowercase normal-case text-7xl md:text-[6.5rem]">Think Smarter.</span><br />
               Grow Stronger.
             </h1>
-            <p className="text-xl text-muted-foreground mb-12 max-w-xl leading-relaxed">
+            <p className="font-friendly text-xl text-muted-foreground mb-12 max-w-xl leading-relaxed">
               AgriShield brings agricultural risk intelligence, AI assistance, and data-driven insights together in one powerful platform.
             </p>
             <div className="flex flex-wrap gap-6">
@@ -163,7 +163,7 @@ function Landing() {
             viewport={{ once: true }}
             className="mb-24"
           >
-            <h2 className="font-display text-4xl md:text-6xl font-extrabold mb-8 max-w-3xl">Intelligence Built Around the Farm.</h2>
+            <h2 className="font-luxury text-4xl md:text-7xl font-extrabold mb-8 max-w-3xl italic">Intelligence Built Around the Farm.</h2>
             <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
               AgriShield provides the financial and intelligence infrastructure for resilient agricultural operations.
             </p>
@@ -237,7 +237,7 @@ function Landing() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="font-display text-4xl md:text-5xl font-extrabold mb-12"
+                className="font-impact text-4xl md:text-7xl font-extrabold mb-12 tracking-wide uppercase"
               >
                 From Risk to Action.<br />
                 A Polished Workflow.
@@ -265,7 +265,7 @@ function Landing() {
           <div className="absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg] group-hover:left-[100%] transition-all duration-1000 ease-in-out" />
           
           <div className="relative z-10">
-            <h2 className="font-display text-4xl md:text-6xl font-extrabold mb-8 leading-tight">
+            <h2 className="font-classic text-4xl md:text-6xl font-extrabold mb-8 leading-tight uppercase">
               Ready to grow a more<br />resilient future?
             </h2>
             <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-2xl mx-auto font-medium">
@@ -330,7 +330,7 @@ function SolutionCard({ title, icon: Icon, desc, delay }: { title: string; icon:
       <div className="h-16 w-16 rounded-2xl bg-white/5 flex items-center justify-center text-primary mb-8 border border-white/10 group-hover:bg-primary group-hover:text-white transition-all duration-500">
         <Icon className="h-8 w-8" />
       </div>
-      <h3 className="text-2xl font-bold mb-4">{title}</h3>
+      <h3 className="font-classic text-2xl font-bold mb-4 uppercase tracking-wider">{title}</h3>
       <p className="text-muted-foreground leading-relaxed">{desc}</p>
     </motion.div>
   );
