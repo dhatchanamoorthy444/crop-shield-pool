@@ -60,12 +60,12 @@ function Landing() {
               <Leaf className="h-4 w-4" />
               <span>Next-Gen Agricultural Intelligence</span>
             </div>
-            <h1 className="font-business text-6xl md:text-[5.5rem] font-extrabold tracking-tighter mb-8 leading-[0.9] text-glow uppercase" style={{ color: '#007979' }}>
+            <h1 className="font-business text-6xl md:text-[5.5rem] font-extrabold tracking-tighter mb-8 leading-[0.9] text-glow uppercase" style={{ color: '#3C205E' }}>
               <span className="text-white">SEE </span>
               <span>RISK.</span>
               <br />
               <span className="text-white">THINK </span>
-              <span style={{ color: '#24B1B1' }}>SMATER</span>
+              <span style={{ color: '#5A318E' }}>SMATER</span>
               <br />
               <span className="text-white">GROW </span>
               <span>STRONGER.</span>
