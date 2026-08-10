@@ -243,7 +243,7 @@ function Landing() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="font-impact text-4xl md:text-7xl font-extrabold mb-12 tracking-wide uppercase"
+                className="font-logistics text-4xl md:text-7xl font-extrabold mb-12 tracking-wide uppercase"
               >
                 From Risk to Action.<br />
                 A Polished Workflow.
@@ -271,7 +271,7 @@ function Landing() {
           <div className="absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg] group-hover:left-[100%] transition-all duration-1000 ease-in-out" />
           
           <div className="relative z-10">
-            <h2 className="font-classic text-4xl md:text-6xl font-extrabold mb-8 leading-tight uppercase">
+            <h2 className="font-business text-4xl md:text-6xl font-extrabold mb-8 leading-tight uppercase">
               Ready to grow a more<br />resilient future?
             </h2>
             <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-2xl mx-auto font-medium">
@@ -336,7 +336,7 @@ function SolutionCard({ title, icon: Icon, desc, delay }: { title: string; icon:
       <div className="h-16 w-16 rounded-2xl bg-white/5 flex items-center justify-center text-primary mb-8 border border-white/10 group-hover:bg-primary group-hover:text-white transition-all duration-500">
         <Icon className="h-8 w-8" />
       </div>
-      <h3 className="font-margin text-2xl font-bold mb-4 uppercase tracking-wider">{title}</h3>
+      <h3 className="font-quota text-2xl font-bold mb-4 uppercase tracking-wider">{title}</h3>
       <p className="text-muted-foreground leading-relaxed">{desc}</p>
     </motion.div>
   );
