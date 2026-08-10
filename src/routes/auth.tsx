@@ -170,7 +170,7 @@ function SignInForm() {
         <div className="space-y-2.5">
           <div className="flex justify-between items-center ml-1">
             <Label className="font-bold text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Access Cipher</Label>
-            <Link to="/reset-password" class="text-[10px] font-bold text-primary hover:text-primary/80 uppercase tracking-widest">Forgot Cipher?</Link>
+            <Link to="/reset-password" className="text-[10px] font-bold text-primary hover:text-primary/80 uppercase tracking-widest">Forgot Cipher?</Link>
           </div>
           <Input 
             className="h-14 bg-white/5 border-white/10 focus-visible:ring-primary/40 rounded-2xl px-6 font-medium" 
