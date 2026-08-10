@@ -4,6 +4,12 @@ import en from "./locales/en";
 import hi from "./locales/hi";
 import ta from "./locales/ta";
 import kn from "./locales/kn";
+import te from "./locales/te";
+import ml from "./locales/ml";
+import mr from "./locales/mr";
+import sa from "./locales/sa";
+
+
 
 if (!i18n.isInitialized) {
   i18n.use(initReactI18next).init({
@@ -12,6 +18,12 @@ if (!i18n.isInitialized) {
       hi: { translation: hi },
       ta: { translation: ta },
       kn: { translation: kn },
+      te: { translation: te },
+      ml: { translation: ml },
+      mr: { translation: mr },
+      sa: { translation: sa },
+
+
     },
     lng: typeof window !== "undefined" ? localStorage.getItem("cs_lang") || "en" : "en",
     fallbackLng: "en",
@@ -24,6 +36,12 @@ export const LANGS = [
   { code: "hi", label: "हिन्दी" },
   { code: "ta", label: "தமிழ்" },
   { code: "kn", label: "ಕನ್ನಡ" },
+  { code: "te", label: "తెలుగు" },
+  { code: "ml", label: "മലയാളം" },
+  { code: "mr", label: "मराठी" },
+  { code: "sa", label: "संस्कृतम्" },
+
+
 ] as const;
 
 export type LangCode = (typeof LANGS)[number]["code"];
