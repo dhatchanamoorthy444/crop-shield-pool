@@ -13,6 +13,7 @@ import { ArrowLeft, Wallet, Users } from "lucide-react";
 
 export const Route = createFileRoute("/pools/$poolId")({
   component: PoolDetail,
+  head: () => ({ meta: [{ title: "Pool Details — AgriShield" }] }),
 });
 
 interface Pool {

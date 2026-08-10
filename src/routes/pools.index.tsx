@@ -14,7 +14,7 @@ import { z } from "zod";
 
 export const Route = createFileRoute("/pools/")({
   component: PoolsPage,
-  head: () => ({ meta: [{ title: "Pools — CropShield" }] }),
+  head: () => ({ meta: [{ title: "AgriShield — Manage Risk Pools" }] }),
 });
 
 function genCode() {
