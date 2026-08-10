@@ -2,324 +2,355 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Brain, ShieldCheck, TrendingUp, Droplets, Leaf, Activity, CheckCircle2 } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { ArrowRight, Brain, ShieldCheck, TrendingUp, Droplets, Leaf, Activity, LayoutDashboard, CheckCircle2 } from "lucide-react";
 import { AgriShieldAI } from "@/components/ai/AgriShieldAI";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 export const Route = createFileRoute("/")({
   component: Landing,
   head: () => ({
-    title: "AgriShield — Intelligent Agricultural Risk Management",
+    title: "AgriShield — Legendary Risk Intelligence",
     meta: [
-      { name: "description", content: "AgriShield helps farmers and cooperatives build financial resilience through intelligent risk-pools, AI-driven insights, and real-time market data." },
-      { property: "og:title", content: "AgriShield — Intelligent Agricultural Risk Management" },
-      { property: "og:description", content: "Build financial resilience for your village farm cooperative with AgriShield." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:image", content: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2400&auto=format&fit=crop" },
+      { name: "description", content: "AgriShield brings agricultural risk intelligence, AI assistance, and data-driven insights together." },
     ],
   }),
 });
 
 function Landing() {
   const { t } = useTranslation();
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  const heroImageY = useTransform(scrollYProgress, [0, 0.5], [0, 200]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-body">
+    <div className="min-h-screen bg-[#050706] text-white selection:bg-primary selection:text-white" ref={containerRef}>
       <SiteHeader />
 
-      {/* HERO */}
-      <section className="relative overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-24">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10 grid lg:grid-cols-2 gap-16 items-center text-left">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary mb-6">
+      {/* HERO SECTION — CINEMATIC EXPERIENCE */}
+      <section className="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden">
+        {/* Background cinematic imagery */}
+        <motion.div 
+          style={{ y: heroImageY }}
+          className="absolute inset-0 z-0"
+        >
+          <img 
+            src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2400&auto=format&fit=crop" 
+            alt="Cinematic Field"
+            className="w-full h-full object-cover scale-110 blur-[2px]"
+          />
+          {/* Green Cinematic Tint Overlay */}
+          <div className="absolute inset-0 bg-[#050706]/80 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050706] via-transparent to-[#050706]/30" />
+        </motion.div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+          >
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary mb-8 backdrop-blur-md">
               <Leaf className="h-4 w-4" />
-              <span>Next-Generation Risk Management</span>
+              <span>Next-Gen Agricultural Intelligence</span>
             </div>
-            <h1 className="font-display text-5xl font-extrabold leading-[1.1] tracking-tight sm:text-7xl mb-8">
-              Smarter Risk Decisions for a More <span className="text-primary italic">Resilient Farm.</span>
+            <h1 className="font-display text-6xl md:text-[5.5rem] font-extrabold tracking-tighter mb-8 leading-[0.9] text-glow">
+              See Risk.<br />
+              <span className="text-primary italic">Think Smarter.</span><br />
+              Grow Stronger.
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed mb-10 max-w-xl">
-              Understand agricultural risks, monitor changing conditions, and make better decisions with intelligent tools built for modern agriculture.
+            <p className="text-xl text-muted-foreground mb-12 max-w-xl leading-relaxed">
+              AgriShield brings agricultural risk intelligence, AI assistance, and data-driven insights together in one powerful platform.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Button asChild size="lg" className="h-14 px-10 text-lg font-semibold rounded-full shadow-premium transition-transform hover:scale-105 active:scale-95">
-                <Link to="/auth">Explore Risk Intelligence</Link>
+            <div className="flex flex-wrap gap-6">
+              <Button asChild size="lg" className="rounded-full px-10 h-16 bg-primary text-white hover:bg-primary/90 shadow-2xl transition-all duration-300 active:scale-95 group">
+                <Link to="/auth" className="flex items-center gap-2">
+                  Explore Risk Intelligence
+                  <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="h-14 px-10 text-lg font-semibold rounded-full bg-background/50 backdrop-blur-md transition-transform hover:scale-105 active:scale-95">
+              <Button asChild variant="ghost" size="lg" className="rounded-full px-10 h-16 border border-white/10 hover:bg-white/5 backdrop-blur-sm transition-all duration-300">
                 <Link to="/simulator">Ask AgriShield AI</Link>
               </Button>
             </div>
-            <div className="mt-8 flex items-center gap-4 text-sm text-muted-foreground">
-              <div className="flex -space-x-2">
-                {[1,2,3,4].map(i => (
-                  <div key={i} className="h-8 w-8 rounded-full border-2 border-background bg-muted overflow-hidden">
-                    <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=farmer${i}`} alt="user" />
-                  </div>
-                ))}
+          </motion.div>
+
+          {/* Floating Glass Cards System */}
+          <div className="relative h-[600px] hidden lg:block perspective-1000">
+            <motion.div 
+              initial={{ opacity: 0, x: 50, rotateY: 10 }}
+              animate={{ opacity: 1, x: 0, rotateY: -10 }}
+              transition={{ delay: 0.5, duration: 1.5 }}
+              className="absolute top-0 right-10 glass-dark p-8 rounded-[2rem] w-80 border-white/10 shadow-2xl z-20"
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              <div className="flex justify-between items-center mb-6">
+                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Agricultural Risk Score</p>
+                <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <Activity className="h-5 w-5 text-primary" />
+                </div>
               </div>
-              <span>Trusted by 500+ agricultural groups</span>
+              <p className="text-6xl font-extrabold text-white mb-2">72</p>
+              <p className="text-sm text-primary font-bold uppercase tracking-widest">Moderate Risk Status</p>
+              <div className="mt-6 h-2 w-full bg-white/5 rounded-full overflow-hidden">
+                <motion.div 
+                  initial={{ width: 0 }}
+                  animate={{ width: "72%" }}
+                  transition={{ delay: 1.5, duration: 2 }}
+                  className="h-full bg-primary"
+                />
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 50 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 1.2 }}
+              className="absolute bottom-20 left-0 glass-dark p-6 rounded-2xl w-64 border-white/5 shadow-2xl z-10"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="h-8 w-8 rounded-lg bg-accent/20 flex items-center justify-center">
+                  <Brain className="h-4 w-4 text-accent" />
+                </div>
+                <p className="text-xs font-bold uppercase tracking-widest text-accent">AI Analysis</p>
+              </div>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                "Soil moisture levels at sector B-4 are suboptimal. Recommend immediate irrigation."
+              </p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1, duration: 1 }}
+              className="absolute top-1/2 -left-20 glass p-5 rounded-2xl w-56 border-white/5 shadow-2xl z-30"
+            >
+              <div className="flex justify-between items-center mb-3">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Market Trend</p>
+                <TrendingUp className="h-4 w-4 text-emerald-400" />
+              </div>
+              <div className="flex items-end gap-2">
+                <p className="text-2xl font-bold">+12.4%</p>
+                <p className="text-[10px] text-emerald-400 font-bold mb-1">INCREASE</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Cinematic Scroll Indicator */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+        >
+          <div className="w-[1px] h-12 bg-gradient-to-t from-primary to-transparent" />
+          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">Scroll to explore</span>
+        </motion.div>
+      </section>
+
+      {/* INTELLIGENCE SECTION — SOLUTIONS SHOWCASE */}
+      <section className="py-32 bg-[#080B09]">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-24"
+          >
+            <h2 className="font-display text-4xl md:text-6xl font-extrabold mb-8 max-w-3xl">Intelligence Built Around the Farm.</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
+              AgriShield provides the financial and intelligence infrastructure for resilient agricultural operations.
+            </p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <SolutionCard 
+              title="Risk Dashboard" 
+              icon={LayoutDashboard} 
+              desc="A centralized view of all agricultural indicators. Monitor risk scores in real-time."
+              delay={0.1}
+            />
+            <SolutionCard 
+              title="AI Assistant" 
+              icon={Brain} 
+              desc="Personalized expert guidance. Ask about pests, weather, or crop management."
+              delay={0.2}
+            />
+            <SolutionCard 
+              title="Weather Intelligence" 
+              icon={Activity} 
+              desc="Localized hyper-accurate forecasts and historical climate pattern analysis."
+              delay={0.3}
+            />
+            <SolutionCard 
+              title="Crop Monitoring" 
+              icon={Leaf} 
+              desc="Satellite-based health tracking and early disease detection triggers."
+              delay={0.4}
+            />
+            <SolutionCard 
+              title="Decision Support" 
+              icon={TrendingUp} 
+              desc="Data-driven insights to help you sell at peak prices and manage inputs efficiently."
+              delay={0.5}
+            />
+            <SolutionCard 
+              title="Secure Sovereignty" 
+              icon={ShieldCheck} 
+              desc="End-to-end encryption for your farm data. You control all permissions."
+              delay={0.6}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS — EDITORIAL GRID */}
+      <section className="py-32 bg-[#050706] border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative rounded-[3rem] overflow-hidden group shadow-2xl"
+            >
+              <img 
+                src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=1600&auto=format&fit=crop" 
+                alt="Modern Farm Intelligence"
+                className="w-full aspect-[4/5] object-cover group-hover:scale-110 transition-transform duration-1000"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050706] via-transparent to-transparent opacity-60" />
+              <div className="absolute bottom-10 left-10 right-10 p-8 glass-dark rounded-3xl border-white/10">
+                <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">Platform Preview</p>
+                <h3 className="text-2xl font-bold">Real-time Risk Visualization</h3>
+              </div>
+            </motion.div>
+
+            <div>
+              <motion.h2 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="font-display text-4xl md:text-5xl font-extrabold mb-12"
+              >
+                From Risk to Action.<br />
+                A Polished Workflow.
+              </motion.h2>
+              <div className="space-y-10">
+                <Step number="01" title="Secure Identity" desc="Verify your identity with end-to-end encrypted document verification." />
+                <Step number="02" title="Form Cooperatives" desc="Connect with your community using secure 6-letter village pool codes." />
+                <Step number="03" title="Intelligent Analysis" desc="Monitor climate, soil, and market triggers via the AgriShield dashboard." />
+                <Step number="04" title="Automated Protection" desc="Build financial resilience with automated risk-pool payouts." />
+              </div>
             </div>
           </div>
-          <div className="relative lg:block hidden">
-            <div className="absolute -inset-20 bg-gradient-to-tr from-primary/30 to-accent/30 blur-[120px] rounded-full opacity-60 animate-pulse" />
-            
-            {/* Main Visual Component */}
-            <div className="relative perspective-1000">
-              <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white/50 aspect-[4/5] max-w-[480px] ml-auto">
-                <img 
-                  src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2400&auto=format&fit=crop" 
-                  alt="Modern Agricultural Field"
-                  className="h-full w-full object-cover scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent" />
-              </div>
-
-              {/* Floating Glass Panels */}
-              <Card className="absolute top-10 -left-16 p-5 bg-white/60 backdrop-blur-xl border border-white/40 shadow-premium w-60 transform -rotate-3 hover:rotate-0 transition-transform duration-500 rounded-3xl">
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-[10px] font-bold text-primary uppercase tracking-widest">Crop Health</span>
-                  <Activity className="h-4 w-4 text-primary" />
-                </div>
-                <div className="flex items-end gap-2">
-                  <span className="text-3xl font-extrabold tracking-tight">94%</span>
-                  <span className="text-[10px] font-bold text-success mb-1">OPTIMAL</span>
-                </div>
-              </Card>
-
-              <Card className="absolute bottom-20 -right-8 p-5 bg-white/60 backdrop-blur-xl border border-white/40 shadow-premium w-56 transform rotate-3 hover:rotate-0 transition-transform duration-500 rounded-3xl">
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-[10px] font-bold text-primary uppercase tracking-widest">Market Risk</span>
-                  <TrendingUp className="h-4 w-4 text-primary" />
-                </div>
-                <div className="flex items-end gap-2">
-                  <span className="text-3xl font-extrabold tracking-tight text-primary">High</span>
-                  <span className="text-[10px] font-bold text-destructive mb-1">+12.4%</span>
-                </div>
-              </Card>
-
-              <Card className="absolute top-1/2 -translate-y-1/2 -left-24 p-6 bg-white/80 backdrop-blur-2xl border border-white/50 shadow-premium w-72 transform hover:scale-105 transition-all duration-500 rounded-[2rem] z-20">
-                <div className="flex justify-between items-center mb-4">
-                  <h4 className="font-display font-extrabold flex items-center gap-2 text-sm"><ShieldCheck className="h-4 w-4 text-primary" /> AgriShield Risk Score</h4>
-                  <span className="px-2.5 py-1 bg-primary/10 text-primary text-[10px] font-extrabold rounded-full tracking-wider">MODERATE</span>
-                </div>
-                <div className="h-2.5 w-full bg-muted rounded-full overflow-hidden mb-2">
-                  <div className="h-full bg-primary" style={{ width: '72%' }} />
-                </div>
-                <div className="flex justify-between text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
-                  <span>Stable</span>
-                  <span>Alert</span>
-                </div>
-              </Card>
-
-              {/* Decorative elements */}
-              <div className="absolute -top-12 -right-12 h-24 w-24 bg-accent/20 rounded-full blur-2xl animate-pulse" />
-              <Leaf className="absolute -top-6 right-10 h-10 w-10 text-primary/30 rotate-45 animate-bounce-slow" />
-              <Droplets className="absolute bottom-10 left-1/4 h-8 w-8 text-primary/20 -rotate-12 animate-pulse" />
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* VALUE STRIP */}
-      <section className="border-y border-border bg-muted/20 py-12">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="flex flex-wrap justify-between items-center gap-8 md:gap-4 opacity-70 grayscale hover:grayscale-0 transition-all">
-            {[
-              { icon: ShieldCheck, label: "Risk Intelligence" },
-              { icon: Brain, label: "AI Assistance" },
-              { icon: Activity, label: "Weather Awareness" },
-              { icon: Leaf, label: "Crop Insights" },
-              { icon: TrendingUp, label: "Decision Support" },
-            ].map((item, i) => (
-              <div key={i} className="flex items-center gap-3 text-sm font-bold uppercase tracking-wider text-muted-foreground">
-                <item.icon className="h-6 w-6 text-primary" />
-                {item.label}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* PROBLEM */}
-      <section className="py-32 bg-background">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="max-w-3xl mb-16">
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">Agricultural Risk Is Changing Faster Than Ever.</h2>
-            <p className="text-xl text-muted-foreground">Farmers face multiple interconnected risks that require more than just experience—they require data and intelligence.</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { title: "Unpredictable Weather", desc: "Monitor changing patterns and receive localized risk alerts before they affect your harvest.", icon: Activity },
-              { title: "Crop Health", desc: "Early detection of pests and disease risks to protect your investments and yield.", icon: Leaf },
-              { title: "Water Scarcity", desc: "Intelligent water management and risk analysis based on local hydrological data.", icon: Droplets },
-              { title: "Market Volatility", desc: "Understand price trends and market dynamics to time your sales for maximum value.", icon: TrendingUp },
-              { title: "Operational Uncertainty", desc: "Mitigate risks associated with labor, inputs, and logistics during critical windows.", icon: Brain },
-              { title: "Financial Exposure", desc: "Identify and manage financial risks before they lead to excessive debt or loss.", icon: ShieldCheck },
-            ].map((p, i) => (
-              <Card key={i} className="group p-8 border-none shadow-soft hover:shadow-premium transition-all duration-300 rounded-3xl">
-                <div className="h-14 w-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-primary-foreground transition-all">
-                  <p.icon className="h-7 w-7" />
-                </div>
-                <h3 className="text-xl font-bold mb-3">{p.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{p.desc}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SOLUTIONS */}
-      <section className="py-32 bg-primary/5">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">Solutions Built for Agricultural Resilience.</h2>
-            <p className="text-xl text-muted-foreground">Comprehensive tools designed to give you a complete picture of your farm's risk landscape.</p>
-          </div>
-          <div className="grid lg:grid-cols-2 gap-12">
-            <Card className="overflow-hidden rounded-3xl border-none shadow-premium flex flex-col md:flex-row">
-              <div className="flex-1 p-10 flex flex-col justify-center">
-                <span className="text-xs font-bold text-primary uppercase tracking-widest mb-4">Core Platform</span>
-                <h3 className="text-3xl font-bold mb-4">Risk Management Dashboard</h3>
-                <p className="text-muted-foreground mb-8 leading-relaxed">
-                  A centralized view of all your agricultural indicators. Track risk scores, monitor trends, and receive actionable insights in real-time.
-                </p>
-                <Button variant="link" className="p-0 text-primary font-bold flex items-center gap-2 group">
-                  Explore Features <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </div>
-              <div className="md:w-72 bg-muted relative overflow-hidden group">
-                <img 
-                  src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=800&auto=format&fit=crop" 
-                  alt="Dashboard Preview" 
-                  className="h-full w-full object-cover grayscale opacity-50 transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-primary/20 mix-blend-multiply" />
-              </div>
-            </Card>
-            <Card className="overflow-hidden rounded-3xl border-none shadow-premium flex flex-col md:flex-row">
-              <div className="flex-1 p-10 flex flex-col justify-center">
-                <span className="text-xs font-bold text-primary uppercase tracking-widest mb-4">AI Intelligence</span>
-                <h3 className="text-3xl font-bold mb-4">AI Agricultural Assistant</h3>
-                <p className="text-muted-foreground mb-8 leading-relaxed">
-                  Your personalized agricultural expert. Ask questions about crops, pests, weather, and management to get data-driven guidance.
-                </p>
-                <Button variant="link" className="p-0 text-primary font-bold flex items-center gap-2 group">
-                  Meet your assistant <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </div>
-              <div className="md:w-72 bg-muted relative overflow-hidden group">
-                <img 
-                  src="https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=800&auto=format&fit=crop" 
-                  alt="AI Preview" 
-                  className="h-full w-full object-cover grayscale opacity-50 transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-primary/20 mix-blend-multiply" />
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* HOW IT WORKS */}
-      <section className="py-32 bg-background">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="text-center mb-20">
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">From Risk to Action.</h2>
-          </div>
-          <div className="grid md:grid-cols-4 gap-12 relative">
-            <div className="absolute top-1/4 left-0 w-full h-0.5 bg-muted hidden md:block" />
-            {[
-              { num: "01", title: "Assess", desc: "Identify your specific agricultural risk profile and assets." },
-              { num: "02", title: "Analyze", desc: "Understand the severity and potential impact of threats." },
-              { num: "03", title: "Act", desc: "Use intelligent recommendations to implement protection." },
-              { num: "04", title: "Protect", desc: "Build long-term resilience for your farm and community." },
-            ].map((step, i) => (
-              <div key={i} className="relative z-10 text-center flex flex-col items-center">
-                <div className="h-16 w-16 rounded-full bg-primary text-primary-foreground font-display font-extrabold text-2xl flex items-center justify-center mb-8 border-4 border-background shadow-lg">
-                  {step.num}
-                </div>
-                <h3 className="text-2xl font-bold mb-4">{step.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{step.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA SECTION */}
-      <section className="py-32 px-4 sm:px-6">
-        <div className="mx-auto max-w-6xl rounded-[4rem] bg-primary text-primary-foreground p-12 md:p-24 relative overflow-hidden text-center shadow-premium">
-          <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center" />
+      {/* FINAL CTA SECTION */}
+      <section className="py-32 px-6">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="max-w-6xl mx-auto rounded-[4rem] bg-primary p-12 md:p-24 relative overflow-hidden text-center shadow-2xl group"
+        >
+          {/* Animated Light Sweep */}
+          <div className="absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg] group-hover:left-[100%] transition-all duration-1000 ease-in-out" />
+          
           <div className="relative z-10">
-            <h2 className="font-display text-4xl md:text-6xl font-bold mb-8">Build a More Resilient Agricultural Future.</h2>
-            <p className="text-xl md:text-2xl opacity-90 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Understand risk. Make informed decisions. Protect what matters most. Join AgriShield today.
+            <h2 className="font-display text-4xl md:text-6xl font-extrabold mb-8 leading-tight">
+              Ready to grow a more<br />resilient future?
+            </h2>
+            <p className="text-xl md:text-2xl text-white/80 mb-12 max-w-2xl mx-auto font-medium">
+              Join the thousand of farmers already using AgriShield to manage risk intelligently.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
-              <Button asChild size="lg" className="h-16 px-12 text-xl font-bold rounded-full bg-white text-primary hover:bg-white/90">
+              <Button asChild size="lg" className="rounded-full px-12 h-16 text-xl font-bold bg-white text-black hover:bg-white/90 shadow-xl transition-all hover:scale-105 active:scale-95">
                 <Link to="/auth">Get Started Now</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="h-16 px-12 text-xl font-bold rounded-full border-white/30 text-white hover:bg-white/10">
-                <Link to="/simulator">Talk to AI Assistant</Link>
+              <Button asChild variant="ghost" size="lg" className="rounded-full px-12 h-16 text-xl font-bold border border-white/20 text-white hover:bg-white/10 backdrop-blur-sm">
+                <Link to="/simulator">View Simulation</Link>
               </Button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-muted/30 pt-24 pb-12 border-t border-border">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 mb-16">
-            <div className="col-span-2 lg:col-span-2">
-              <Link to="/" className="flex items-center gap-2 font-display text-2xl font-bold text-primary mb-6">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary shadow-soft">
-                  <Leaf className="h-6 w-6 text-primary-foreground" />
+      <footer className="py-20 bg-[#050706] border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
+            <div>
+              <Link to="/" className="flex items-center gap-3 font-display text-3xl font-extrabold text-glow mb-6">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
+                  <Leaf className="h-6 w-6 text-white" />
                 </span>
                 AgriShield
               </Link>
-              <p className="text-muted-foreground leading-relaxed max-w-xs mb-8">
-                AgriShield helps farmers and agricultural stakeholders understand risk, access intelligent insights, and make more informed decisions.
+              <p className="text-muted-foreground text-sm tracking-widest uppercase font-bold">
+                Built for a more resilient agricultural future.
               </p>
             </div>
-            <div>
-              <h4 className="font-bold mb-6 text-sm uppercase tracking-widest text-muted-foreground">Product</h4>
-              <ul className="space-y-4 text-sm font-medium">
-                <li><Link to="/dashboard" className="hover:text-primary">Risk Dashboard</Link></li>
-                <li><Link to="/simulator" className="hover:text-primary">AI Assistant</Link></li>
-                <li><Link to="/prices" className="hover:text-primary">Market Prices</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-6 text-sm uppercase tracking-widest text-muted-foreground">Company</h4>
-              <ul className="space-y-4 text-sm font-medium">
-                <li><a href="#" className="hover:text-primary">About Us</a></li>
-                <li><a href="#" className="hover:text-primary">Sustainability</a></li>
-                <li><a href="#" className="hover:text-primary">Contact</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-6 text-sm uppercase tracking-widest text-muted-foreground">Support</h4>
-              <ul className="space-y-4 text-sm font-medium">
-                <li><a href="#" className="hover:text-primary">Help Center</a></li>
-                <li><a href="#" className="hover:text-primary">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-primary">Terms of Service</a></li>
-              </ul>
+            
+            <div className="flex gap-12 text-sm font-bold uppercase tracking-widest text-muted-foreground">
+              <Link to="/dashboard" className="hover:text-primary transition-colors">Platform</Link>
+              <Link to="/simulator" className="hover:text-primary transition-colors">Risk Intelligence</Link>
+              <a href="#" className="hover:text-primary transition-colors">Privacy</a>
+              <a href="#" className="hover:text-primary transition-colors">Terms</a>
             </div>
           </div>
-          <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-muted-foreground">
-            <p>© {new Date().getFullYear()} AgriShield. All rights reserved.</p>
-            <div className="flex gap-8">
-              <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" /> End-to-end Encrypted</span>
-              <span className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-primary" /> ISO Certified</span>
-            </div>
+          <div className="mt-20 pt-8 border-t border-white/5 text-center text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground/50">
+            © 2026 AgriShield Technologies Inc. All rights reserved.
           </div>
         </div>
       </footer>
-
+      
       <AgriShieldAI />
     </div>
+  );
+}
+
+function SolutionCard({ title, icon: Icon, desc, delay }: { title: string; icon: any; desc: string; delay: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay, duration: 0.8 }}
+      whileHover={{ y: -10, borderColor: "rgba(27, 77, 46, 0.4)" }}
+      className="glass-dark p-10 rounded-[2.5rem] border border-white/5 transition-all duration-500 group cursor-default"
+    >
+      <div className="h-16 w-16 rounded-2xl bg-white/5 flex items-center justify-center text-primary mb-8 border border-white/10 group-hover:bg-primary group-hover:text-white transition-all duration-500">
+        <Icon className="h-8 w-8" />
+      </div>
+      <h3 className="text-2xl font-bold mb-4">{title}</h3>
+      <p className="text-muted-foreground leading-relaxed">{desc}</p>
+    </motion.div>
+  );
+}
+
+function Step({ number, title, desc }: { number: string; title: string; desc: string }) {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, x: 20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      className="flex gap-8 group cursor-default"
+    >
+      <div className="flex-shrink-0 font-display text-4xl font-extrabold text-white/10 group-hover:text-primary/40 transition-colors duration-500">
+        {number}
+      </div>
+      <div>
+        <h4 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{title}</h4>
+        <p className="text-muted-foreground leading-relaxed text-sm">{desc}</p>
+      </div>
+    </motion.div>
   );
 }

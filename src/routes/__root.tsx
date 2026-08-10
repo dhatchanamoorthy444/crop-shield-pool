@@ -79,8 +79,28 @@ function RootComponent() {
   return (
     <AuthProvider>
       <TooltipProvider>
-        <Outlet />
-        <Toaster richColors position="top-center" />
+        <div className="relative min-h-screen selection:bg-primary selection:text-white">
+          {/* Atmospheric Background System */}
+          <div className="fixed inset-0 z-[-1] overflow-hidden bg-[#050706]">
+            {/* Layer 2: Main blurred green gradient */}
+            <div className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-primary/20 blur-[120px] animate-pulse-gentle" />
+            
+            {/* Layer 3: Subtle warm gold/olive glow */}
+            <div className="absolute bottom-[10%] left-[-5%] w-[40%] h-[40%] rounded-full bg-accent/5 blur-[100px] animate-drift" />
+            
+            {/* Layer 4: Grain texture */}
+            <div className="absolute inset-0 bg-noise opacity-[0.03]" />
+            
+            {/* Layer 5: Dynamic atmospheric gradients */}
+            <div className="absolute inset-0 opacity-30">
+              <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[150px] animate-float" />
+              <div className="absolute bottom-1/4 right-1/3 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[130px] animate-float" style={{ animationDelay: '-2s' }} />
+            </div>
+          </div>
+
+          <Outlet />
+          <Toaster richColors position="top-center" />
+        </div>
       </TooltipProvider>
     </AuthProvider>
   );
