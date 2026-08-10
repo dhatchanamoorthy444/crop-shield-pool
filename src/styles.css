@@ -43,9 +43,9 @@
   --color-card-foreground: #e0f2e8;
 
   /* Primary Neon Greens */
-  --color-primary: #00ff66; /* Bright Green (#12) */
-  --color-primary-dark: #008033; /* Dark Green (#2) */
-  --color-primary-foreground: #000000;
+  --color-primary: #3C205E; /* Deep Royal Purple */
+  --color-primary-dark: #2a1642;
+  --color-primary-foreground: #ffffff;
 
   /* Accent Neon Blues/Cyans */
   --color-accent: #00e5ff; /* Cyan (#10) */
@@ -55,13 +55,13 @@
   /* Status Colors */
   --color-danger-neon: #ff3131; /* Bright Red (#11) */
   --color-warning-neon: #ffbd44; /* Bright Orange (#14) */
-  --color-success-neon: #00ff66;
+  --color-success-neon: #3C205E;
 
   --color-muted: #0d1a12;
   --color-muted-foreground: #a0bca8;
 
-  --color-border: rgba(0, 255, 102, 0.15);
-  --color-ring: rgba(0, 255, 102, 0.5);
+  --color-border: rgba(60, 32, 94, 0.15);
+  --color-ring: rgba(60, 32, 94, 0.5);
 
   --shadow-premium: 
     0 20px 25px -5px rgb(0 0 0 / 0.5), 
@@ -128,20 +128,20 @@
     background: rgba(10, 15, 12, 0.6);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
-    border: 1px solid rgba(0, 255, 102, 0.1);
-    box-shadow: 0 0 20px rgba(0, 255, 102, 0.05);
+    border: 1px solid rgba(60, 32, 94, 0.1);
+    box-shadow: 0 0 20px rgba(60, 32, 94, 0.05);
   }
 
   .glass-dark {
     background: rgba(2, 4, 3, 0.7);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
-    border: 1px solid rgba(0, 255, 102, 0.08);
+    border: 1px solid rgba(60, 32, 94, 0.08);
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
   }
 
   .neon-glow-green {
-    box-shadow: 0 0 15px rgba(0, 255, 102, 0.4), inset 0 0 10px rgba(0, 255, 102, 0.2);
+    box-shadow: 0 0 15px rgba(60, 32, 94, 0.4), inset 0 0 10px rgba(60, 32, 94, 0.2);
   }
 
   .neon-glow-blue {
@@ -149,7 +149,7 @@
   }
 
   .neon-text-green {
-    text-shadow: 0 0 8px rgba(0, 255, 102, 0.6), 0 0 20px rgba(0, 255, 102, 0.3);
+    text-shadow: 0 0 8px rgba(60, 32, 94, 0.6), 0 0 20px rgba(60, 32, 94, 0.3);
   }
 
   .neon-text-blue {
