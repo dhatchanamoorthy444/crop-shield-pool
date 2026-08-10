@@ -33,7 +33,7 @@ function Landing() {
       <SiteHeader />
 
       {/* HERO SECTION — CINEMATIC EXPERIENCE */}
-      <section className="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center overflow-hidden py-32">
         {/* Background cinematic imagery */}
         <motion.div 
           style={{ y: heroImageY }}
@@ -49,12 +49,9 @@ function Landing() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#050706] via-transparent to-[#050706]/30" />
         </motion.div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-5 gap-10 items-center">
           <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-          >
+            className="lg:col-span-3"
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-primary mb-8 backdrop-blur-md">
               <Leaf className="h-4 w-4" />
               <span>Next-Gen Agricultural Intelligence</span>
@@ -80,10 +77,10 @@ function Landing() {
             </div>
           </motion.div>
 
-          {/* Floating Glass Cards System - Optimized to prevent overlap */}
-          <div className="relative h-[700px] hidden lg:block">
+          {/* Floating Glass Cards System - Positioned relatively to avoid overlap */}
+          <div className="lg:col-span-2 relative h-[600px] hidden lg:block">
             <motion.div 
-              initial={{ opacity: 0, x: -100 }}
+              initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ 
                 delay: 0.5, 
@@ -91,7 +88,7 @@ function Landing() {
                 type: "spring",
                 stiffness: 50
               }}
-              className="absolute top-0 left-0 glass-dark p-8 rounded-[2rem] w-80 border-white/10 shadow-2xl z-20 animate-float"
+              className="absolute top-0 right-0 glass-dark p-8 rounded-[2rem] w-full max-w-[320px] border-white/10 shadow-2xl z-20 animate-float"
             >
               <div className="flex justify-between items-center mb-6">
                 <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Risk Score</p>
@@ -112,10 +109,10 @@ function Landing() {
             </motion.div>
             
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9, x: 100 }}
+              initial={{ opacity: 0, scale: 0.9, x: -50 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
               transition={{ delay: 0.8, duration: 1.2 }}
-              className="absolute top-[35%] right-0 glass-dark p-6 rounded-2xl w-72 border-white/5 shadow-2xl z-10 animate-bounce-slow"
+              className="absolute top-[40%] left-[-20%] glass-dark p-6 rounded-2xl w-full max-w-[280px] border-white/5 shadow-2xl z-10 animate-bounce-slow"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="h-8 w-8 rounded-lg bg-accent/20 flex items-center justify-center">
@@ -132,7 +129,7 @@ function Landing() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2, duration: 1 }}
-              className="absolute bottom-10 left-20 glass p-5 rounded-2xl w-60 border-white/5 shadow-2xl z-30 neon-glow-green"
+              className="absolute bottom-0 right-10 glass p-5 rounded-2xl w-full max-w-[240px] border-white/5 shadow-2xl z-30 neon-glow-green"
             >
               <div className="flex justify-between items-center mb-3">
                 <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Market Trend</p>
