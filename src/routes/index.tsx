@@ -29,7 +29,7 @@ function Landing() {
   const heroImageY = useTransform(scrollYProgress, [0, 0.5], [0, 200]);
 
   return (
-    <div className="min-h-screen bg-[#050706] text-white selection:bg-primary selection:text-white" ref={containerRef}>
+    <div className="min-h-screen bg-[#020504] text-white selection:bg-primary selection:text-white" ref={containerRef}>
       <SiteHeader />
 
       {/* HERO SECTION — CINEMATIC EXPERIENCE */}
@@ -45,8 +45,8 @@ function Landing() {
             className="w-full h-full object-cover scale-110 blur-[2px]"
           />
           {/* Green Cinematic Tint Overlay */}
-          <div className="absolute inset-0 bg-[#050706]/80 mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050706] via-transparent to-[#050706]/30" />
+          <div className="absolute inset-0 bg-[#020504]/80 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#020504] via-transparent to-[#020504]/30" />
         </motion.div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-5 gap-10 items-center">
