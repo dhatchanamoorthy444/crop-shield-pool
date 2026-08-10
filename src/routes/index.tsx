@@ -59,7 +59,7 @@ function Landing() {
               <Leaf className="h-4 w-4" />
               <span>Next-Gen Agricultural Intelligence</span>
             </div>
-            <h1 className="font-display text-6xl md:text-[5.5rem] font-extrabold tracking-tighter mb-8 leading-[0.9] text-glow">
+            <h1 className="font-display text-6xl md:text-[5.5rem] font-extrabold tracking-tighter mb-8 leading-[0.9] text-glow neon-text-green">
               See Risk.<br />
               <span className="text-primary italic">Think Smarter.</span><br />
               Grow Stronger.
@@ -68,7 +68,7 @@ function Landing() {
               AgriShield brings agricultural risk intelligence, AI assistance, and data-driven insights together in one powerful platform.
             </p>
             <div className="flex flex-wrap gap-6">
-              <Button asChild size="lg" className="rounded-full px-10 h-16 bg-primary text-white hover:bg-primary/90 shadow-2xl transition-all duration-300 active:scale-95 group">
+              <Button asChild size="lg" className="rounded-full px-10 h-16 bg-primary text-black font-bold hover:bg-primary/90 shadow-[0_0_30px_rgba(0,255,102,0.3)] transition-all duration-300 active:scale-95 group border-none">
                 <Link to="/auth" className="flex items-center gap-2">
                   Explore Risk Intelligence
                   <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
