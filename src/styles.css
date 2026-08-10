@@ -116,10 +116,11 @@
     letter-spacing: -0.02em;
   }
   
-  /* Selection styling */
+  /* Dual-color Text Selection */
   ::selection {
     background-color: var(--color-primary);
-    color: white;
+    color: var(--color-background);
+    text-shadow: 2px 2px 0px var(--color-accent);
   }
 }
 
