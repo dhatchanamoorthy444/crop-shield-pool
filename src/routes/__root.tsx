@@ -34,15 +34,15 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "CropShield Pool — Village risk-pools that protect every farmer" },
+      { title: "AgriShield — Intelligent Agricultural Risk Management" },
       {
         name: "description",
         content:
-          "Pool small contributions with your village. Automatic payouts when crops fail. Encrypted ID verification, real-time mandi prices, multi-language.",
+          "AgriShield helps farmers and agricultural stakeholders understand risk, access intelligent insights, and make more informed decisions.",
       },
-      { name: "author", content: "CropShield Pool" },
-      { property: "og:title", content: "CropShield Pool" },
-      { property: "og:description", content: "Village risk-pools that protect every farmer." },
+      { name: "author", content: "AgriShield" },
+      { property: "og:title", content: "AgriShield" },
+      { property: "og:description", content: "Intelligent Agricultural Risk Management." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

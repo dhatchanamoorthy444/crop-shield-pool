@@ -1,188 +1,74 @@
-@import "tailwindcss" source(none);
-@source "../src";
-@import "tw-animate-css";
-
-@custom-variant dark (&:is(.dark *));
-
 /*
- * CropShield design system — earthy, warm, agricultural.
- * Deep field green primary, harvest gold accent, soil/cream neutrals.
+ * AgriShield design system — premium, trustworthy, agricultural.
+ * Deep Forest Green primary, sage & golden accents, soft off-white background.
  */
 
 @theme inline {
   --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
 
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary-glow: var(--primary-glow);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-harvest: var(--harvest);
-  --color-harvest-foreground: var(--harvest-foreground);
-  --color-soil: var(--soil);
-  --color-soil-foreground: var(--soil-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-success: var(--success);
-  --color-success-foreground: var(--success-foreground);
-  --color-warning: var(--warning);
-  --color-warning-foreground: var(--warning-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-}
+  --color-background: oklch(0.99 0.005 100);
+  --color-foreground: oklch(0.20 0.02 145);
 
-:root {
-  --radius: 0.875rem;
+  --color-card: oklch(1 0 0);
+  --color-card-foreground: oklch(0.20 0.02 145);
 
-  /* Cream/paper background, deep ink foreground */
-  --background: oklch(0.985 0.012 95);
-  --foreground: oklch(0.21 0.025 145);
+  --color-primary: oklch(0.35 0.12 150); /* Deep Forest Green */
+  --color-primary-foreground: oklch(0.99 0.005 100);
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.21 0.025 145);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.21 0.025 145);
+  --color-accent: oklch(0.85 0.10 95); /* Soft Golden Accent */
+  --color-accent-foreground: oklch(0.20 0.02 145);
 
-  /* Field green */
-  --primary: oklch(0.46 0.13 148);
-  --primary-foreground: oklch(0.985 0.012 95);
-  --primary-glow: oklch(0.62 0.16 145);
+  --color-muted: oklch(0.96 0.01 140);
+  --color-muted-foreground: oklch(0.45 0.03 140);
 
-  --secondary: oklch(0.94 0.03 130);
-  --secondary-foreground: oklch(0.28 0.05 148);
+  --color-border: oklch(0.88 0.02 145);
+  --color-ring: oklch(0.35 0.12 150);
 
-  --muted: oklch(0.95 0.018 100);
-  --muted-foreground: oklch(0.46 0.025 140);
+  --shadow-premium: 
+    0 20px 25px -5px rgb(0 0 0 / 0.05), 
+    0 8px 10px -6px rgb(0 0 0 / 0.05),
+    0 0 0 1px rgb(0 0 0 / 0.02);
+  --shadow-soft: 
+    0 4px 6px -1px rgb(0 0 0 / 0.03), 
+    0 2px 4px -2px rgb(0 0 0 / 0.03);
 
-  --accent: oklch(0.93 0.07 90);
-  --accent-foreground: oklch(0.28 0.06 100);
-
-  /* Harvest gold */
-  --harvest: oklch(0.78 0.16 78);
-  --harvest-foreground: oklch(0.22 0.05 80);
-
-  /* Earthy soil brown */
-  --soil: oklch(0.42 0.07 55);
-  --soil-foreground: oklch(0.985 0.012 95);
-
-  --success: oklch(0.62 0.15 150);
-  --success-foreground: oklch(0.985 0.012 95);
-  --warning: oklch(0.74 0.15 65);
-  --warning-foreground: oklch(0.22 0.04 60);
-  --destructive: oklch(0.55 0.22 27);
-  --destructive-foreground: oklch(0.985 0.012 95);
-
-  --border: oklch(0.88 0.02 110);
-  --input: oklch(0.92 0.02 110);
-  --ring: oklch(0.46 0.13 148);
-
-  --chart-1: oklch(0.46 0.13 148);
-  --chart-2: oklch(0.78 0.16 78);
-  --chart-3: oklch(0.42 0.07 55);
-  --chart-4: oklch(0.62 0.15 220);
-  --chart-5: oklch(0.55 0.22 27);
-
-  --gradient-hero: linear-gradient(135deg, oklch(0.46 0.13 148) 0%, oklch(0.62 0.16 145) 50%, oklch(0.78 0.16 78) 100%);
-  --gradient-field: linear-gradient(180deg, oklch(0.985 0.012 95) 0%, oklch(0.94 0.04 110) 100%);
-  --gradient-card: linear-gradient(145deg, oklch(1 0 0) 0%, oklch(0.97 0.02 100) 100%);
-  --shadow-soft: 0 2px 8px -2px color-mix(in oklab, oklch(0.42 0.07 55) 12%, transparent);
-  --shadow-elevated: 0 12px 40px -12px color-mix(in oklab, oklch(0.46 0.13 148) 25%, transparent);
-  --shadow-glow: 0 0 60px color-mix(in oklab, oklch(0.78 0.16 78) 35%, transparent);
-}
-
-.dark {
-  --background: oklch(0.18 0.02 145);
-  --foreground: oklch(0.96 0.015 95);
-  --card: oklch(0.23 0.025 145);
-  --card-foreground: oklch(0.96 0.015 95);
-  --popover: oklch(0.23 0.025 145);
-  --popover-foreground: oklch(0.96 0.015 95);
-  --primary: oklch(0.7 0.16 145);
-  --primary-foreground: oklch(0.18 0.02 145);
-  --primary-glow: oklch(0.78 0.18 142);
-  --secondary: oklch(0.28 0.03 145);
-  --secondary-foreground: oklch(0.96 0.015 95);
-  --muted: oklch(0.26 0.025 145);
-  --muted-foreground: oklch(0.7 0.025 120);
-  --accent: oklch(0.32 0.06 90);
-  --accent-foreground: oklch(0.96 0.015 95);
-  --harvest: oklch(0.78 0.16 78);
-  --harvest-foreground: oklch(0.18 0.02 80);
-  --soil: oklch(0.55 0.08 55);
-  --soil-foreground: oklch(0.96 0.015 95);
-  --success: oklch(0.7 0.16 150);
-  --success-foreground: oklch(0.18 0.02 145);
-  --warning: oklch(0.78 0.16 65);
-  --warning-foreground: oklch(0.22 0.04 60);
-  --destructive: oklch(0.65 0.2 27);
-  --destructive-foreground: oklch(0.96 0.015 95);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.7 0.16 145);
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
     font-family: var(--font-body);
+    color: var(--color-foreground);
+    background-color: var(--color-background);
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
 }
 
 @layer utilities {
-  .bg-gradient-hero { background-image: var(--gradient-hero); }
-  .bg-gradient-field { background-image: var(--gradient-field); }
-  .bg-gradient-card { background-image: var(--gradient-card); }
-  .shadow-soft { box-shadow: var(--shadow-soft); }
-  .shadow-elevated { box-shadow: var(--shadow-elevated); }
-  .shadow-glow { box-shadow: var(--shadow-glow); }
-  .text-balance { text-wrap: balance; }
-}
-
-@layer utilities {
-  @keyframes farm-sun-float { 0%,100% { transform: translateX(-50%) translateY(0) scale(1); } 50% { transform: translateX(-50%) translateY(-10px) scale(1.05); } }
-  @keyframes farm-pulse-ring { 0% { transform: translateX(-50%) scale(1); opacity: 0.6; } 100% { transform: translateX(-50%) scale(2.2); opacity: 0; } }
-  @keyframes farm-drift { 0% { left: -20%; } 100% { left: 110%; } }
-  @keyframes farm-sway { 0%,100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
-  @keyframes farm-grow { 0% { transform: scaleY(0); opacity: 0; } 60% { opacity: 1; } 100% { transform: scaleY(1); opacity: 1; } }
-  @keyframes farm-spin-plane { 0%,100% { transform: translateX(-50%) rotateX(62deg) rotateZ(-2deg); } 50% { transform: translateX(-50%) rotateX(60deg) rotateZ(2deg); } }
-  @keyframes farm-dome-glow { 0%,100% { opacity: 0.5; transform: translateX(-50%) scale(1); } 50% { opacity: 0.9; transform: translateX(-50%) scale(1.03); } }
-
-  .farm-sun { animation: farm-sun-float 6s ease-in-out infinite; }
-  .farm-pulse { animation: farm-pulse-ring 4s ease-out infinite; }
-  .farm-cloud { animation: farm-drift 26s linear infinite; }
-  .farm-cloud-slow { animation-duration: 40s; }
-  .farm-ground { animation: farm-spin-plane 12s ease-in-out infinite; }
-  .farm-sprout { transform-origin: bottom center; animation: farm-grow 1s ease-out both, farm-sway 4s ease-in-out infinite 1s; }
-  .farm-dome { animation: farm-dome-glow 5s ease-in-out infinite; }
-  @media (prefers-reduced-motion: reduce) {
-    .farm-sun, .farm-pulse, .farm-cloud, .farm-ground, .farm-sprout, .farm-dome { animation: none !important; }
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .animate-bounce-slow {
+    animation: bounce-slow 4s ease-in-out infinite;
+  }
+  .shadow-premium {
+    box-shadow: var(--shadow-premium);
+  }
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
   }
 }

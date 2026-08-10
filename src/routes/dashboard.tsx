@@ -13,7 +13,15 @@ import { Feed } from "@/components/posts/Feed";
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
-  head: () => ({ meta: [{ title: "Dashboard — CropShield Pool" }] }),
+  head: () => ({ 
+    title: "Dashboard — AgriShield",
+    meta: [
+      { name: "description", content: "Manage your farm risks, community pools, and contributions." },
+      { property: "og:title", content: "AgriShield Dashboard" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ]
+  }),
 });
 
 interface PoolSummary {
@@ -74,158 +82,98 @@ function Dashboard() {
     if (!profile) return null;
     if (profile.kyc_status === "approved")
       return (
-        <Badge className="bg-success text-success-foreground hover:bg-success">
-          <ShieldCheck className="mr-1 h-3 w-3" /> {t("dashboard.kyc_approved")}
-        </Badge>
-      );
-    if (profile.kyc_status === "pending")
-      return (
-        <Badge variant="outline" className="border-harvest/50 text-harvest-foreground">
-          <ShieldAlert className="mr-1 h-3 w-3" /> {t("dashboard.kyc_pending")}
+        <Badge className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20">
+          <ShieldCheck className="mr-1 h-3 w-3" /> Verified Member
         </Badge>
       );
     return (
-      <Badge variant="destructive">
-        <ShieldAlert className="mr-1 h-3 w-3" /> {t("dashboard.kyc_required")}
+      <Badge variant="outline" className="border-muted text-muted-foreground">
+        <ShieldAlert className="mr-1 h-3 w-3" /> Verification Required
       </Badge>
     );
   };
 
   const totalBalance = pools.reduce((s, p) => s + p.balance, 0);
   const totalContrib = pools.reduce((s, p) => s + p.my_contributions, 0);
-  const estCoverage = totalBalance > 0 && pools.length > 0
-    ? Math.round(pools.reduce((s, p) => s + (p.member_count > 0 ? p.balance / p.member_count : 0), 0))
-    : 0;
 
   return (
-    <div className="min-h-screen bg-gradient-field">
+    <div className="min-h-screen bg-muted/20">
       <SiteHeader />
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-        <div className="flex flex-wrap items-end justify-between gap-3">
+      <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div>
-            <p className="text-sm text-muted-foreground">{t("dashboard.title")}</p>
-            <h1 className="font-display text-3xl font-extrabold text-foreground sm:text-4xl">
-              {t("dashboard.welcome", { name: profile?.full_name?.split(" ")[0] ?? "" })}
+            <h1 className="font-display text-4xl font-extrabold text-foreground">
+              Welcome back, {profile?.full_name?.split(" ")[0] ?? "Farmer"}
             </h1>
+            <p className="mt-2 text-muted-foreground">Your intelligent risk management dashboard.</p>
           </div>
           {kycBadge()}
         </div>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-3">
-          {/* Main content area */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* KPI cards */}
-            <div className="grid gap-4 sm:grid-cols-3">
-              <KpiCard icon={Wallet} label={t("dashboard.pool_balance")} value={`₹${totalBalance.toLocaleString("en-IN")}`} />
-              <KpiCard icon={TrendingUp} label={t("dashboard.your_contributions")} value={`₹${totalContrib.toLocaleString("en-IN")}`} />
-              <KpiCard icon={ShieldCheck} label={t("dashboard.est_coverage")} value={`₹${estCoverage.toLocaleString("en-IN")}`} />
+        <div className="grid gap-8 lg:grid-cols-3">
+          <div className="lg:col-span-2 space-y-8">
+            <div className="grid gap-6 sm:grid-cols-2">
+              <KpiCard icon={Wallet} label="Total Pool Balance" value={`₹${totalBalance.toLocaleString("en-IN")}`} />
+              <KpiCard icon={TrendingUp} label="Your Contributions" value={`₹${totalContrib.toLocaleString("en-IN")}`} />
             </div>
 
-            {/* Post/Feed section */}
-            <div className="space-y-4">
-              <div className="flex items-center gap-2">
-                <Share2 className="h-5 w-5 text-primary" />
-                <h2 className="font-display text-xl font-bold">Community Feed</h2>
-              </div>
+            <section>
+              <h2 className="font-display text-2xl font-bold mb-6 flex items-center gap-2">
+                <Share2 className="h-6 w-6 text-primary" /> Community Feed
+              </h2>
               <PostComposer />
-              <Feed />
-            </div>
+              <div className="mt-6">
+                <Feed />
+              </div>
+            </section>
           </div>
 
-          {/* Sidebar */}
-          <div className="space-y-6">
-            <Card className="border-border/60 bg-gradient-card">
-              <CardHeader className="pb-3">
+          <aside className="space-y-8">
+            <Card className="border-none shadow-premium rounded-3xl p-2">
+              <CardHeader className="pb-4">
                 <CardTitle className="font-display text-lg flex items-center gap-2">
-                  <Layout className="h-4 w-4 text-primary" />
-                  {t("dashboard.quick_actions")}
+                  <Layout className="h-5 w-5 text-primary" />
+                  Quick Actions
                 </CardTitle>
               </CardHeader>
-              <CardContent className="grid gap-3">
-                <ActionTile to="/pools" icon={Users} label={t("dashboard.join_pool")} />
-                <ActionTile to="/simulator" icon={TrendingUp} label={t("dashboard.open_simulator")} />
-                <ActionTile to="/prices" icon={Sprout} label={t("nav.prices")} />
-                <ActionTile to="/kyc" icon={ShieldCheck} label={t("dashboard.verify_kyc")} />
+              <CardContent className="grid gap-2">
+                <ActionTile to="/pools" icon={Users} label="Manage Pools" />
+                <ActionTile to="/simulator" icon={TrendingUp} label="Risk Simulation" />
+                <ActionTile to="/prices" icon={Sprout} label="Market Prices" />
+                <ActionTile to="/kyc" icon={ShieldCheck} label="KYC Verification" />
               </CardContent>
             </Card>
-          </div>
+          </aside>
         </div>
-
-        {/* Pools */}
-        <h2 className="mt-10 font-display text-2xl font-bold text-foreground">{t("nav.pools")}</h2>
-        {loading ? (
-          <p className="mt-4 text-muted-foreground">{t("common.loading")}</p>
-        ) : pools.length === 0 ? (
-          <Card className="mt-4 border-dashed border-border bg-card/60">
-            <CardContent className="flex flex-col items-center gap-4 py-10 text-center">
-              <p className="text-muted-foreground">{t("dashboard.no_pool")}</p>
-              <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-                <Link to="/pools">{t("dashboard.join_pool")}</Link>
-              </Button>
-            </CardContent>
-          </Card>
-        ) : (
-          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {pools.map((p) => (
-              <Card key={p.id} className="border-border/60 bg-gradient-card transition hover:shadow-elevated">
-                <CardHeader>
-                  <CardTitle className="font-display text-lg">{p.name}</CardTitle>
-                  <p className="text-sm text-muted-foreground">{p.village}</p>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">{t("pools.balance")}</span>
-                    <span className="font-semibold">₹{p.balance.toLocaleString("en-IN")}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">{t("dashboard.members")}</span>
-                    <span className="font-semibold">{p.member_count}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">{t("dashboard.your_contributions")}</span>
-                    <span className="font-semibold">₹{p.my_contributions.toLocaleString("en-IN")}</span>
-                  </div>
-                  <Button asChild variant="outline" size="sm" className="mt-3 w-full">
-                    <Link to="/pools/$poolId" params={{ poolId: p.id }}>
-                      {t("pools.open")} <ArrowRight className="ml-1 h-3 w-3" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        )}
       </main>
     </div>
   );
 }
 
-function KpiCard({ icon: Icon, label, value }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string }) {
+function KpiCard({ icon: Icon, label, value }: { icon: any; label: string; value: string }) {
   return (
-    <Card className="border-border/60 bg-gradient-card">
-      <CardContent className="flex items-center gap-4 p-5">
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-          <Icon className="h-6 w-6" />
+    <Card className="border-none shadow-soft rounded-3xl p-6">
+      <div className="flex items-center gap-4">
+        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/5 text-primary">
+          <Icon className="h-7 w-7" />
         </div>
         <div>
-          <p className="text-xs uppercase tracking-wider text-muted-foreground">{label}</p>
-          <p className="font-display text-2xl font-bold text-foreground">{value}</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">{label}</p>
+          <p className="font-display text-3xl font-extrabold text-foreground">{value}</p>
         </div>
-      </CardContent>
+      </div>
     </Card>
   );
 }
 
-function ActionTile({ to, icon: Icon, label }: { to: string; icon: React.ComponentType<{ className?: string }>; label: string }) {
+function ActionTile({ to, icon: Icon, label }: { to: string; icon: any; label: string }) {
   return (
-    <Link
-      to={to}
-      className="group flex items-center gap-3 rounded-xl border border-border/60 bg-card p-4 transition hover:border-primary/40 hover:shadow-soft"
-    >
-      <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-harvest/15 text-soil">
-        <Icon className="h-5 w-5" />
-      </span>
-      <span className="text-sm font-semibold text-foreground group-hover:text-primary">{label}</span>
+    <Link to={to} className="group flex items-center gap-4 rounded-2xl p-4 hover:bg-primary/5 transition-all">
+      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+        <Icon className="h-6 w-6" />
+      </div>
+      <span className="font-bold text-foreground">{label}</span>
+      <ArrowRight className="h-5 w-5 ml-auto opacity-0 group-hover:opacity-100 transition-opacity text-primary" />
     </Link>
   );
 }

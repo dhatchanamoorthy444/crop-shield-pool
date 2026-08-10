@@ -1,5 +1,5 @@
 const en = {
-  brand: "CropShield Pool",
+  brand: "AgriShield",
   tagline: "Village risk-pools that protect every farmer.",
   nav: { home: "Home", dashboard: "Dashboard", pools: "Pools", simulator: "Simulator", prices: "Prices", kyc: "Verify ID", signin: "Sign in", signup: "Get started", signout: "Sign out" },
   landing: {
@@ -19,7 +19,7 @@ const en = {
     feature5_body: "English, हिन्दी, தமிழ், ಕನ್ನಡ — pick what feels like home.",
     feature6_title: "Bank-ready reports",
     feature6_body: "Show banks and government your group is organized and low-risk.",
-    how_title: "How CropShield works",
+    how_title: "How AgriShield works",
     step1: "Verify your ID once — Aadhaar, Voter ID, PAN or DL.",
     step2: "Join your village pool with a 6-letter code.",
     step3: "Contribute a small amount each season.",
@@ -38,7 +38,7 @@ const en = {
     role_leader: "FPO / Group leader",
     role_official: "Panchayat / Agri official",
     have_account: "Already have an account?",
-    no_account: "New to CropShield?",
+    no_account: "New to AgriShield?",
     submit_signin: "Sign in",
     submit_signup: "Create account",
   },
