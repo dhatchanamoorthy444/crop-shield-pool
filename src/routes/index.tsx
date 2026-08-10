@@ -8,6 +8,17 @@ import { AgriShieldAI } from "@/components/ai/AgriShieldAI";
 
 export const Route = createFileRoute("/")({
   component: Landing,
+  head: () => ({
+    title: "AgriShield — Intelligent Agricultural Risk Management",
+    meta: [
+      { name: "description", content: "AgriShield helps farmers and cooperatives build financial resilience through intelligent risk-pools, AI-driven insights, and real-time market data." },
+      { property: "og:title", content: "AgriShield — Intelligent Agricultural Risk Management" },
+      { property: "og:description", content: "Build financial resilience for your village farm cooperative with AgriShield." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2400&auto=format&fit=crop" },
+    ],
+  }),
 });
 
 function Landing() {
