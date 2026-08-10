@@ -128,7 +128,7 @@ function Landing() {
               initial={{ opacity: 0, scale: 0.8, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ delay: 1.2, duration: 1 }}
-              className="absolute top-[20%] -right-16 glass p-5 rounded-2xl w-56 border-white/5 shadow-2xl z-40"
+              className="absolute top-[60%] -left-32 glass p-5 rounded-2xl w-56 border-white/5 shadow-2xl z-40"
             >
               <div className="flex justify-between items-center mb-3">
                 <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Market Trend</p>
@@ -139,6 +139,7 @@ function Landing() {
                 <p className="text-[10px] text-emerald-400 font-bold mb-1 uppercase tracking-wider">Increase</p>
               </div>
             </motion.div>
+
 
 
 
