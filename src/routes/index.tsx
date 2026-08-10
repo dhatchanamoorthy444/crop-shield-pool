@@ -80,37 +80,42 @@ function Landing() {
             </div>
           </motion.div>
 
-          {/* Floating Glass Cards System */}
-          <div className="relative h-[600px] hidden lg:block">
+          {/* Floating Glass Cards System - Optimized to prevent overlap */}
+          <div className="relative h-[700px] hidden lg:block">
             <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 1.5 }}
-              className="absolute top-0 right-0 glass-dark p-8 rounded-[2rem] w-80 border-white/10 shadow-2xl z-20"
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ 
+                delay: 0.5, 
+                duration: 1.5,
+                type: "spring",
+                stiffness: 50
+              }}
+              className="absolute top-0 left-0 glass-dark p-8 rounded-[2rem] w-80 border-white/10 shadow-2xl z-20 animate-float"
             >
               <div className="flex justify-between items-center mb-6">
-                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Agricultural Risk Score</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Risk Score</p>
                 <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
                   <Activity className="h-5 w-5 text-primary" />
                 </div>
               </div>
-              <p className="text-6xl font-extrabold text-white mb-2">72</p>
-              <p className="text-sm text-primary font-bold uppercase tracking-widest">Moderate Risk Status</p>
+              <p className="text-6xl font-classic font-extrabold text-white mb-2 italic">72</p>
+              <p className="text-xs text-primary font-bold uppercase tracking-widest">Moderate Status</p>
               <div className="mt-6 h-2 w-full bg-white/5 rounded-full overflow-hidden">
                 <motion.div 
                   initial={{ width: 0 }}
                   animate={{ width: "72%" }}
                   transition={{ delay: 1.5, duration: 2 }}
-                  className="h-full bg-primary"
+                  className="h-full bg-primary neon-glow-green"
                 />
               </div>
             </motion.div>
             
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9, y: 50 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9, x: 100 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
               transition={{ delay: 0.8, duration: 1.2 }}
-              className="absolute top-[45%] right-[60%] glass-dark p-6 rounded-2xl w-64 border-white/5 shadow-2xl z-10"
+              className="absolute top-[35%] right-0 glass-dark p-6 rounded-2xl w-72 border-white/5 shadow-2xl z-10 animate-bounce-slow"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="h-8 w-8 rounded-lg bg-accent/20 flex items-center justify-center">
@@ -118,24 +123,24 @@ function Landing() {
                 </div>
                 <p className="text-xs font-bold uppercase tracking-widest text-accent">AI Analysis</p>
               </div>
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                "Soil moisture levels at sector B-4 are suboptimal. Recommend immediate irrigation."
+              <p className="text-sm font-friendly leading-relaxed text-muted-foreground italic">
+                "Suboptimal moisture in Sector B-4. Priority irrigation recommended."
               </p>
             </motion.div>
 
             <motion.div 
-              initial={{ opacity: 0, scale: 0.8, x: 20 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ delay: 1, duration: 1 }}
-              className="absolute bottom-10 right-20 glass p-5 rounded-2xl w-56 border-white/5 shadow-2xl z-30"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2, duration: 1 }}
+              className="absolute bottom-10 left-20 glass p-5 rounded-2xl w-60 border-white/5 shadow-2xl z-30 neon-glow-green"
             >
               <div className="flex justify-between items-center mb-3">
                 <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Market Trend</p>
-                <TrendingUp className="h-4 w-4 text-emerald-400" />
+                <TrendingUp className="h-4 w-4 text-primary" />
               </div>
               <div className="flex items-end gap-2">
-                <p className="text-2xl font-bold">+12.4%</p>
-                <p className="text-[10px] text-emerald-400 font-bold mb-1 uppercase tracking-wider">Increase</p>
+                <p className="text-2xl font-classic font-bold text-white">+12.4%</p>
+                <p className="text-[10px] text-primary font-bold mb-1 uppercase tracking-wider">Incr</p>
               </div>
             </motion.div>
           </div>
