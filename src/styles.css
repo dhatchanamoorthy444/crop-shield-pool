@@ -116,11 +116,10 @@
     letter-spacing: -0.02em;
   }
   
-  /* Dual-color Text Selection */
+  /* Dark Oil Light Selection */
   ::selection {
-    background-color: var(--color-primary);
-    color: var(--color-background);
-    text-shadow: 2px 2px 0px var(--color-accent);
+    background-color: #003d4d; /* Dark Oil Blue */
+    color: var(--color-accent); /* Light Cyber Blue */
   }
 }
 
