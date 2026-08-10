@@ -81,7 +81,7 @@ function RootComponent() {
       <TooltipProvider>
         <div className="relative min-h-screen selection:bg-primary selection:text-white">
           {/* Atmospheric Background System */}
-          <div className="fixed inset-0 z-[-1] overflow-hidden bg-[#050706]">
+          <div className="fixed inset-0 z-[-1] overflow-hidden bg-[#020504]">
             {/* Layer 2: Main blurred green gradient */}
             <div className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-primary/20 blur-[120px] animate-pulse-gentle" />
             
