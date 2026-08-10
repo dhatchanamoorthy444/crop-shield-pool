@@ -140,7 +140,7 @@ function Landing() {
                 <TrendingUp className="h-4 w-4 text-primary" />
               </div>
               <div className="flex items-end gap-2">
-                <p className="text-2xl font-classic font-bold text-white">+12.4%</p>
+                <p className="text-2xl font-quota font-bold text-white">+12.4%</p>
                 <p className="text-[10px] text-primary font-bold mb-1 uppercase tracking-widest font-mobile">Incr</p>
               </div>
             </motion.div>
