@@ -1,6 +1,6 @@
 import type { Translations } from "./en";
 const kn: Translations = {
-  brand: "ಕ್ರಾಪ್‌ಶೀಲ್ಡ್ ಪೂಲ್",
+  brand: "ಅಗ್ರಿಶೀಲ್ಡ್",
   tagline: "ಪ್ರತಿ ರೈತನನ್ನು ರಕ್ಷಿಸುವ ಗ್ರಾಮ ರಿಸ್ಕ್-ಪೂಲ್‌ಗಳು.",
   nav: { home: "ಮುಖಪುಟ", dashboard: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್", pools: "ಪೂಲ್‌ಗಳು", simulator: "ಸಿಮ್ಯುಲೇಟರ್", prices: "ಬೆಲೆಗಳು", kyc: "ID ಪರಿಶೀಲನೆ", signin: "ಸೈನ್ ಇನ್", signup: "ಪ್ರಾರಂಭಿಸಿ", signout: "ಸೈನ್ ಔಟ್" },
   landing: {

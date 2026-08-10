@@ -1,6 +1,6 @@
 import type { Translations } from "./en";
 const ta: Translations = {
-  brand: "க்ராப்ஷீல்ட் பூல்",
+  brand: "அக்ரிஷீல்ட்",
   tagline: "ஒவ்வொரு விவசாயியையும் பாதுகாக்கும் கிராம ரிஸ்க்-பூல்.",
   nav: { home: "முகப்பு", dashboard: "டாஷ்போர்டு", pools: "பூல்கள்", simulator: "சிமுலேட்டர்", prices: "விலை", kyc: "ID சரிபார்ப்பு", signin: "உள்நுழை", signup: "தொடங்கு", signout: "வெளியேறு" },
   landing: {

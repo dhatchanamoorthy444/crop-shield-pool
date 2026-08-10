@@ -1,6 +1,6 @@
 import type { Translations } from "./en";
 const hi: Translations = {
-  brand: "क्रॉपशील्ड पूल",
+  brand: "एग्रीशील्ड",
   tagline: "गाँव के जोखिम-पूल जो हर किसान की रक्षा करते हैं।",
   nav: { home: "होम", dashboard: "डैशबोर्ड", pools: "पूल", simulator: "सिमुलेटर", prices: "भाव", kyc: "ID सत्यापन", signin: "साइन इन", signup: "शुरू करें", signout: "साइन आउट" },
   landing: {

@@ -1,5 +1,5 @@
 const en = {
-  brand: "CropShield Pool",
+  brand: "AgriShield",
   tagline: "Village risk-pools that protect every farmer.",
   nav: { home: "Home", dashboard: "Dashboard", pools: "Pools", simulator: "Simulator", prices: "Prices", kyc: "Verify ID", signin: "Sign in", signup: "Get started", signout: "Sign out" },
   landing: {
