@@ -17,6 +17,16 @@
   --font-signature: "Sacramento", cursive;
   --font-friendly: "Quicksand", sans-serif;
 
+  /* Strictly Business Commercial Fonts */
+  --font-quota: "PT Sans", sans-serif;
+  --font-encrypt: "Sifonn", sans-serif;
+  --font-logistics: "Zen Dots", cursive;
+  --font-mobile: "Syncopate", sans-serif;
+  --font-demand: "Jost", sans-serif;
+  --font-margin: "Syne", sans-serif;
+  --font-business: "Gilroy", sans-serif;
+  --font-consumer: "Raleway", sans-serif;
+
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
@@ -154,6 +164,14 @@
   .font-impact { font-family: var(--font-bold-impact); }
   .font-signature { font-family: var(--font-signature); }
   .font-friendly { font-family: var(--font-friendly); }
+  .font-quota { font-family: var(--font-quota); font-weight: 700; }
+  .font-encrypt { font-family: var(--font-encrypt); }
+  .font-logistics { font-family: var(--font-logistics); }
+  .font-mobile { font-family: var(--font-mobile); font-weight: 700; }
+  .font-demand { font-family: var(--font-demand); }
+  .font-margin { font-family: var(--font-margin); font-weight: 700; }
+  .font-business { font-family: var(--font-business); font-weight: 800; }
+  .font-consumer { font-family: var(--font-consumer); font-weight: 300; }
 
   .perspective-1000 {
     perspective: 1000px;

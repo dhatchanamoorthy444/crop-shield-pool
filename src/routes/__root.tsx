@@ -52,7 +52,7 @@ export const Route = createRootRoute({
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Playfair+Display:ital,wght@0,700;1,700&family=Bebas+Neue&family=Sacramento&family=Quicksand:wght@500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Playfair+Display:ital,wght@0,700;1,700&family=Bebas+Neue&family=Sacramento&family=Quicksand:wght@500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=PT+Sans:wght@700&family=Sifonn:wght@400&family=Zen+Dots&family=Syncopate:wght@700&family=Jost:wght@400;700&family=Syne:wght@500;700&family=Gilroy:wght@800&family=Raleway:wght@300&display=swap",
       },
     ],
   }),
