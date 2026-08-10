@@ -1,27 +1,69 @@
 import { useState } from "react";
-import { MessageSquare, X, Send, Leaf, Sparkles, Brain, ArrowRight } from "lucide-react";
+import { X, Brain } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
+import { useServerFn } from "@tanstack/react-start";
+import { toast } from "sonner";
+import {
+  Conversation,
+  ConversationContent,
+  ConversationScrollButton,
+} from "@/components/ai-elements/conversation";
+import { Message, MessageContent, MessageResponse } from "@/components/ai-elements/message";
+import {
+  PromptInput,
+  PromptInputTextarea,
+  PromptInputFooter,
+  PromptInputSubmit,
+  type PromptInputMessage,
+} from "@/components/ai-elements/prompt-input";
+import { Shimmer } from "@/components/ai-elements/shimmer";
+import { askAgriShieldAI } from "@/lib/ai/agri-ai.functions";
+import aiMark from "@/assets/agrishield-ai-mark.png";
+
+type ChatMessage = { role: "user" | "assistant"; content: string };
+
+const QUICK_ACTIONS = [
+  "Assess my drought risk",
+  "Wheat price outlook",
+  "Pest pressure this week",
+];
 
 export function AgriShieldAI() {
+  const ask = useServerFn(askAgriShieldAI);
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    { role: "assistant", content: "Welcome to AgriShield Intelligence. I am your specialized AI assistant for agricultural risk and decision support. How can I enhance your operations today?" }
+  const [status, setStatus] = useState<"ready" | "submitted">("ready");
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    {
+      role: "assistant",
+      content:
+        "Welcome to **AgriShield Intelligence**. Ask me about crop risk, weather exposure, irrigation timing, market trends, or how your risk pool works.",
+    },
   ]);
-  const [inputValue, setInputValue] = useState("");
 
-  const handleSend = () => {
-    if (!inputValue.trim()) return;
-    setMessages([...messages, { role: "user", content: inputValue }]);
-    setInputValue("");
-    // Simulate AI response
-    setTimeout(() => {
-      setMessages(prev => [...prev, { 
-        role: "assistant", 
-        content: "I'm analyzing the market trends and climate data for your specific region. We're seeing a 15% increase in projected yields for pulse crops if irrigation is optimized by week 4." 
-      }]);
-    }, 1000);
+  const send = async (text: string) => {
+    const content = text.trim();
+    if (!content || status === "submitted") return;
+    const next: ChatMessage[] = [...messages, { role: "user", content }];
+    setMessages(next);
+    setStatus("submitted");
+    try {
+      const result = await ask({
+        data: { messages: next.slice(-12).map((m) => ({ role: m.role, content: m.content })) },
+      });
+      setMessages((prev) => [...prev, { role: "assistant", content: result.content }]);
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : "AgriShield AI is unavailable.";
+      toast.error(msg);
+      setMessages((prev) => [...prev, { role: "assistant", content: msg }]);
+    } finally {
+      setStatus("ready");
+    }
+  };
+
+  const handleSubmit = (message: PromptInputMessage, event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    void send(message.text ?? "");
   };
 
   return (
@@ -35,15 +77,18 @@ export function AgriShieldAI() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsOpen(true)}
-            className="group relative h-20 w-20 rounded-full bg-[#0C100D] border border-white/10 shadow-[0_0_50px_rgba(27,77,46,0.3)] flex items-center justify-center overflow-hidden transition-all duration-500 hover:border-primary/50"
+            aria-label="Open AgriShield AI"
+            className="group relative h-20 w-20 rounded-full bg-[#0C100D] border border-white/10 shadow-[0_0_50px_rgba(212,163,115,0.25)] flex items-center justify-center overflow-hidden transition-all duration-500 hover:border-primary/50"
           >
-            {/* Breathing Glow */}
             <div className="absolute inset-0 bg-primary/20 animate-pulse-gentle" />
-            <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            
-            <div className="relative z-10">
-              <Sparkles className="h-8 w-8 text-primary transition-transform duration-500 group-hover:scale-110" />
-            </div>
+            <img
+              src={aiMark}
+              alt="AgriShield AI"
+              loading="lazy"
+              width={512}
+              height={512}
+              className="relative z-10 h-10 w-10 object-contain transition-transform duration-500 group-hover:scale-110"
+            />
           </motion.button>
         )}
       </AnimatePresence>
@@ -57,82 +102,93 @@ export function AgriShieldAI() {
             className="glass-dark w-[450px] max-w-[90vw] h-[650px] max-h-[80vh] rounded-[2.5rem] border-white/10 shadow-[0_30px_100px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden"
           >
             {/* Header */}
-            <div className="p-8 pb-4 flex justify-between items-center border-b border-white/5 bg-white/5">
+            <div className="p-6 flex justify-between items-center border-b border-white/5 bg-white/5">
               <div className="flex items-center gap-4">
-                <div className="h-12 w-12 rounded-2xl bg-primary/20 flex items-center justify-center border border-primary/30">
-                  <Brain className="h-6 w-6 text-primary" />
+                <div className="h-12 w-12 rounded-2xl bg-primary/15 flex items-center justify-center border border-primary/30">
+                  <img
+                    src={aiMark}
+                    alt=""
+                    loading="lazy"
+                    width={512}
+                    height={512}
+                    className="h-7 w-7 object-contain"
+                  />
                 </div>
                 <div>
-                  <h3 className="font-display text-xl font-extrabold tracking-tight">AgriShield AI</h3>
+                  <h3 className="font-business text-xl font-extrabold tracking-tight">AgriShield AI</h3>
                   <div className="flex items-center gap-1.5">
-                    <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Expert Systems Online</span>
+                    <div className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                      Live intelligence
+                    </span>
                   </div>
                 </div>
               </div>
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={() => setIsOpen(false)}
+                aria-label="Close assistant"
                 className="h-10 w-10 rounded-full border border-white/5 hover:bg-white/5"
               >
                 <X className="h-5 w-5" />
               </Button>
             </div>
 
-            {/* Chat Area */}
-            <div className="flex-1 p-8 overflow-y-auto space-y-6 scrollbar-none">
-              {messages.map((msg, i) => (
-                <motion.div
-                  initial={{ opacity: 0, x: msg.role === 'user' ? 20 : -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  key={i}
-                  className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                >
-                  <div className={`max-w-[85%] p-5 rounded-3xl text-sm leading-relaxed ${
-                    msg.role === 'user' 
-                      ? 'bg-primary text-white rounded-tr-none' 
-                      : 'bg-white/5 border border-white/5 text-muted-foreground rounded-tl-none'
-                  }`}>
-                    {msg.content}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            {/* Transcript */}
+            <Conversation className="flex-1">
+              <ConversationContent className="gap-4 px-6 py-6">
+                {messages.map((msg, i) => (
+                  <Message from={msg.role} key={i}>
+                    {msg.role === "assistant" ? (
+                      <MessageContent className="bg-transparent px-0 text-foreground">
+                        <MessageResponse>{msg.content}</MessageResponse>
+                      </MessageContent>
+                    ) : (
+                      <MessageContent className="bg-primary text-primary-foreground">
+                        {msg.content}
+                      </MessageContent>
+                    )}
+                  </Message>
+                ))}
+                {status === "submitted" && (
+                  <Message from="assistant">
+                    <MessageContent className="bg-transparent px-0">
+                      <span className="flex items-center gap-2 text-sm">
+                        <Brain className="h-4 w-4 text-primary" />
+                        <Shimmer>Analysing field intelligence...</Shimmer>
+                      </span>
+                    </MessageContent>
+                  </Message>
+                )}
+              </ConversationContent>
+              <ConversationScrollButton />
+            </Conversation>
 
-            {/* Quick Actions */}
-            <div className="px-8 py-4 flex gap-2 overflow-x-auto scrollbar-none">
-              {['Risk Assessment', 'Market Trends', 'Pest Control'].map((action) => (
-                <button 
+            {/* Quick actions */}
+            <div className="px-6 pb-2 flex gap-2 overflow-x-auto">
+              {QUICK_ACTIONS.map((action) => (
+                <button
                   key={action}
-                  onClick={() => setInputValue(action)}
-                  className="whitespace-nowrap px-4 py-2 rounded-full border border-white/5 bg-white/5 text-[10px] font-bold uppercase tracking-widest text-muted-foreground hover:bg-white/10 hover:text-white transition-all"
+                  onClick={() => void send(action)}
+                  disabled={status === "submitted"}
+                  className="whitespace-nowrap px-4 py-2 rounded-full border border-white/5 bg-white/5 text-[10px] font-bold uppercase tracking-widest text-muted-foreground hover:bg-white/10 hover:text-foreground transition-all disabled:opacity-40"
                 >
                   {action}
                 </button>
               ))}
             </div>
 
-            {/* Footer / Input */}
-            <div className="p-8 pt-4">
-              <div className="relative group">
-                <Input 
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                  placeholder="Inquire about risk intelligence..." 
-                  className="h-14 pl-6 pr-14 rounded-full border-white/10 bg-white/5 text-sm focus-visible:ring-primary focus-visible:border-primary/50 transition-all placeholder:text-muted-foreground/30"
-                />
-                <Button 
-                  size="icon"
-                  onClick={handleSend}
-                  className="absolute right-1.5 top-1.5 h-11 w-11 rounded-full bg-primary hover:bg-primary/90 shadow-lg group-focus-within:scale-105 transition-transform"
-                >
-                  <Send className="h-4 w-4 text-white" />
-                </Button>
-              </div>
-              <p className="mt-4 text-[10px] text-center font-bold uppercase tracking-[0.2em] text-muted-foreground/30">
-                Powered by AgriShield Neural Engine
+            {/* Composer */}
+            <div className="p-6 pt-2">
+              <PromptInput onSubmit={handleSubmit}>
+                <PromptInputTextarea placeholder="Ask about risk, weather, prices or pools..." />
+                <PromptInputFooter className="justify-end">
+                  <PromptInputSubmit status={status} disabled={status === "submitted"} />
+                </PromptInputFooter>
+              </PromptInput>
+              <p className="mt-3 text-[10px] text-center font-bold uppercase tracking-[0.2em] text-muted-foreground/40">
+                AgriShield neural engine
               </p>
             </div>
           </motion.div>
