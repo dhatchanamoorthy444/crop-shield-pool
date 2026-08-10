@@ -1,7 +1,10 @@
+@import "tailwindcss";
+
 /*
  * AgriShield — Dark Organic Glass design system.
  * Cinematic, premium, agricultural intelligence.
  */
+
 
 @theme inline {
   --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
