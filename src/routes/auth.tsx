@@ -11,21 +11,19 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { toast } from "sonner";
-import { Leaf, ShieldCheck, Lock } from "lucide-react";
+import { Leaf, ShieldCheck, Lock, ArrowRight, Sparkles } from "lucide-react";
 import { z } from "zod";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const Route = createFileRoute("/auth")({
   component: AuthPage,
   head: () => ({
+    title: "Secure Access — AgriShield",
     meta: [
-      { title: "Authentication — AgriShield" },
       {
         name: "description",
         content: "Securely access your AgriShield dashboard. Risk management intelligence for modern agriculture.",
       },
-      { property: "og:title", content: "AgriShield Login" },
-      { property: "og:description", content: "Access intelligent agricultural risk management tools." },
-      { property: "og:type", content: "website" },
     ],
   }),
 });
@@ -34,7 +32,6 @@ const signupSchema = z.object({
   fullName: z.string().trim().min(2, "Enter your full name").max(120),
   email: z.string().trim().email("Enter a valid email address").max(255),
   password: z.string().min(8, "Password must be at least 8 characters").max(72),
-  phone: z.string().trim().max(20).optional(),
   role: z.enum(["farmer", "leader", "official"]),
 });
 
@@ -57,27 +54,44 @@ function AuthPage() {
   }, [user, loading, nav]);
 
   return (
-    <div className="min-h-screen bg-background relative flex flex-col items-center justify-center p-4">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/5 via-background to-background pointer-events-none" />
-      
-      <div className="w-full max-w-[440px] relative z-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <div className="mb-8 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2.5 font-display text-2xl font-bold text-primary group">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary shadow-soft group-hover:scale-105 transition-transform">
-              <Leaf className="h-6 w-6 text-primary-foreground" />
+    <div className="min-h-screen bg-[#050706] text-white relative flex flex-col items-center justify-center p-6 overflow-hidden">
+      {/* Cinematic Background Atmosphere */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] animate-pulse-gentle" />
+        <div className="absolute bottom-1/4 -right-1/4 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[100px] animate-pulse-gentle delay-1000" />
+      </div>
+
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="w-full max-w-[480px] relative z-10"
+      >
+        <div className="mb-12 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-3 font-display text-3xl font-extrabold text-white group">
+            <span className="flex h-12 w-12 items-center justify-center rounded-[1rem] bg-primary shadow-[0_0_20px_rgba(27,77,46,0.4)] group-hover:scale-105 transition-transform">
+              <Leaf className="h-7 w-7 text-white" />
             </span>
             AgriShield
           </Link>
-          <LanguageSwitcher compact />
+          <div className="glass-dark px-2 py-1 rounded-full border-white/5">
+            <LanguageSwitcher compact />
+          </div>
         </div>
 
-        <Card className="border-none shadow-premium bg-white/80 backdrop-blur-xl rounded-[2rem] overflow-hidden">
+        <Card className="glass-dark border-white/10 rounded-[2.5rem] overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.6)]">
           <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-muted/50 p-1.5 h-auto">
-              <TabsTrigger value="signin" className="rounded-2xl py-2.5 font-bold data-[state=active]:bg-white data-[state=active]:shadow-sm">
+            <TabsList className="grid w-full grid-cols-2 bg-white/5 p-2 h-auto rounded-none border-b border-white/5">
+              <TabsTrigger 
+                value="signin" 
+                className="rounded-2xl py-3.5 font-display font-extrabold text-sm uppercase tracking-widest data-[state=active]:bg-primary data-[state=active]:text-white transition-all"
+              >
                 Sign In
               </TabsTrigger>
-              <TabsTrigger value="signup" className="rounded-2xl py-2.5 font-bold data-[state=active]:bg-white data-[state=active]:shadow-sm">
+              <TabsTrigger 
+                value="signup" 
+                className="rounded-2xl py-3.5 font-display font-extrabold text-sm uppercase tracking-widest data-[state=active]:bg-primary data-[state=active]:text-white transition-all"
+              >
                 Join Now
               </TabsTrigger>
             </TabsList>
@@ -91,22 +105,26 @@ function AuthPage() {
           </Tabs>
         </Card>
 
-        <div className="mt-8 flex flex-col items-center gap-4">
-          <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground uppercase tracking-widest">
-            <Lock className="h-3 w-3 text-primary" />
-            Enterprise-grade Security
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="mt-12 flex flex-col items-center gap-6"
+        >
+          <div className="flex items-center gap-3 text-[10px] font-bold text-muted-foreground uppercase tracking-[0.3em] backdrop-blur-sm px-4 py-2 rounded-full border border-white/5 bg-white/5">
+            <ShieldCheck className="h-4 w-4 text-primary" />
+            Neural-Grade Encryption Active
           </div>
-          <p className="text-xs text-center text-muted-foreground max-w-[280px]">
-            By continuing, you agree to our Terms of Service and Privacy Policy.
+          <p className="text-[10px] text-center text-muted-foreground/40 max-w-[320px] font-bold uppercase tracking-widest leading-loose">
+            Secure entry protocol initiated. By continuing, you authorize the terms of the AgriShield Intelligence Network.
           </p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
 
 function SignInForm() {
-  const { t } = useTranslation();
   const nav = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -125,31 +143,55 @@ function SignInForm() {
       return;
     }
     if (data.session) {
-      toast.success("Welcome back to AgriShield");
+      toast.success("Identity Verified. Welcome back.");
       void nav({ to: "/dashboard", replace: true });
     }
   };
 
   return (
-    <form onSubmit={submit} className="p-8">
-      <CardHeader className="p-0 mb-6">
-        <CardTitle className="text-2xl font-extrabold font-display">Welcome back</CardTitle>
-        <CardDescription>Enter your credentials to access your dashboard.</CardDescription>
-      </CardHeader>
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <Label className="font-bold text-xs uppercase tracking-widest text-muted-foreground">Email Address</Label>
-          <Input className="h-12 bg-muted/30 border-none focus-visible:ring-primary/20 rounded-xl" type="email" placeholder="farmer@example.com" required value={email} onChange={(e) => setEmail(e.target.value)} />
+    <form onSubmit={submit} className="p-10 space-y-8">
+      <div>
+        <h2 className="text-3xl font-display font-extrabold mb-3">Welcome Back</h2>
+        <p className="text-muted-foreground text-sm font-medium">Re-establish your connection to the risk network.</p>
+      </div>
+
+      <div className="space-y-6">
+        <div className="space-y-2.5">
+          <Label className="font-bold text-[10px] uppercase tracking-[0.2em] text-muted-foreground ml-1">Network Identifier</Label>
+          <Input 
+            className="h-14 bg-white/5 border-white/10 focus-visible:ring-primary/40 rounded-2xl px-6 font-medium placeholder:text-muted-foreground/20" 
+            type="email" 
+            placeholder="farmer@network.ag" 
+            required 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
+          />
         </div>
-        <div className="space-y-2">
-          <div className="flex justify-between items-center">
-            <Label className="font-bold text-xs uppercase tracking-widest text-muted-foreground">Password</Label>
-            <Link to="/reset-password" onClick={(e) => { e.preventDefault(); /* trigger forgot pass flow */ }} className="text-xs font-bold text-primary hover:underline">Forgot?</Link>
+        <div className="space-y-2.5">
+          <div className="flex justify-between items-center ml-1">
+            <Label className="font-bold text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Access Cipher</Label>
+            <Link to="/reset-password" class="text-[10px] font-bold text-primary hover:text-primary/80 uppercase tracking-widest">Forgot Cipher?</Link>
           </div>
-          <Input className="h-12 bg-muted/30 border-none focus-visible:ring-primary/20 rounded-xl" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+          <Input 
+            className="h-14 bg-white/5 border-white/10 focus-visible:ring-primary/40 rounded-2xl px-6 font-medium" 
+            type="password" 
+            required 
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)} 
+          />
         </div>
-        <Button type="submit" disabled={busy} className="w-full h-12 rounded-xl bg-primary font-bold shadow-soft">
-          {busy ? "Signing in..." : "Sign In to Dashboard"}
+        
+        <Button 
+          type="submit" 
+          disabled={busy} 
+          className="w-full h-16 rounded-2xl bg-primary text-white font-display font-extrabold text-sm uppercase tracking-widest shadow-[0_10px_30px_rgba(27,77,46,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all group"
+        >
+          {busy ? "Verifying..." : (
+            <span className="flex items-center gap-2">
+              Authorize Access
+              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </span>
+          )}
         </Button>
       </div>
     </form>
@@ -157,7 +199,6 @@ function SignInForm() {
 }
 
 function SignUpForm({ currentLang }: { currentLang: string }) {
-  const { t } = useTranslation();
   const nav = useNavigate();
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -199,41 +240,52 @@ function SignUpForm({ currentLang }: { currentLang: string }) {
   };
 
   return (
-    <form onSubmit={submit} className="p-8">
-      <CardHeader className="p-0 mb-6">
-        <CardTitle className="text-2xl font-extrabold font-display">Create Account</CardTitle>
-        <CardDescription>Join 500+ agricultural stakeholders today.</CardDescription>
-      </CardHeader>
-      <div className="space-y-4">
+    <form onSubmit={submit} className="p-10 space-y-8">
+      <div>
+        <h2 className="text-3xl font-display font-extrabold mb-3">Join the Network</h2>
+        <p className="text-muted-foreground text-sm font-medium">Initialize your profile within the AgriShield ecosystem.</p>
+      </div>
+
+      <div className="space-y-6">
         <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <Label className="font-bold text-xs uppercase tracking-widest text-muted-foreground">Full Name</Label>
-            <Input className="h-12 bg-muted/30 border-none rounded-xl" required value={fullName} onChange={(e) => setFullName(e.target.value)} />
+          <div className="space-y-2.5">
+            <Label className="font-bold text-[10px] uppercase tracking-[0.2em] text-muted-foreground ml-1">Full Identity</Label>
+            <Input className="h-14 bg-white/5 border-white/10 rounded-2xl px-6 font-medium" required value={fullName} onChange={(e) => setFullName(e.target.value)} />
           </div>
-          <div className="space-y-2">
-            <Label className="font-bold text-xs uppercase tracking-widest text-muted-foreground">Role</Label>
+          <div className="space-y-2.5">
+            <Label className="font-bold text-[10px] uppercase tracking-[0.2em] text-muted-foreground ml-1">Network Role</Label>
             <Select value={role} onValueChange={(v) => setRole(v as any)}>
-              <SelectTrigger className="h-12 bg-muted/30 border-none rounded-xl font-bold">
+              <SelectTrigger className="h-14 bg-white/5 border-white/10 rounded-2xl px-6 font-bold">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="rounded-xl font-bold">
-                <SelectItem value="farmer">Farmer</SelectItem>
-                <SelectItem value="leader">FPO Leader</SelectItem>
-                <SelectItem value="official">Agri Official</SelectItem>
+              <SelectContent className="glass-dark border-white/10 rounded-2xl font-bold">
+                <SelectItem value="farmer" className="rounded-xl">Farmer</SelectItem>
+                <SelectItem value="leader" className="rounded-xl">FPO Leader</SelectItem>
+                <SelectItem value="official" className="rounded-xl">Agri Official</SelectItem>
               </SelectContent>
             </Select>
           </div>
         </div>
-        <div className="space-y-2">
-          <Label className="font-bold text-xs uppercase tracking-widest text-muted-foreground">Email</Label>
-          <Input className="h-12 bg-muted/30 border-none rounded-xl" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+        <div className="space-y-2.5">
+          <Label className="font-bold text-[10px] uppercase tracking-[0.2em] text-muted-foreground ml-1">Email Identifier</Label>
+          <Input className="h-14 bg-white/5 border-white/10 rounded-2xl px-6 font-medium" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
-        <div className="space-y-2">
-          <Label className="font-bold text-xs uppercase tracking-widest text-muted-foreground">Password</Label>
-          <Input className="h-12 bg-muted/30 border-none rounded-xl" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
+        <div className="space-y-2.5">
+          <Label className="font-bold text-[10px] uppercase tracking-[0.2em] text-muted-foreground ml-1">Secure Cipher</Label>
+          <Input className="h-14 bg-white/5 border-white/10 rounded-2xl px-6 font-medium" type="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
-        <Button type="submit" disabled={busy} className="w-full h-12 rounded-xl bg-primary font-bold shadow-soft">
-          {busy ? "Creating Account..." : "Create My Account"}
+        
+        <Button 
+          type="submit" 
+          disabled={busy} 
+          className="w-full h-16 rounded-2xl bg-primary text-white font-display font-extrabold text-sm uppercase tracking-widest shadow-[0_10px_30px_rgba(27,77,46,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all group"
+        >
+          {busy ? "Initializing..." : (
+            <span className="flex items-center gap-2">
+              Create My Identity
+              <Sparkles className="h-5 w-5 group-hover:rotate-12 transition-transform" />
+            </span>
+          )}
         </Button>
       </div>
     </form>
