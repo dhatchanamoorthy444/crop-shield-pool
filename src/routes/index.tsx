@@ -60,15 +60,15 @@ function Landing() {
               <Leaf className="h-4 w-4" />
               <span>Next-Gen Agricultural Intelligence</span>
             </div>
-            <h1 className="font-business text-6xl md:text-[5.5rem] font-extrabold tracking-tighter mb-8 leading-[0.9] text-glow neon-text-green uppercase">
+            <h1 className="font-business text-6xl md:text-[5.5rem] font-extrabold tracking-tighter mb-8 leading-[0.9] text-glow uppercase" style={{ color: '#007979' }}>
               <span className="text-white">SEE </span>
-              <span className="text-primary">RISK.</span>
+              <span>RISK.</span>
               <br />
               <span className="text-white">THINK </span>
-              <span className="text-accent">SMATER</span>
+              <span style={{ color: '#24B1B1' }}>SMATER</span>
               <br />
               <span className="text-white">GROW </span>
-              <span className="text-primary">STRONGER.</span>
+              <span>STRONGER.</span>
             </h1>
             <p className="font-friendly text-xl text-muted-foreground mb-12 max-w-xl leading-relaxed">
               AgriShield brings agricultural risk intelligence, AI assistance, and data-driven insights together in one powerful platform.
