@@ -52,31 +52,60 @@ function Landing() {
             </div>
           </div>
           <div className="relative lg:block hidden">
-            <div className="absolute -inset-10 bg-gradient-to-tr from-primary/30 to-accent/30 blur-3xl rounded-full opacity-60 animate-pulse" />
-            <div className="relative space-y-4">
-              <Card className="p-6 bg-white/80 backdrop-blur-xl border border-white/50 shadow-premium transform hover:-translate-y-1 transition-all duration-300">
-                <div className="flex justify-between items-center mb-4">
-                  <h4 className="font-display font-bold flex items-center gap-2"><Activity className="h-5 w-5 text-primary" /> Overall Risk Score</h4>
-                  <span className="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">MODERATE</span>
+            <div className="absolute -inset-20 bg-gradient-to-tr from-primary/30 to-accent/30 blur-[120px] rounded-full opacity-60 animate-pulse" />
+            
+            {/* Main Visual Component */}
+            <div className="relative perspective-1000">
+              <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white/50 aspect-[4/5] max-w-[480px] ml-auto">
+                <img 
+                  src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2400&auto=format&fit=crop" 
+                  alt="Modern Agricultural Field"
+                  className="h-full w-full object-cover scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent" />
+              </div>
+
+              {/* Floating Glass Panels */}
+              <Card className="absolute top-10 -left-16 p-5 bg-white/60 backdrop-blur-xl border border-white/40 shadow-premium w-60 transform -rotate-3 hover:rotate-0 transition-transform duration-500 rounded-3xl">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-[10px] font-bold text-primary uppercase tracking-widest">Crop Health</span>
+                  <Activity className="h-4 w-4 text-primary" />
                 </div>
-                <div className="h-3 w-full bg-muted rounded-full overflow-hidden">
-                  <div className="h-full bg-primary" style={{ width: '72%' }} />
-                </div>
-                <div className="mt-2 flex justify-between text-xs font-bold text-muted-foreground uppercase tracking-widest">
-                  <span>Safe</span>
-                  <span>Critical</span>
+                <div className="flex items-end gap-2">
+                  <span className="text-3xl font-extrabold tracking-tight">94%</span>
+                  <span className="text-[10px] font-bold text-success mb-1">OPTIMAL</span>
                 </div>
               </Card>
-              <div className="grid grid-cols-2 gap-4">
-                <Card className="p-4 bg-white/80 backdrop-blur-xl border border-white/50 shadow-premium transform hover:-translate-y-1 transition-all duration-300 delay-75">
-                  <p className="text-xs font-bold text-muted-foreground uppercase mb-2">Weather Risk</p>
-                  <p className="text-2xl font-bold">Low</p>
-                </Card>
-                <Card className="p-4 bg-white/80 backdrop-blur-xl border border-white/50 shadow-premium transform hover:-translate-y-1 transition-all duration-300 delay-150">
-                  <p className="text-xs font-bold text-muted-foreground uppercase mb-2">Market Risk</p>
-                  <p className="text-2xl font-bold text-primary">High</p>
-                </Card>
-              </div>
+
+              <Card className="absolute bottom-20 -right-8 p-5 bg-white/60 backdrop-blur-xl border border-white/40 shadow-premium w-56 transform rotate-3 hover:rotate-0 transition-transform duration-500 rounded-3xl">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-[10px] font-bold text-primary uppercase tracking-widest">Market Risk</span>
+                  <TrendingUp className="h-4 w-4 text-primary" />
+                </div>
+                <div className="flex items-end gap-2">
+                  <span className="text-3xl font-extrabold tracking-tight text-primary">High</span>
+                  <span className="text-[10px] font-bold text-destructive mb-1">+12.4%</span>
+                </div>
+              </Card>
+
+              <Card className="absolute top-1/2 -translate-y-1/2 -left-24 p-6 bg-white/80 backdrop-blur-2xl border border-white/50 shadow-premium w-72 transform hover:scale-105 transition-all duration-500 rounded-[2rem] z-20">
+                <div className="flex justify-between items-center mb-4">
+                  <h4 className="font-display font-extrabold flex items-center gap-2 text-sm"><ShieldCheck className="h-4 w-4 text-primary" /> AgriShield Risk Score</h4>
+                  <span className="px-2.5 py-1 bg-primary/10 text-primary text-[10px] font-extrabold rounded-full tracking-wider">MODERATE</span>
+                </div>
+                <div className="h-2.5 w-full bg-muted rounded-full overflow-hidden mb-2">
+                  <div className="h-full bg-primary" style={{ width: '72%' }} />
+                </div>
+                <div className="flex justify-between text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
+                  <span>Stable</span>
+                  <span>Alert</span>
+                </div>
+              </Card>
+
+              {/* Decorative elements */}
+              <div className="absolute -top-12 -right-12 h-24 w-24 bg-accent/20 rounded-full blur-2xl animate-pulse" />
+              <Leaf className="absolute -top-6 right-10 h-10 w-10 text-primary/30 rotate-45 animate-bounce-slow" />
+              <Droplets className="absolute bottom-10 left-1/4 h-8 w-8 text-primary/20 -rotate-12 animate-pulse" />
             </div>
           </div>
         </div>
