@@ -227,7 +227,8 @@ function Dashboard() {
                 <ActionTile to="/pools" icon={Users} label="Risk Pools" desc="Cooperative Capital" />
                 <ActionTile to="/simulator" icon={TrendingUp} label="Simulator" desc="Scenario Engine" />
                 <ActionTile to="/prices" icon={Sprout} label="Market Hub" desc="Live Price Data" />
-                <ActionTile to="/kyc" icon={ShieldCheck} label="Verification" desc="Identity Protocol" />
+                <ActionTile to="/security" icon={ShieldCheck} label="Security Vault" desc="Audit Logs" />
+                <ActionTile to="/kyc" icon={Activity} label="Verification" desc="Identity Protocol" />
               </div>
             </motion.div>
 
