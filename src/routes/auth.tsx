@@ -162,6 +162,19 @@ function SignInForm() {
       email: email.trim(),
       password,
     });
+    
+    // Log the attempt
+    await supabase.from("audit_logs").insert({
+      email: email.trim(),
+      event_type: "login_attempt",
+      status: error ? "failed" : "success",
+      user_id: data.user?.id || null,
+      metadata: { 
+        method: "password",
+        error: error?.message || null 
+      }
+    });
+
     setBusy(false);
     if (error) {
       toast.error(friendly(error.message));
@@ -291,6 +304,16 @@ function SignUpForm({ currentLang }: { currentLang: string }) {
         },
       },
     });
+
+    // Log the signup
+    await supabase.from("audit_logs").insert({
+      email: email.trim(),
+      event_type: "signup_attempt",
+      status: error ? "failed" : "success",
+      user_id: data.user?.id || null,
+      metadata: { error: error?.message || null }
+    });
+
     setBusy(false);
     if (error) {
       toast.error(friendly(error.message));
