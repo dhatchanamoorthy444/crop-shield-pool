@@ -18,6 +18,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PoolsIndexRouteImport } from './routes/pools.index'
 import { Route as PoolsPoolIdRouteImport } from './routes/pools.$poolId'
+import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
 
 const SimulatorRoute = SimulatorRouteImport.update({
   id: '/simulator',
@@ -64,38 +65,46 @@ const PoolsPoolIdRoute = PoolsPoolIdRouteImport.update({
   path: '/pools/$poolId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/callback',
+  path: '/callback',
+  getParentRoute: () => AuthRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/kyc': typeof KycRoute
   '/prices': typeof PricesRoute
   '/reset-password': typeof ResetPasswordRoute
   '/simulator': typeof SimulatorRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/pools/$poolId': typeof PoolsPoolIdRoute
   '/pools/': typeof PoolsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/kyc': typeof KycRoute
   '/prices': typeof PricesRoute
   '/reset-password': typeof ResetPasswordRoute
   '/simulator': typeof SimulatorRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/pools/$poolId': typeof PoolsPoolIdRoute
   '/pools': typeof PoolsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/kyc': typeof KycRoute
   '/prices': typeof PricesRoute
   '/reset-password': typeof ResetPasswordRoute
   '/simulator': typeof SimulatorRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/pools/$poolId': typeof PoolsPoolIdRoute
   '/pools/': typeof PoolsIndexRoute
 }
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
     | '/prices'
     | '/reset-password'
     | '/simulator'
+    | '/auth/callback'
     | '/pools/$poolId'
     | '/pools/'
   fileRoutesByTo: FileRoutesByTo
@@ -120,6 +130,7 @@ export interface FileRouteTypes {
     | '/prices'
     | '/reset-password'
     | '/simulator'
+    | '/auth/callback'
     | '/pools/$poolId'
     | '/pools'
   id:
@@ -131,13 +142,14 @@ export interface FileRouteTypes {
     | '/prices'
     | '/reset-password'
     | '/simulator'
+    | '/auth/callback'
     | '/pools/$poolId'
     | '/pools/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AuthRoute: typeof AuthRoute
+  AuthRoute: typeof AuthRouteWithChildren
   DashboardRoute: typeof DashboardRoute
   KycRoute: typeof KycRoute
   PricesRoute: typeof PricesRoute
@@ -212,12 +224,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PoolsPoolIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof AuthRoute
+    }
   }
 }
 
+interface AuthRouteChildren {
+  AuthCallbackRoute: typeof AuthCallbackRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthCallbackRoute: AuthCallbackRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthRoute: AuthRoute,
+  AuthRoute: AuthRouteWithChildren,
   DashboardRoute: DashboardRoute,
   KycRoute: KycRoute,
   PricesRoute: PricesRoute,
