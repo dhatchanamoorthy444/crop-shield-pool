@@ -419,6 +419,7 @@ export type Database = {
         Args: never
         Returns: Database["public"]["Enums"]["app_role"][]
       }
+      get_pool_join_code: { Args: { _pool_id: string }; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -430,6 +431,7 @@ export type Database = {
         Args: { _pool_id: string; _user_id: string }
         Returns: boolean
       }
+      join_pool_by_code: { Args: { _code: string }; Returns: string }
     }
     Enums: {
       app_language: "en" | "hi" | "ta" | "kn"
