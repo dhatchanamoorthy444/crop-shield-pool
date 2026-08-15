@@ -12,10 +12,10 @@ import { TrendingUp, TrendingDown } from "lucide-react";
 export const Route = createFileRoute("/prices")({
   component: Prices,
   head: () => ({ 
-    title: "Market Prices — AgriShield",
+    title: "Market Price Intelligence — AgriShield PRO",
     meta: [
-      { name: "description", content: "Real-time mandi prices and agricultural market trends." },
-      { property: "og:title", content: "Market Prices — AgriShield" },
+      { name: "description", content: "Real-time mandi price intelligence and historical market trend analysis for farmers." },
+      { property: "og:title", content: "Market Hub — AgriShield PRO" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ]

@@ -17,9 +17,12 @@ import { AgriShieldAI } from "@/components/ai/AgriShieldAI";
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
   head: () => ({ 
-    title: "Intelligence Hub — AgriShield",
+    title: "Intelligence Hub — AgriShield PRO Dashboard",
     meta: [
-      { name: "description", content: "Manage your farm risks, community pools, and contributions." },
+      { name: "description", content: "Comprehensive overview of your agricultural risks, village pools, and AI-driven farm insights." },
+      { property: "og:title", content: "Intelligence Hub — AgriShield PRO" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ]
   }),
 });

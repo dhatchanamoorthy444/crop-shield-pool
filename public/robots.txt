@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /auth/
+Disallow: /kyc/
+Disallow: /dashboard/
+Disallow: /pools/
+Disallow: /prices/
+Disallow: /simulator/
+
+Sitemap: https://risk-shield-share.lovable.app/sitemap.xml

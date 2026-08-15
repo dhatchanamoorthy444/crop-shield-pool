@@ -11,13 +11,12 @@ import { Sprout } from "lucide-react";
 export const Route = createFileRoute("/reset-password")({
   component: ResetPasswordPage,
   head: () => ({
+    title: "Reset Access Cipher — AgriShield PRO",
     meta: [
-      { title: "Set a new password — CropShield Pool" },
-      { name: "description", content: "Choose a new password for your CropShield Pool account." },
-      { property: "og:title", content: "Reset your CropShield Pool password" },
-      { property: "og:description", content: "Choose a new password for your CropShield Pool account." },
+      { name: "description", content: "Securely reset your password and regain access to the AgriShield PRO risk network." },
+      { property: "og:title", content: "Reset Access Cipher — AgriShield PRO" },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
 });

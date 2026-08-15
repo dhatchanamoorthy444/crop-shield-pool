@@ -18,12 +18,15 @@ import { motion, AnimatePresence } from "framer-motion";
 export const Route = createFileRoute("/auth")({
   component: AuthPage,
   head: () => ({
-    title: "Secure Access — AgriShield",
+    title: "Secure Access — AgriShield PRO Authentication",
     meta: [
       {
         name: "description",
-        content: "Securely access your AgriShield dashboard. Risk management intelligence for modern agriculture.",
+        content: "Securely access your AgriShield PRO dashboard. Managed agricultural risk intelligence with neural-grade encryption.",
       },
+      { property: "og:title", content: "Secure Access — AgriShield PRO" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
 });

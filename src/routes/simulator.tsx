@@ -11,10 +11,10 @@ import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Toolti
 export const Route = createFileRoute("/simulator")({
   component: Simulator,
   head: () => ({ 
-    title: "Risk Simulator — AgriShield",
+    title: "Scenario Engine — AgriShield PRO",
     meta: [
-      { name: "description", content: "Simulate agricultural risk scenarios and village pool protection." },
-      { property: "og:title", content: "Risk Simulator — AgriShield" },
+      { name: "description", content: "Simulate agricultural risk scenarios and stress-test village pool resilience." },
+      { property: "og:title", content: "Scenario Engine — AgriShield PRO" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ]

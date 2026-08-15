@@ -34,17 +34,11 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "AgriShield — Intelligent Agricultural Risk Management" },
-      {
-        name: "description",
-        content:
-          "AgriShield helps farmers and agricultural stakeholders understand risk, access intelligent insights, and make more informed decisions.",
-      },
-      { name: "author", content: "AgriShield" },
-      { property: "og:title", content: "AgriShield" },
-      { property: "og:description", content: "Intelligent Agricultural Risk Management." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { name: "author", content: "AgriShield PRO" },
+      { name: "theme-color", content: "#1B3B2B" },
+      { name: "robots", content: "index, follow" },
+      { property: "og:site_name", content: "AgriShield PRO" },
+      { property: "og:locale", content: "en_US" },
     ],
     links: [
       { rel: "icon", type: "image/png", href: "/favicon.png" },
