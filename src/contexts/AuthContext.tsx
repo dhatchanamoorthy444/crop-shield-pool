@@ -34,28 +34,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
-    // 1) auth listener FIRST
-    const { data: sub } = supabase.auth.onAuthStateChange((_evt, sess) => {
+    let mounted = true;
+
+    // 1) auth listener
+    const { data: sub } = supabase.auth.onAuthStateChange(async (_evt, sess) => {
+      if (!mounted) return;
       setSession(sess);
       if (sess?.user) {
-        // Defer Supabase calls to avoid deadlock
-        setTimeout(() => {
-          void fetchProfile(sess.user.id);
-        }, 0);
+        await fetchProfile(sess.user.id);
       } else {
         setProfile(null);
         setRoles([]);
       }
-    });
-
-    // 2) THEN check existing session
-    void supabase.auth.getSession().then(({ data: { session: s } }) => {
-      setSession(s);
-      if (s?.user) void fetchProfile(s.user.id);
       setLoading(false);
     });
 
-    return () => sub.subscription.unsubscribe();
+    // 2) Initial session check
+    const initSession = async () => {
+      try {
+        const { data: { session: s } } = await supabase.auth.getSession();
+        if (!mounted) return;
+        setSession(s);
+        if (s?.user) await fetchProfile(s.user.id);
+      } catch (err) {
+        console.error("Auth init error:", err);
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    };
+    
+    void initSession();
+
+    return () => {
+      mounted = false;
+      sub.subscription.unsubscribe();
+    };
   }, []);
 
   const refreshProfile = async () => {
