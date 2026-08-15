@@ -87,7 +87,7 @@ function AuthPage() {
 
         <Card className="glass-dark border-white/10 rounded-[2.5rem] overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.6)]">
           <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-white/5 p-2 h-auto rounded-none border-b border-white/5">
+            <TabsList className="grid w-full grid-cols-3 bg-white/5 p-2 h-auto rounded-none border-b border-white/5">
               <TabsTrigger 
                 value="signin" 
                 className="rounded-2xl py-3.5 font-classic font-extrabold text-xs uppercase tracking-[0.2em] data-[state=active]:bg-primary data-[state=active]:text-white transition-all"
@@ -381,56 +381,145 @@ function SignUpForm({ currentLang }: { currentLang: string }) {
 }
 
 function ForgotPasswordForm() {
+  const nav = useNavigate();
   const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
+  const [step, setStep] = useState<"email" | "otp">("email");
   const [busy, setBusy] = useState(false);
 
-  const submit = async (e: FormEvent) => {
+  const handleRequestOtp = async (e: FormEvent) => {
     e.preventDefault();
     setBusy(true);
-    const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
-      redirectTo: `${window.location.origin}/reset-password`,
+    // Note: Supabase resetPasswordForEmail sends a link by default. 
+    // For OTP, we use signInWithOtp with 'recovery' type or custom logic.
+    // In many Supabase setups, resetPasswordForEmail is the standard.
+    // If we want a literal OTP code to enter, we'd use verifyOtp later.
+    const { error } = await supabase.auth.resetPasswordForEmail(email.trim());
+    
+    // Log the attempt
+    await supabase.from("audit_logs").insert({
+      email: email.trim(),
+      event_type: "otp_requested",
+      status: error ? "failed" : "success",
+      metadata: { method: "recovery", error: error?.message || null }
     });
+
     setBusy(false);
     if (error) {
       toast.error(friendly(error.message));
     } else {
-      toast.success("Recovery instructions dispatched to your network identifier.");
+      toast.success("Identity verification code dispatched.");
+      setStep("otp");
+    }
+  };
+
+  const handleVerifyOtp = async (e: FormEvent) => {
+    e.preventDefault();
+    setBusy(true);
+    const { data, error } = await supabase.auth.verifyOtp({
+      email: email.trim(),
+      token: otp,
+      type: "recovery",
+    });
+
+    // Log the verification
+    await supabase.from("audit_logs").insert({
+      email: email.trim(),
+      event_type: "otp_verified",
+      status: error ? "failed" : "success",
+      user_id: data.user?.id || null,
+      metadata: { error: error?.message || null }
+    });
+
+    setBusy(false);
+    if (error) {
+      toast.error("Invalid verification code. Access denied.");
+    } else {
+      toast.success("Identity Verified. Re-establishing connection.");
+      void nav({ to: "/reset-password" });
     }
   };
 
   return (
     <div className="p-10 space-y-8">
       <div>
-        <h2 className="text-3xl font-classic font-extrabold mb-3 uppercase tracking-wider italic">Recover Access</h2>
-        <p className="text-muted-foreground text-sm font-medium font-friendly">Enter your identifier to reset your access cipher.</p>
+        <h2 className="text-3xl font-classic font-extrabold mb-3 uppercase tracking-wider italic">
+          {step === "email" ? "Recover Access" : "Verify Identity"}
+        </h2>
+        <p className="text-muted-foreground text-sm font-medium font-friendly">
+          {step === "email" 
+            ? "Enter your identifier to initiate the recovery protocol." 
+            : "Enter the secure 6-digit cipher sent to your identifier."}
+        </p>
       </div>
 
-      <form onSubmit={submit} className="space-y-6">
-        <div className="space-y-2.5">
-          <Label className="font-bold text-[10px] uppercase tracking-[0.2em] text-muted-foreground ml-1">Network Identifier</Label>
-          <Input 
-            className="h-14 bg-white/5 border-white/10 rounded-2xl px-6 font-medium placeholder:text-muted-foreground/20" 
-            type="email" 
-            placeholder="farmer@network.ag" 
-            required 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-          />
-        </div>
-        
-        <Button 
-          type="submit" 
-          disabled={busy} 
-          className="w-full h-16 rounded-2xl bg-primary text-white font-classic font-extrabold text-xs uppercase tracking-[0.2em] shadow-[0_10px_30px_rgba(27,77,46,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all group"
-        >
-          {busy ? "Dispatching..." : (
-            <span className="flex items-center gap-2">
-              Send Recovery Instructions
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </span>
-          )}
-        </Button>
-      </form>
+      <AnimatePresence mode="wait">
+        {step === "email" ? (
+          <motion.form 
+            key="email-step"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            onSubmit={handleRequestOtp} 
+            className="space-y-6"
+          >
+            <div className="space-y-2.5">
+              <Label className="font-bold text-[10px] uppercase tracking-[0.2em] text-muted-foreground ml-1">Network Identifier</Label>
+              <Input 
+                className="h-14 bg-white/5 border-white/10 rounded-2xl px-6 font-medium placeholder:text-muted-foreground/20" 
+                type="email" 
+                placeholder="farmer@network.ag" 
+                required 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)} 
+              />
+            </div>
+            <Button 
+              type="submit" 
+              disabled={busy} 
+              className="w-full h-16 rounded-2xl bg-primary text-white font-classic font-extrabold text-xs uppercase tracking-[0.2em] shadow-[0_10px_30px_rgba(27,77,46,0.3)] hover:scale-[1.02] transition-all"
+            >
+              {busy ? "Dispatching..." : "Send Verification Code"}
+            </Button>
+          </motion.form>
+        ) : (
+          <motion.form 
+            key="otp-step"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            onSubmit={handleVerifyOtp} 
+            className="space-y-6"
+          >
+            <div className="space-y-2.5">
+              <Label className="font-bold text-[10px] uppercase tracking-[0.2em] text-muted-foreground ml-1">Verification Code</Label>
+              <Input 
+                className="h-14 bg-white/5 border-white/10 rounded-2xl px-6 font-mono text-center text-2xl tracking-[0.5em] placeholder:text-muted-foreground/20" 
+                type="text" 
+                placeholder="000000" 
+                maxLength={6}
+                required 
+                value={otp} 
+                onChange={(e) => setOtp(e.target.value)} 
+              />
+            </div>
+            <Button 
+              type="submit" 
+              disabled={busy} 
+              className="w-full h-16 rounded-2xl bg-primary text-white font-classic font-extrabold text-xs uppercase tracking-[0.2em] shadow-[0_10px_30px_rgba(27,77,46,0.3)] hover:scale-[1.02] transition-all"
+            >
+              {busy ? "Verifying..." : "Verify Code & Continue"}
+            </Button>
+            <button 
+              type="button" 
+              onClick={() => setStep("email")}
+              className="w-full text-[10px] font-bold text-muted-foreground hover:text-white uppercase tracking-widest transition-colors"
+            >
+              Use different identifier
+            </button>
+          </motion.form>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
