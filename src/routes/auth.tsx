@@ -523,21 +523,3 @@ function ForgotPasswordForm() {
     </div>
   );
 }
-
-        
-        <Button 
-          type="submit" 
-          disabled={busy} 
-          className="w-full h-16 rounded-2xl bg-primary text-white font-classic font-extrabold text-xs uppercase tracking-[0.2em] shadow-[0_10px_30px_rgba(27,77,46,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all group"
-        >
-          {busy ? "Dispatching..." : (
-            <span className="flex items-center gap-2">
-              Send Recovery Instructions
-              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </span>
-          )}
-        </Button>
-      </form>
-    </div>
-  );
-}
