@@ -10,7 +10,7 @@ import { useRef } from "react";
 
 export const Route = createFileRoute("/")({
   component: Landing,
-  head: () => ({
+  head: ({ location }) => ({
     title: "AgriShield — Legendary Risk Intelligence for Farmers",
     meta: [
       { name: "description", content: "Empowering farmers with AI risk intelligence, cooperative pools, and real-time mandi prices. Build agricultural resilience with AgriShield PRO." },
@@ -18,6 +18,9 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Empowering farmers with AI risk intelligence and cooperative pools." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [
+      { rel: "canonical", href: `https://risk-shield-share.lovable.app${location.href}` },
     ],
   }),
 });

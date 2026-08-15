@@ -30,7 +30,7 @@ function NotFoundComponent() {
 }
 
 export const Route = createRootRoute({
-  head: ({ location }) => ({
+  head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -41,7 +41,6 @@ export const Route = createRootRoute({
       { property: "og:locale", content: "en_US" },
     ],
     links: [
-      { rel: "canonical", href: `https://risk-shield-share.lovable.app${location.pathname}` },
       { rel: "icon", type: "image/png", href: "/favicon.png" },
       { rel: "stylesheet", href: appCss },
 
