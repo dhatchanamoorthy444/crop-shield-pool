@@ -45,7 +45,7 @@ function Landing() {
         >
           <img 
             src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2400&auto=format&fit=crop" 
-            alt="Cinematic Field"
+            alt="Cinematic aerial view of lush green agricultural fields during sunrise"
             className="w-full h-full object-cover scale-110 blur-[2px]"
           />
           {/* Green Cinematic Tint Overlay */}
@@ -237,7 +237,7 @@ function Landing() {
             >
               <img 
                 src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=1600&auto=format&fit=crop" 
-                alt="Modern Farm Intelligence"
+                alt="Close-up of a modern farmer using a tablet for real-time risk visualization in a green field"
                 className="w-full aspect-[4/5] object-cover group-hover:scale-110 transition-transform duration-1000"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#050706] via-transparent to-transparent opacity-60" />
