@@ -83,7 +83,7 @@ export function AgriShieldAI() {
             <div className="absolute inset-0 bg-primary/20 animate-pulse-gentle" />
             <img
               src={aiMark}
-              alt="AgriShield AI"
+              alt="AgriShield Neural Intelligence Assistant Logo"
               loading="lazy"
               width={512}
               height={512}
@@ -107,7 +107,7 @@ export function AgriShieldAI() {
                 <div className="h-12 w-12 rounded-2xl bg-primary/15 flex items-center justify-center border border-primary/30">
                   <img
                     src={aiMark}
-                    alt=""
+                    alt="AgriShield AI Status Icon"
                     loading="lazy"
                     width={512}
                     height={512}
