@@ -87,7 +87,7 @@ function AuthPage() {
 
         <Card className="glass-dark border-white/10 rounded-[2.5rem] overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.6)]">
           <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-white/5 p-2 h-auto rounded-none border-b border-white/5">
+            <TabsList className="grid w-full grid-cols-3 bg-white/5 p-2 h-auto rounded-none border-b border-white/5">
               <TabsTrigger 
                 value="signin" 
                 className="rounded-2xl py-3.5 font-classic font-extrabold text-xs uppercase tracking-[0.2em] data-[state=active]:bg-primary data-[state=active]:text-white transition-all"
