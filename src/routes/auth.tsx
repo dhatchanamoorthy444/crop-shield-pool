@@ -28,6 +28,9 @@ export const Route = createFileRoute("/auth")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
+    links: [
+      { rel: "canonical", href: "https://risk-shield-share.lovable.app/auth" },
+    ],
   }),
 });
 
@@ -97,6 +100,12 @@ function AuthPage() {
               >
                 Join Now
               </TabsTrigger>
+              <TabsTrigger 
+                value="forgot" 
+                className="rounded-2xl py-3.5 font-classic font-extrabold text-xs uppercase tracking-[0.2em] data-[state=active]:bg-primary data-[state=active]:text-white transition-all"
+              >
+                Reset
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="signin" className="mt-0">
@@ -104,6 +113,9 @@ function AuthPage() {
             </TabsContent>
             <TabsContent value="signup" className="mt-0">
               <SignUpForm currentLang={i18n.language} />
+            </TabsContent>
+            <TabsContent value="forgot" className="mt-0">
+              <ForgotPasswordForm />
             </TabsContent>
           </Tabs>
         </Card>
@@ -220,7 +232,9 @@ function SignInForm() {
           <div className="space-y-2.5">
             <div className="flex justify-between items-center ml-1">
               <Label className="font-bold text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Access Cipher</Label>
-              <Link to="/reset-password" className="text-[10px] font-bold text-primary hover:text-primary/80 uppercase tracking-widest">Forgot Cipher?</Link>
+              <TabsTrigger value="forgot" asChild>
+                <button type="button" className="text-[10px] font-bold text-primary hover:text-primary/80 uppercase tracking-widest">Forgot Cipher?</button>
+              </TabsTrigger>
             </div>
             <Input 
               className="h-14 bg-white/5 border-white/10 focus-visible:ring-primary/40 rounded-2xl px-6 font-medium" 
@@ -340,5 +354,60 @@ function SignUpForm({ currentLang }: { currentLang: string }) {
         </Button>
       </div>
     </form>
+  );
+}
+
+function ForgotPasswordForm() {
+  const [email, setEmail] = useState("");
+  const [busy, setBusy] = useState(false);
+
+  const submit = async (e: FormEvent) => {
+    e.preventDefault();
+    setBusy(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    setBusy(false);
+    if (error) {
+      toast.error(friendly(error.message));
+    } else {
+      toast.success("Recovery instructions dispatched to your network identifier.");
+    }
+  };
+
+  return (
+    <div className="p-10 space-y-8">
+      <div>
+        <h2 className="text-3xl font-classic font-extrabold mb-3 uppercase tracking-wider italic">Recover Access</h2>
+        <p className="text-muted-foreground text-sm font-medium font-friendly">Enter your identifier to reset your access cipher.</p>
+      </div>
+
+      <form onSubmit={submit} className="space-y-6">
+        <div className="space-y-2.5">
+          <Label className="font-bold text-[10px] uppercase tracking-[0.2em] text-muted-foreground ml-1">Network Identifier</Label>
+          <Input 
+            className="h-14 bg-white/5 border-white/10 rounded-2xl px-6 font-medium placeholder:text-muted-foreground/20" 
+            type="email" 
+            placeholder="farmer@network.ag" 
+            required 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
+          />
+        </div>
+        
+        <Button 
+          type="submit" 
+          disabled={busy} 
+          className="w-full h-16 rounded-2xl bg-primary text-white font-classic font-extrabold text-xs uppercase tracking-[0.2em] shadow-[0_10px_30px_rgba(27,77,46,0.3)] hover:scale-[1.02] active:scale-[0.98] transition-all group"
+        >
+          {busy ? "Dispatching..." : (
+            <span className="flex items-center gap-2">
+              Send Recovery Instructions
+              <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </span>
+          )}
+        </Button>
+      </form>
+    </div>
   );
 }

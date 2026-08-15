@@ -19,6 +19,9 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [
+      { rel: "canonical", href: "https://risk-shield-share.lovable.app/" },
+    ],
   }),
 });
 
