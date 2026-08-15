@@ -18,10 +18,10 @@ import { Lock, ShieldCheck } from "lucide-react";
 export const Route = createFileRoute("/kyc")({
   component: KycPage,
   head: () => ({ 
-    title: "Verify ID — AgriShield",
+    title: "ID Protocol Verification — AgriShield PRO",
     meta: [
-      { name: "description", content: "Securely verify your identity to join village cooperatives." },
-      { property: "og:title", content: "Verify ID — AgriShield" },
+      { name: "description", content: "Verify your identity with neural-grade encryption to participate in AgriShield risk pools." },
+      { property: "og:title", content: "Identity Protocol — AgriShield PRO" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ]

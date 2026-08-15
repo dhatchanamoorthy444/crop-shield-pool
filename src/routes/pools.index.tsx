@@ -15,10 +15,10 @@ import { z } from "zod";
 export const Route = createFileRoute("/pools/")({
   component: PoolsPage,
   head: () => ({ 
-    title: "Village Pools — AgriShield",
+    title: "Cooperative Risk Pools — AgriShield PRO",
     meta: [
-      { name: "description", content: "Join or create village risk-pools for collective protection." },
-      { property: "og:title", content: "Village Pools — AgriShield" },
+      { name: "description", content: "Join or lead village cooperatives with digital risk-pools for automated agricultural protection." },
+      { property: "og:title", content: "Village Pools — AgriShield PRO" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ]

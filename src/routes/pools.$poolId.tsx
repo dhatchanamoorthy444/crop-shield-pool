@@ -14,10 +14,10 @@ import { ArrowLeft, Wallet, Users } from "lucide-react";
 export const Route = createFileRoute("/pools/$poolId")({
   component: PoolDetail,
   head: () => ({ 
-    title: "Pool Details — AgriShield",
+    title: "Risk Pool Ledger — AgriShield PRO",
     meta: [
-      { name: "description", content: "View contributions and status for your village risk-pool." },
-      { property: "og:title", content: "Pool Details — AgriShield" },
+      { name: "description", content: "Manage cooperative assets, monitor contributions, and oversee risk pool health." },
+      { property: "og:title", content: "Pool Ledger — AgriShield PRO" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ]

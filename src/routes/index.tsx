@@ -11,9 +11,13 @@ import { useRef } from "react";
 export const Route = createFileRoute("/")({
   component: Landing,
   head: () => ({
-    title: "AgriShield — Legendary Risk Intelligence",
+    title: "AgriShield — Legendary Risk Intelligence for Farmers",
     meta: [
-      { name: "description", content: "AgriShield brings agricultural risk intelligence, AI assistance, and data-driven insights together." },
+      { name: "description", content: "Empowering farmers with AI risk intelligence, cooperative pools, and real-time mandi prices. Build agricultural resilience with AgriShield PRO." },
+      { property: "og:title", content: "AgriShield — Legendary Risk Intelligence" },
+      { property: "og:description", content: "Empowering farmers with AI risk intelligence and cooperative pools." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
 });
