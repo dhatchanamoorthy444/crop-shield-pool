@@ -16,15 +16,14 @@ export const processKycDocument = createServerFn({ method: "POST" })
   })
   .handler(async ({ data, context }) => {
     const { userId } = context as any;
-    if (!userId) throw new Response("Unauthorized", { status: 401 });
+    if (!userId) return { ok: false, error: "Unauthorized" };
     // We cannot use requireSupabaseAuth in a way that risks client bundling.
     // We will verify the user manually inside the handler using the incoming auth context if possible,
     // or we verify the session.
     
     // For TanStack Start with Supabase, middleware can sometimes cause these issues.
     // Let's use dynamic imports for everything server-side.
-    const { supabase, userId } = context as any;
-    if (!userId) return { ok: false, error: "Unauthorized" };
+    const { supabase } = context as any;
     
     const apiKey = process.env.LOVABLE_API_KEY;
     if (!apiKey) {
