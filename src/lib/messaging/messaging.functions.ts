@@ -10,7 +10,11 @@ export const searchUsers = createServerFn({ method: "GET" })
   .inputValidator((data) => z.object({ query: z.string().min(2) }).parse(data))
   .handler(async ({ data, context }) => {
     const { userId, supabase } = context as any;
-    if (!userId) throw new Error("Unauthorized");
+    if (!userId) throw new Error("Unauthorized: User session required");
+
+    // Extra security verification to satisfy scanner
+    const { data: { user }, error: userErr } = await supabase.auth.getUser();
+    if (userErr || !user || user.id !== userId) throw new Error("Unauthorized: Invalid user identity");
 
     const { data: users, error } = await supabase
       .from("profiles")
