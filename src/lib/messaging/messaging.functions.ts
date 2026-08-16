@@ -8,16 +8,9 @@ import { z } from "zod";
 export const searchUsers = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .inputValidator((data) => z.object({ query: z.string().min(2) }).parse(data))
-  .handler(async ({ data }) => {
-    const request = getRequest();
-    const token = request?.headers.get("authorization")?.replace("Bearer ", "");
-    if (!token) throw new Error("Unauthorized");
-
-    const supabase = createClient<Database>(
-      process.env.SUPABASE_URL!,
-      process.env.SUPABASE_PUBLISHABLE_KEY!,
-      { global: { headers: { Authorization: `Bearer ${token}` } } }
-    );
+  .handler(async ({ data, context }) => {
+    const { userId, supabase } = context as any;
+    if (!userId) throw new Error("Unauthorized");
 
     const { data: users, error } = await supabase
       .from("profiles")

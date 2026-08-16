@@ -7,16 +7,9 @@ import { z } from "zod";
 
 export const getPosts = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
-  .handler(async () => {
-    const request = getRequest();
-    const token = request?.headers.get("authorization")?.replace("Bearer ", "");
-    if (!token) throw new Error("Unauthorized");
-
-    const supabase = createClient<Database>(
-      process.env.SUPABASE_URL!,
-      process.env.SUPABASE_PUBLISHABLE_KEY!,
-      { global: { headers: { Authorization: `Bearer ${token}` } } }
-    );
+  .handler(async ({ context }) => {
+    const { userId, supabase } = context as any;
+    if (!userId) throw new Error("Unauthorized");
 
     const { data, error } = await supabase
       .from("posts")
