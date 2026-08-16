@@ -105,15 +105,18 @@ export const processKycDocument = createServerFn({ method: "POST" })
     const digits = (parsed.id_number ?? "").toString().replace(/\D/g, "");
     const masked = digits.length >= 4 ? "X".repeat(Math.max(0, digits.length - 4)) + digits.slice(-4) : null;
 
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { error: updErr } = await supabaseAdmin
+    // Update using the user-scoped client to respect RLS
+    // The previous Turn used supabaseAdmin, but with proper RLS, the user-scoped client
+    // is safer as it enforces that a user can only update their own records.
+    const { error: updErr } = await supabase
       .from("kyc_documents")
       .update({
         extracted_name: name,
         masked_id_number: masked,
         status: "pending",
       })
-      .eq("id", doc.id);
+      .eq("id", doc.id)
+      .eq("user_id", userId); // Double safety
       
     if (updErr) return { ok: false, error: updErr.message };
 
