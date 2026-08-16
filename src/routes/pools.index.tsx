@@ -182,7 +182,7 @@ function CreateForm({ onCreated, userId }: { onCreated: () => void; userId: stri
       district: parsed.data.district || null, state: parsed.data.state || null,
       default_contribution: parsed.data.default_contribution,
       target_crops, created_by: userId, join_code,
-    }).select().single();
+    }).select("id, name, village, balance, default_contribution").single();
     if (error || !pool) { setBusy(false); toast.error(error?.message ?? "Failed"); return; }
     await supabase.from("pool_members").insert({ pool_id: pool.id, user_id: userId });
     setBusy(false);
