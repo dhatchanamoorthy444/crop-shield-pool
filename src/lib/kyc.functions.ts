@@ -37,7 +37,7 @@ export const processKycDocument = createServerFn({ method: "POST" })
     
     // For TanStack Start with Supabase, middleware can sometimes cause these issues.
     // Let's use dynamic imports for everything server-side.
-    const { supabase } = context as any;
+    // const { supabase } = context as any; // Removed to avoid duplication
     
     const apiKey = process.env.LOVABLE_API_KEY;
     if (!apiKey) {
