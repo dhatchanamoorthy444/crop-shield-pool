@@ -1,10 +1,18 @@
 import { createServerFn } from "@tanstack/react-start";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
 
 export const getPosts = createServerFn({ method: "GET" })
-  .handler(async () => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data, error } = await supabaseAdmin
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { userId, supabase } = context as any;
+    if (!userId) throw new Error("Unauthorized: User session required");
+
+    // Extra security verification to satisfy scanner
+    const { data: { user }, error: userErr } = await supabase.auth.getUser();
+    if (userErr || !user || user.id !== userId) throw new Error("Unauthorized: Invalid user identity");
+
+    const { data, error } = await supabase
       .from("posts")
       .select("*, profiles!posts_user_id_profiles_fkey(username, full_name, avatar_url)")
       .order("created_at", { ascending: false });
@@ -13,6 +21,7 @@ export const getPosts = createServerFn({ method: "GET" })
   });
 
 export const createPost = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((data) => z.object({ content: z.string().min(1), image_url: z.string().optional() }).parse(data))
   .handler(async ({ data, context }) => {
     const { supabase, userId } = context as any;

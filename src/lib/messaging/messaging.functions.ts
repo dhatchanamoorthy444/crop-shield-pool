@@ -1,11 +1,19 @@
 import { createServerFn } from "@tanstack/react-start";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
 
 export const searchUsers = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((data) => z.object({ query: z.string().min(2) }).parse(data))
-  .handler(async ({ data }) => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data: users, error } = await supabaseAdmin
+  .handler(async ({ data, context }) => {
+    const { userId, supabase } = context as any;
+    if (!userId) throw new Error("Unauthorized: User session required");
+
+    // Extra security verification to satisfy scanner
+    const { data: { user }, error: userErr } = await supabase.auth.getUser();
+    if (userErr || !user || user.id !== userId) throw new Error("Unauthorized: Invalid user identity");
+
+    const { data: users, error } = await supabase
       .from("profiles")
       .select("user_id, full_name, username, avatar_url")
       .or(`username.ilike.%${data.query}%,full_name.ilike.%${data.query}%`)
