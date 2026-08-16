@@ -18,19 +18,8 @@ export const processKycDocument = createServerFn({ method: "POST" })
     return input;
   })
   .handler(async ({ data, context }) => {
-    const request = getRequest();
-    const token = request?.headers.get("authorization")?.replace("Bearer ", "");
-    if (!token) return { ok: false, error: "Unauthorized: No token" };
-
-    const supabase = createClient<Database>(
-      process.env.SUPABASE_URL!,
-      process.env.SUPABASE_PUBLISHABLE_KEY!,
-      { global: { headers: { Authorization: `Bearer ${token}` } } }
-    );
-
-    const { data: { user }, error: authErr } = await supabase.auth.getUser();
-    if (authErr || !user) return { ok: false, error: "Unauthorized: Invalid user" };
-    const userId = user.id;
+    const { userId, supabase } = context as any;
+    if (!userId) throw new Error("Unauthorized: No session");
     // We cannot use requireSupabaseAuth in a way that risks client bundling.
     // We will verify the user manually inside the handler using the incoming auth context if possible,
     // or we verify the session.
