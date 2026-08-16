@@ -4,9 +4,9 @@ import { z } from "zod";
 
 export const getPosts = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
-  .handler(async () => {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data, error } = await supabaseAdmin
+  .handler(async ({ context }) => {
+    const { supabase } = context as any;
+    const { data, error } = await supabase
       .from("posts")
       .select("*, profiles!posts_user_id_profiles_fkey(username, full_name, avatar_url)")
       .order("created_at", { ascending: false });
