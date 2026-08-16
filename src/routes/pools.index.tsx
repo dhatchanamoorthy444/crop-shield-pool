@@ -42,9 +42,20 @@ function PoolsPage() {
     if (!user) return;
     const { data } = await supabase
       .from("pool_members")
-      .select("pools(id, name, village, balance, join_code)")
+      .select("pools(id, name, village, balance)")
       .eq("user_id", user.id);
-    setMyPools((data ?? []).map((r) => r.pools).filter(Boolean) as never);
+      
+    const poolList = (data ?? []).map((r) => r.pools).filter(Boolean) as any[];
+    
+    // Load join codes for these pools via secure RPC
+    const poolsWithCodes = await Promise.all(
+      poolList.map(async (p) => {
+        const { data: code } = await supabase.rpc("get_pool_join_code", { _pool_id: p.id });
+        return { ...p, join_code: code || "PRIVATE" };
+      })
+    );
+    
+    setMyPools(poolsWithCodes);
   };
 
   useEffect(() => { void refresh(); }, [user]);
@@ -116,11 +127,12 @@ function JoinForm({ onJoined, userId }: { onJoined: () => void; userId: string }
     const parsed = joinSchema.safeParse({ code: code.toUpperCase() });
     if (!parsed.success) { toast.error("Enter a valid 6-letter code"); return; }
     setBusy(true);
-    const { data: pool } = await supabase.from("pools").select("id").eq("join_code", parsed.data.code).maybeSingle();
-    if (!pool) { setBusy(false); toast.error("Pool not found"); return; }
-    const { error } = await supabase.from("pool_members").insert({ pool_id: pool.id, user_id: userId });
+    // Use the secure join RPC instead of manual check + insert
+    const { data: poolId, error } = await supabase.rpc("join_pool_by_code", { _code: parsed.data.code });
+    
     setBusy(false);
     if (error) { toast.error(error.message); return; }
+    if (!poolId) { toast.error("Pool not found"); return; }
     toast.success("Joined!");
     setCode("");
     onJoined();
