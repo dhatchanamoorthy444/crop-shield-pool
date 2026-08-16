@@ -1,11 +1,23 @@
 import { createServerFn } from "@tanstack/react-start";
+import { getRequest } from "@tanstack/react-start/server";
+import { createClient } from "@supabase/supabase-js";
+import type { Database } from "@/integrations/supabase/types";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
 
 export const getPosts = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
-  .handler(async ({ context }) => {
-    const { supabase } = context as any;
+  .handler(async () => {
+    const request = getRequest();
+    const token = request?.headers.get("authorization")?.replace("Bearer ", "");
+    if (!token) throw new Error("Unauthorized");
+
+    const supabase = createClient<Database>(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_PUBLISHABLE_KEY!,
+      { global: { headers: { Authorization: `Bearer ${token}` } } }
+    );
+
     const { data, error } = await supabase
       .from("posts")
       .select("*, profiles!posts_user_id_profiles_fkey(username, full_name, avatar_url)")
