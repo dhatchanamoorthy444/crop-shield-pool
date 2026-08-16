@@ -40,9 +40,22 @@ function PoolDetail() {
   const [busy, setBusy] = useState(false);
 
   const refresh = async () => {
-    const { data: p } = await supabase.from("pools").select("*").eq("id", poolId).maybeSingle();
+    // Explicitly select columns since join_code is restricted at the privilege level
+    const { data: p } = await supabase
+      .from("pools")
+      .select("id, name, village, balance, default_contribution")
+      .eq("id", poolId)
+      .maybeSingle();
+      
     setPool(p as Pool | null);
-    if (p) setAmount(String(p.default_contribution));
+    if (p) {
+      setAmount(String(p.default_contribution));
+      // Load the join code through the secure RPC
+      const { data: codeData } = await supabase.rpc("get_pool_join_code", { _pool_id: poolId });
+      if (codeData) {
+        setPool(prev => prev ? { ...prev, join_code: codeData } : null);
+      }
+    }
     const { data: m } = await supabase.from("pool_members").select("user_id").eq("pool_id", poolId);
     const memberIds = (m ?? []).map((r) => r.user_id);
     let profMap = new Map<string, string | null>();
