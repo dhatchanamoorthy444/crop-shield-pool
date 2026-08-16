@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
 
 /**
@@ -6,13 +7,16 @@ import { z } from "zod";
  * extracts name + ID number, masks the ID number, then updates the kyc_documents row.
  */
 export const processKycDocument = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((input: { documentId: string }) => {
     if (!input?.documentId || typeof input.documentId !== "string") {
       throw new Error("documentId required");
     }
     return input;
   })
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
+    const { userId } = context as any;
+    if (!userId) throw new Response("Unauthorized", { status: 401 });
     // We cannot use requireSupabaseAuth in a way that risks client bundling.
     // We will verify the user manually inside the handler using the incoming auth context if possible,
     // or we verify the session.
@@ -34,6 +38,7 @@ export const processKycDocument = createServerFn({ method: "POST" })
       .from("kyc_documents")
       .select("*")
       .eq("id", data.documentId)
+      .eq("user_id", userId)
       .single();
     if (docErr || !doc) return { ok: false, error: "Document not found" };
     

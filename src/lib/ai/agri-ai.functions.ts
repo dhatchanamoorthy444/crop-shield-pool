@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
 
 const schema = z.object({
@@ -19,6 +20,7 @@ Be concise and practical: short paragraphs or tight bullet lists, concrete numbe
 Never give financial or insurance guarantees. If asked about payouts, explain that AgriShield pool payouts are simulated in this prototype.`;
 
 export const askAgriShieldAI = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((data) => schema.parse(data))
   .handler(async ({ data }) => {
     const apiKey = process.env["LOVABLE_API_KEY"];

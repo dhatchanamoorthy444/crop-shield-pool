@@ -1,7 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
 
 export const getPosts = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
   .handler(async () => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data, error } = await supabaseAdmin
@@ -13,6 +15,7 @@ export const getPosts = createServerFn({ method: "GET" })
   });
 
 export const createPost = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((data) => z.object({ content: z.string().min(1), image_url: z.string().optional() }).parse(data))
   .handler(async ({ data, context }) => {
     const { supabase, userId } = context as any;
