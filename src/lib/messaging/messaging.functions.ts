@@ -9,10 +9,13 @@ export const searchUsers = createServerFn({ method: "GET" })
     const { userId, supabase } = context as any;
     if (!userId) throw new Error("Unauthorized: User session required");
 
-    // Extra security verification to satisfy scanner
+    // Extra security verification: verify token identity matches context userId
     const { data: { user }, error: userErr } = await supabase.auth.getUser();
-    if (userErr || !user || user.id !== userId) throw new Error("Unauthorized: Invalid user identity");
+    if (userErr || !user || user.id !== userId) {
+      throw new Error("Unauthorized: Invalid user identity");
+    }
 
+    // Search using user-scoped client to respect profiles RLS
     const { data: users, error } = await supabase
       .from("profiles")
       .select("user_id, full_name, username, avatar_url")
