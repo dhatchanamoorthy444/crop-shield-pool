@@ -34,13 +34,22 @@ export const processKycDocument = createServerFn({ method: "POST" })
       return { ok: false, error: "AI service unavailable" };
     }
 
-    // Load the doc with user context to respect RLS
+    // Load the doc using the user-scoped client to respect RLS
+    // Verification: RLS policy 'view own kyc' ensures a user can only select their own row.
     const { data: doc, error: docErr } = await supabase
       .from("kyc_documents")
       .select("*")
       .eq("id", data.documentId)
       .single();
-    if (docErr || !doc) return { ok: false, error: "Document not found" };
+    
+    if (docErr || !doc) {
+      return { ok: false, error: "Document not found or access denied" };
+    }
+    
+    // Ownership check: Ensure the document belongs to the authenticated user
+    if (doc.user_id !== userId) {
+      return { ok: false, error: "Unauthorized: You do not own this document" };
+    }
     
     // Download from private bucket with user context
     const { data: file, error: dlErr } = await supabase.storage

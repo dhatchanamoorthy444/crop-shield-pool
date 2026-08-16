@@ -8,10 +8,13 @@ export const getPosts = createServerFn({ method: "GET" })
     const { userId, supabase } = context as any;
     if (!userId) throw new Error("Unauthorized: User session required");
 
-    // Extra security verification to satisfy scanner
+    // Extra security verification: verify token identity matches context userId
     const { data: { user }, error: userErr } = await supabase.auth.getUser();
-    if (userErr || !user || user.id !== userId) throw new Error("Unauthorized: Invalid user identity");
+    if (userErr || !user || user.id !== userId) {
+      throw new Error("Unauthorized: Invalid user identity");
+    }
 
+    // Fetch using user-scoped client to respect posts RLS
     const { data, error } = await supabase
       .from("posts")
       .select("*, profiles!posts_user_id_profiles_fkey(username, full_name, avatar_url)")
