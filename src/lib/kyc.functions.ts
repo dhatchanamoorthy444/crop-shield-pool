@@ -23,27 +23,24 @@ export const processKycDocument = createServerFn({ method: "POST" })
     
     // For TanStack Start with Supabase, middleware can sometimes cause these issues.
     // Let's use dynamic imports for everything server-side.
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    
-    // In TanStack Start, we'd usually use middleware, but to fix the build immediately,
-    // we'll rely on the fact that this is a server function.
+    const { supabase, userId } = context as any;
+    if (!userId) return { ok: false, error: "Unauthorized" };
     
     const apiKey = process.env.LOVABLE_API_KEY;
     if (!apiKey) {
       return { ok: false, error: "AI service unavailable" };
     }
 
-    // Load the doc
-    const { data: doc, error: docErr } = await supabaseAdmin
+    // Load the doc with user context to respect RLS
+    const { data: doc, error: docErr } = await supabase
       .from("kyc_documents")
       .select("*")
       .eq("id", data.documentId)
-      .eq("user_id", userId)
       .single();
     if (docErr || !doc) return { ok: false, error: "Document not found" };
     
-    // Download from private bucket
-    const { data: file, error: dlErr } = await supabaseAdmin.storage
+    // Download from private bucket with user context
+    const { data: file, error: dlErr } = await supabase.storage
       .from("kyc-documents")
       .download(doc.storage_path);
     if (dlErr || !file) return { ok: false, error: "Could not read document" };
@@ -96,6 +93,7 @@ export const processKycDocument = createServerFn({ method: "POST" })
     const digits = (parsed.id_number ?? "").toString().replace(/\D/g, "");
     const masked = digits.length >= 4 ? "X".repeat(Math.max(0, digits.length - 4)) + digits.slice(-4) : null;
 
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { error: updErr } = await supabaseAdmin
       .from("kyc_documents")
       .update({
